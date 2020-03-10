@@ -24,6 +24,10 @@ public class OwnerController {
         return ownerService.findAllOwner();
     }
 
+    public void hej(){
+        System.out.println("hej");
+    }
+
     @GetMapping("/owners/{id}")
     public Owner getOneOwner (@PathVariable int id) {
         return ownerService.findOneOwner(id);
