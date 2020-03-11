@@ -1,11 +1,11 @@
 package com.example.demo.repositories;
 
 
-import com.example.demo.entities.Owner;
+import com.example.demo.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OwnerRepo extends CrudRepository<Owner, Integer> {
-    public Owner findById (int id);
+public interface UserRepo extends CrudRepository<User, Integer> {
+    public User findById (int id);
 }
