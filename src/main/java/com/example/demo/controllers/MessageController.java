@@ -18,6 +18,7 @@ public class MessageController {
 
     @GetMapping("/messages")
     public List<Message> getAllMessages(){
+
         return messageService.findAllMessages();
     }
 }
