@@ -10,6 +10,7 @@ public class FriendList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     public FriendList() {
     }

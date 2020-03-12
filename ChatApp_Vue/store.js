@@ -4,10 +4,11 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-       
-        
+       users: []
     },
     mutations: {
-      
+      displayUsers(state, users){
+        state.users = users;
+      }
       }
   })
