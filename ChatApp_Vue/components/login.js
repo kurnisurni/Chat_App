@@ -3,7 +3,7 @@ export default{
        <section>
             <h1>Welcome!</h1>
             <nav>
-                <form @submit.prevent="logIn">
+                <section>
                     <h3>Log In:</h3>
                     <input v-model="username" 
                         type="text" 
@@ -18,8 +18,8 @@ export default{
                     >
 
                     <button @click=showOrHidePassword>{{ buttonText }}</button>
-                    <button>Log In</button>
-                </form>
+                    <button type="button" @click="logIn">Log In</button>
+                </section>
                 <router-link to="/sign-up">Sign Up</router-link>
             </nav>
        </section>
@@ -34,7 +34,7 @@ export default{
     },
     methods:{
         logIn(){
-
+            console.log(this.username, this.password)
         },
 
         showOrHidePassword(){
