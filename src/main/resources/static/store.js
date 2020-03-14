@@ -6,7 +6,9 @@ export const store = new Vuex.Store({
     state: {
        users: [],
        channels: [],
-       friendList: []
+       friendList: [],
+       messages: [],
+       currentUser: {}
     },
     mutations: {
       displayUsers(state, users){
@@ -17,6 +19,9 @@ export const store = new Vuex.Store({
       },
       displayFriends(state, friends){
         state.friendList = friends;
+      },
+      loginUser(state, user){
+        state.currentUser = user
       }
     }
 })

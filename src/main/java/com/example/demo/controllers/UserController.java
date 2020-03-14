@@ -24,4 +24,9 @@ public class UserController {
     public User getOneUser (@PathVariable int id) {
         return userService.findOneUser(id);
     }
+
+    @GetMapping("/users/login/{username}/{password}")
+    public User checkLogin (@PathVariable String username, @PathVariable String password){
+        return userService.checkLogin(username, password);
+    }
 }

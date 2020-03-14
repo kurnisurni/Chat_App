@@ -41,13 +41,23 @@ export default{
       }
     },
     methods:{
-        logIn(){
+        async logIn(){
             console.log(this.username, this.password)
-            fetch("http://localhost:5000/rest/users", {mode: "cors"}).then(response => response.json()).then(users => {
-              console.log(users);
-              
-              this.$store.commit("displayUsers", users)
-            })
+            let url = '/rest/users/login/' + this.username + '/' + this.password
+            console.log(url)
+
+            let user;
+            try{
+              user = await fetch(url)
+              user = await user.json()
+              console.log("success")
+              this.$store.commit("loginUser", user)
+              console.log(this.$store.state.currentUser)
+            } catch (e){
+              console.log("failed");
+              console.log(e)
+            }
+        
         },
 
         showOrHidePassword(){
