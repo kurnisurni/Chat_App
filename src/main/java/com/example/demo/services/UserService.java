@@ -32,4 +32,8 @@ public class UserService {
 
         return user;
     }
+
+    public User checkLogin(String username, String password){
+        return userRepo.checkPassword(username, password);
+    }
 }
