@@ -4,7 +4,7 @@ export default {
     <h3>Channels</h3>
     <ul class="channelList">
       <li v-for="channel in channels" :key="channel.id">
-        <router-link :to="channel.name">{{ channel.name }}</router-link>
+        {{ channel.name }}
       </li>
     </ul>   
   </div>

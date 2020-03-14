@@ -5,7 +5,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
        users: [],
-       channels: []
+       channels: [],
+       friendList: []
     },
     mutations: {
       displayUsers(state, users){
@@ -13,6 +14,9 @@ export const store = new Vuex.Store({
       },
       displayChannels(state, channels){
         state.channels = channels;
+      },
+      displayFriends(state, friends){
+        state.friendList = friends;
       }
     }
 })
