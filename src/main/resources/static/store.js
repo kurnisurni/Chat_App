@@ -22,6 +22,9 @@ export const store = new Vuex.Store({
       },
       loginUser(state, user){
         state.currentUser = user
+      },
+      displayMessages(state, messages){
+        state.messages = messages
       }
     }
 })
