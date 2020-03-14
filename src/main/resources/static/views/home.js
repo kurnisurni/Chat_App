@@ -1,9 +1,15 @@
 import login from '../components/login.js'
+import userChannels from '../components/userChannels.js'
+
 export default{
     components:{
-       login 
+       login,
+       userChannels
     },
     template:`
-        <login />  
+    <div>
+      <login />
+      <userChannels />
+    </div>
     `
 }

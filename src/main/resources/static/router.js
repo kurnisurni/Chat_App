@@ -18,7 +18,11 @@ export const router = new VueRouter({
         path: '/', 
         component: home
       },
-      
+      {
+        name:"Pets",
+        path: '/Pets', 
+        component: home
+      }
      
   ]
 });
