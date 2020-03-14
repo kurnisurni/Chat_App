@@ -1,9 +1,18 @@
 import login from '../components/login.js'
+import userChannels from '../components/userChannels.js'
+import friendlist from '../components/friendlist.js'
+
 export default{
     components:{
-       login 
+       login,
+       userChannels,
+       friendlist
     },
     template:`
-        <login />  
+    <div>
+      <login />
+      <userChannels />
+      <friendlist />
+    </div>
     `
 }

@@ -17,8 +17,6 @@ export const router = new VueRouter({
         name:"home",
         path: '/', 
         component: home
-      },
-      
-     
+      },     
   ]
 });

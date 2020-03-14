@@ -15,7 +15,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //@CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
