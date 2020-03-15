@@ -12,12 +12,13 @@ export default{
       <friendlist />
     </div>
     `,
+    /*All prints in created are in console. This is just to see if it works. */
     async created(){
+      console.log('created')
       
       let users = await fetch('/rest/users')
       users = await users.json()
       this.$store.commit('displayUsers', users)
-      console.log('created')
       console.log(users)
       
       let messages = await fetch('/rest/messages')
