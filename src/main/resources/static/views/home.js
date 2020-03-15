@@ -12,8 +12,8 @@ export default{
       <friendlist />
     </div>
     `,
-    
     async created(){
+      
       let users = await fetch('/rest/users')
       users = await users.json()
       this.$store.commit('displayUsers', users)
@@ -25,9 +25,11 @@ export default{
       this.$store.commit('displayMessages', messages)
       console.log(messages)
 
-      let channels = await fetch('rest/channels')
+      let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+      let channels = await fetch(url)
       channels = await channels.json()
-      this.$store.commit('displayChannels', channels)
+      this.$store.commit('displayUserChannels', channels)
       console.log(channels)
+      
     }
 }

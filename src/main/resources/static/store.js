@@ -5,6 +5,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
        users: [],
+       userChannels: [],
        channels: [],
        friendList: [],
        messages: [],
@@ -25,6 +26,9 @@ export const store = new Vuex.Store({
       },
       displayMessages(state, messages){
         state.messages = messages
+      },
+      displayUserChannels(state, userChannels){
+        state.userChannels = userChannels
       }
     }
 })
