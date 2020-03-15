@@ -10,9 +10,9 @@ export const router = new VueRouter({
   mode: 'history',
   routes: [
       {
-        name:"login",
+        name:"index",
         path: '/index.html', 
-        component: login
+        component: home
       },
       {
         name:"home",
