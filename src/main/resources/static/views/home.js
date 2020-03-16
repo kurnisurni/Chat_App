@@ -42,9 +42,5 @@ export default{
       let channels = await fetch(url)
       channels = await channels.json()
       this.$store.commit('displayUserChannels', channels)
-      console.log(channels)
-
-      console.log(this.$store.state.currentUser.id)
-      
     }
 }

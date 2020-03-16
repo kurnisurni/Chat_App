@@ -41,8 +41,6 @@ export default{
           console.log(e)
         }
           message = await message.json()
-
-          console.log(message)
           
           this.$store.commit('sendMessage', message)
         }

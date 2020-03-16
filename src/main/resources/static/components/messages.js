@@ -1,12 +1,12 @@
-
 export default{
     template:`
-      <div>
+      <div class="messages">
         <div v-for="message in messages" :key="message.id">
-        {{ getUser(message.user_id) }}
-          <hr>
-          <img class="messagePicture" :src=userPic> {{ userName }}: {{ message.content }}
-          <hr>
+          <div class="hiddenGetUserMethod" style="visibility: hidden">{{ getUser(message.user_id) }}</div>
+          <div class="messageDiv">
+            <img class="messagePicture" :src=userPic>
+            <p class="messageParagraph">{{ userName }}: {{ message.content }}, {{ message.message_time }}</p>
+          </div>
         </div>
       </div>
     `,
@@ -36,7 +36,7 @@ export default{
     computed: {
       messages(){
         return this.$store.state.messages
-      },
+      }
     },
     created(){
       
