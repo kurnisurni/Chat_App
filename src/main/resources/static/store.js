@@ -29,6 +29,11 @@ export const store = new Vuex.Store({
       },
       displayUserChannels(state, userChannels){
         state.userChannels = userChannels
+      },
+      sendMessage(state, message){
+        console.log(message)
+        state.messages.push(message)
+        console.log(state.messages)
       }
     }
 })

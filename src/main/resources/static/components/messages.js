@@ -3,8 +3,9 @@ export default{
     template:`
       <div>
         <div v-for="message in messages" :key="message.id">
-        {{ message.userName }}
-        {{ message.userPic }} {{ message.content }}
+        {{ getUser(message.user_id) }}
+          <hr>
+          <img class="messagePicture" :src=userPic> {{ userName }}: {{ message.content }}
           <hr>
         </div>
       </div>
@@ -15,7 +16,8 @@ export default{
 
     data(){
         return{
-          
+          userName: '',
+          userPic: ''
         }
     },
 
@@ -26,17 +28,17 @@ export default{
          let user = await fetch(url)
          user = await user.json()
 
-         this.userPic = user.picture_url
+         this.userPic = user.picture
          this.userName = user.username
-       }
+       },
     },
 
     computed: {
       messages(){
         return this.$store.state.messages
-      }
+      },
     },
     created(){
-      getUser(1)
+      
     }
 }
