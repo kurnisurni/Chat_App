@@ -34,11 +34,6 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
                 });
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/rest/users").allowedOrigins("http://127.0.0.1:5500");
-    }
-
     @Bean
     public DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();

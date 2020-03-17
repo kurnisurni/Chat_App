@@ -15,7 +15,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //@CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
@@ -24,5 +23,10 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getOneUser (@PathVariable int id) {
         return userService.findOneUser(id);
+    }
+
+    @GetMapping("/users/login/{username}/{password}")
+    public User checkLogin (@PathVariable String username, @PathVariable String password){
+        return userService.checkLogin(username, password);
     }
 }
