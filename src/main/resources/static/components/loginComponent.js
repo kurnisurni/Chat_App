@@ -22,7 +22,7 @@ export default{
                     <button @click=showOrHidePassword>{{ buttonText }}</button>
                     <button type="button" @click="logIn">Log In</button>
                 </section>
-                <router-link to="/sign-up">Sign Up</router-link>
+                <router-link to="/register">Sign Up</router-link>
             </nav>
        </section>
     `,

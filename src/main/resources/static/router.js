@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import home from './views/home.js'
 import login from './views/login.js'
+import register from './views/register.js'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -23,6 +24,11 @@ export const router = new VueRouter({
         name:"login",
         path: '/', 
         component: login
-      } 
+      },
+      {
+     name:"register",
+     path: '/register',
+     component: register
+     }
   ]
 });

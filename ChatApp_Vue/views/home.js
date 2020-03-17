@@ -1,9 +1,13 @@
 import login from '../components/login.js'
+import register from '../components/register.js'
+
 export default{
     components:{
-       login 
+       login,
+       register 
     },
     template:`
         <login />  
+        <register />
     `
 }
