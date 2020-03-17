@@ -1,8 +1,34 @@
-
-*{
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-body{
+body {
+	margin: 0;
+}
+
+.hiddenGetUserMethod {
+  height: 0px;
+  width: 0px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageDiv {
   margin: 0;
+  display: flex;
 }
+
+.messageParagraph {
+  display: flex;
+}
+
+.messagePicture {
+  height: 2em;
+  width: 2em;
+  padding: 4px;
+  border-radius: 3px;
+}
+

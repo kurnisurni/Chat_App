@@ -25,10 +25,18 @@ export const store = new Vuex.Store({
         state.currentUser = user
       },
       displayMessages(state, messages){
+        for (let i = 0; i < messages.length; i++){
+          messages[i].message_time = new Date(messages[i].message_time).toLocaleString()
+        }
         state.messages = messages
       },
       displayUserChannels(state, userChannels){
         state.userChannels = userChannels
+      },
+      sendMessage(state, message){
+        console.log(message)
+        state.messages.push(message)
+        console.log(state.messages)
       }
     }
 })

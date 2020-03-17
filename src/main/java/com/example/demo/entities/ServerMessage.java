@@ -3,7 +3,7 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="server_messages")
+@Table(name = "server_messages")
 public class ServerMessage {
 
     @Id
@@ -13,7 +13,8 @@ public class ServerMessage {
     private int channel_id;
     private String time;
 
-    public ServerMessage(){}
+    public ServerMessage() {
+    }
 
     public int getId() {
         return id;

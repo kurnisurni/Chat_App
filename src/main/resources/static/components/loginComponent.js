@@ -5,23 +5,15 @@ export default{
        <section>
             <h1>Welcome!</h1>
             <nav>
-                <section>
+                <form class="loginForm" @submit.prevent="logIn">
                     <h3>Log In:</h3>
-                    <input v-model="username" 
-                        type="text" 
-                        placeholder="Enter username:" 
-                        required 
-                    >
+                    <input v-model="username" type="text" placeholder="Enter username:" required>
 
-                    <input v-model="password" 
-                        :type="passwordType" 
-                        placeholder="Enter password:" 
-                        required
-                    >
+                    <input v-model="password" type="text" :type="passwordType" placeholder="Enter password:" required>
 
                     <button @click=showOrHidePassword>{{ buttonText }}</button>
-                    <button type="button" @click="logIn">Log In</button>
-                </section>
+                    <button>Log In</button>
+                </form>
                 <router-link to="/sign-up">Sign Up</router-link>
             </nav>
        </section>
@@ -38,7 +30,7 @@ export default{
 
     },
     methods:{
-        async logIn(){
+      async logIn(){
           let url = '/rest/users/login/' + this.username + '/' + this.password
 
           let user;
@@ -51,16 +43,17 @@ export default{
           } catch (e){
             console.log(e)
           }
-        },
+          
+      },
 
-        showOrHidePassword(){
-          if(this.passwordType === 'password') {
-            this.passwordType = 'text'
-            this.buttonText = 'Hide Password'
-          } else {
-            this.passwordType = 'password'
-            this.buttonText = 'Show Password'
-          }
+      showOrHidePassword(){
+        if(this.passwordType === 'password') {
+          this.passwordType = 'text'
+          this.buttonText = 'Hide Password'
+        } else {
+          this.passwordType = 'password'
+          this.buttonText = 'Show Password'
         }
+      }
     }
 }

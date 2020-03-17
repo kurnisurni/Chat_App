@@ -1,10 +1,6 @@
 package com.example.demo.entities;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 
 @Entity
 @Table(name="messages")
@@ -16,7 +12,7 @@ public class Message {
     private int user_id;
     private String content;
     private int channel_id;
-    private String message_time;
+    private long message_time;
 
     public Message(){}
 
@@ -52,11 +48,11 @@ public class Message {
         this.channel_id = channel_id;
     }
 
-    public String getMessage_time() {
+    public long getMessage_time() {
         return message_time;
     }
 
-    public void setMessage_time(String message_time) {
+    public void setMessage_time(long message_time) {
         this.message_time = message_time;
     }
 }
