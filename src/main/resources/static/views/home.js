@@ -1,4 +1,4 @@
-import userChannels from '../components/userChannels.js'
+import userChannels from '../components/channelList.js'
 import friendlist from '../components/friendlist.js'
 
 export default{
