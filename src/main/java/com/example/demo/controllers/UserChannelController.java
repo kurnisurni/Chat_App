@@ -21,5 +21,4 @@ public class UserChannelController {
     public List<UserChannel> getUserChannels(@PathVariable int id){
         return userChannelService.findAllUserChannels(id);
     }
-
 }
