@@ -2,11 +2,9 @@ package com.example.demo.entities;
 
 import com.example.demo.services.UserChannelsId;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users_channels")
