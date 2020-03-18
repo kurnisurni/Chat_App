@@ -11,7 +11,7 @@ export default{
 
                     <input v-model="password" type="text" :type="passwordType" placeholder="Enter password:" required>
 
-                    <button class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
+                    <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
                     <button class="logInButton">Log In</button>
                 </form>
                 <router-link class="signUp" to="/sign-up">Sign Up</router-link>
