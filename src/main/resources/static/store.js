@@ -35,6 +35,7 @@ export const store = new Vuex.Store({
       },
       sendMessage(state, message){
         console.log(message)
+        message.message_time = new Date(message.message_time).toLocaleString()
         state.messages.push(message)
         console.log(state.messages)
       }
