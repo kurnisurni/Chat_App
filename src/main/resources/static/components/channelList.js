@@ -1,7 +1,7 @@
 export default {
   template: `
   <div>
-    <h3>Channels</h3>
+    <h3>Channels: </h3>
     <ul class="channelList">
       <li v-for="channel in channels" :key="channel.id">
         {{ channel.name }}
@@ -11,19 +11,7 @@ export default {
   `,
   computed: {
     channels(){
-      return this.$store.state.channels
+      return this.$store.state.userChannels
     }
   },
-  methods: {
-    async getChannels(){
-      let channels = await fetch('/rest/channels')
-
-      channels = await channels.json()
-
-      this.$store.commit('displayChannels', channels)
-    }
-  },
-  created() {
-    this.getChannels()
-  }
-}
+ 
