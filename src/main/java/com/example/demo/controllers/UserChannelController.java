@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.UserChannel;
+import com.example.demo.entities.Channel;
 import com.example.demo.services.UserChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class UserChannelController {
     private UserChannelService userChannelService;
 
     @GetMapping("/users/channels/id/{id}")
-    public List<UserChannel> getUserChannels(@PathVariable int id){
+    public List<Channel> getUserChannels(@PathVariable int id){
         return userChannelService.findAllUserChannels(id);
     }
 }
