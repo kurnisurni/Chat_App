@@ -1,5 +1,5 @@
 import userChannels from '../components/channelList.js'
-import friendlist from '../components/friendlist.js'
+import friendlist from '../components/friendList.js'
 
 export default{
     components:{
@@ -38,6 +38,17 @@ export default{
           channels = await channels.json()
           this.$store.commit('displayUserChannels', channels)
           console.log(channels)
+      },
+
+      async loadFriendList(){
+         //Loads user friends, before home view is created
+
+          let url = '/rest/friend-list/' + this.$store.state.currentUser.id
+          let users = await fetch(url)
+          users = await users.json()
+          this.$store.commit('displayFriends', users)
+          console.log(users)
+    
       }
     },
 
@@ -47,5 +58,6 @@ export default{
         this.loadUsers()
         this.loadMessages()
         this.loadChannels()
+        this.loadFriendList()
     }
 }
