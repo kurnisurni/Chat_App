@@ -1,5 +1,8 @@
 import userChannels from '../components/channelList.js'
 import friendlist from '../components/friendList.js'
+import loginComponent from '../components/loginComponent.js'
+import messages from '../components/messages.js'
+import messageInput from '../components/messageInput.js'
 
 export default{
     components:{
@@ -11,7 +14,7 @@ export default{
 
     template:`
     <div>
-      <userChannels />
+      <loginComponent />
       <friendlist />
       <messages />
       <messageInput />

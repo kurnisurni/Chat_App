@@ -3,18 +3,18 @@ import { router } from "../router.js"
 export default{
     template:`
        <section>
-            <h1>Welcome!</h1>
+            <h1 class="frontPage">Welcome!</h1>
             <nav>
                 <form class="loginForm" @submit.prevent="logIn">
-                    <h3>Log In:</h3>
+                    <h3 class="h3LogIn">Log In:</h3>
                     <input v-model="username" type="text" placeholder="Enter username:" required>
 
                     <input v-model="password" type="text" :type="passwordType" placeholder="Enter password:" required>
 
-                    <button @click=showOrHidePassword>{{ buttonText }}</button>
-                    <button>Log In</button>
+                    <button class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
+                    <button class="logInButton">Log In</button>
                 </form>
-                <router-link to="/sign-up">Sign Up</router-link>
+                <router-link class="signUp" to="/sign-up">Sign Up</router-link>
             </nav>
        </section>
     `,
