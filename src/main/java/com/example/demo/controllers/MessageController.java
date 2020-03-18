@@ -19,9 +19,11 @@ public class MessageController {
 
         return messageService.findAllMessages();
     }
-
+/*
     @PostMapping("/messages")
     public Message postMessage(@RequestBody Message message){
         return messageService.postMessage(message);
     }
+    */
+
 }
