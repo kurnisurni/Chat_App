@@ -1,16 +1,21 @@
 import userChannels from '../components/channelList.js'
 import friendlist from '../components/friendList.js'
+import messages from '../components/messages.js'
+import messageInput from '../components/messageInput.js'
 
 export default{
     components:{
        userChannels,
-       friendlist
+       friendlist,
+       messages,
+       messageInput,
     },
 
     template:`
     <div>
-      <userChannels />
       <friendlist />
+      <messages />
+      <messageInput />
     </div>
     `,
 
