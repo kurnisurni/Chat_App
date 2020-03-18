@@ -1,9 +1,6 @@
 package com.example.demo.controllers;
 
-
-
 import com.example.demo.entities.FriendList;
-import com.example.demo.entities.User;
 import com.example.demo.services.FriendListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +18,7 @@ public class FriendListController {
     @Autowired
     FriendListService friendListService;
 
-    @GetMapping("/friendlist/{userId}")
+    @GetMapping("/friend-list/{userId}")
     public List<FriendList> getAllFriendsForUser(@PathVariable int userId){
         return friendListService.findAllByUser1(userId);
     }
