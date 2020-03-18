@@ -1,8 +1,5 @@
 import userChannels from '../components/channelList.js'
-import friendlist from '../components/friendlist.js'
-import messages from '../components/messages.js'
-import messageInput from '../components/messageInput.js'
-import { router } from '../router.js'
+import friendlist from '../components/friendList.js'
 
 export default{
     components:{
@@ -11,6 +8,7 @@ export default{
        messages,
        messageInput
     },
+
     template:`
     <div>
       <userChannels />
@@ -19,28 +17,51 @@ export default{
       <messageInput />
     </div>
     `,
-    /*All prints in created are in console. This is just to see if it works. */
-    async created(){
-      console.log('created')
 
-      console.log(this.$store.state.currentUser)
-      if (this.$store.state.currentUser.id === undefined) {
-        router.push('/')
+    methods:{
+      async loadUsers(){
+        //Loads all users before home view is created
+          let users = await fetch('/rest/users')
+          users = await users.json()
+          this.$store.commit('displayUsers', users)
+          console.log(users)
+      },
+
+      async loadMessages(){
+        //Loads all messages before home view is created
+          let messages = await fetch('/rest/messages')
+          messages = await messages.json()
+          this.$store.commit('displayMessages', messages)
+          console.log(messages)
+      },
+
+      async loadChannels(){
+        //Loads only those channels, where current user is present, before home view is created
+          let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+          let channels = await fetch(url)
+          channels = await channels.json()
+          this.$store.commit('displayUserChannels', channels)
+          console.log(channels)
+      },
+
+      async loadFriendList(){
+         //Loads user friends, before home view is created
+
+          let url = '/rest/friend-list/' + this.$store.state.currentUser.id
+          let users = await fetch(url)
+          users = await users.json()
+          this.$store.commit('displayFriends', users)
+          console.log(users)
+    
       }
-      
-      let users = await fetch('/rest/users')
-      users = await users.json()
-      this.$store.commit('displayUsers', users)
-      console.log(users)
-      
-      let messages = await fetch('/rest/messages')
-      messages = await messages.json()
-      this.$store.commit('displayMessages', messages)
-      console.log(messages)
+    },
 
-      let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
-      let channels = await fetch(url)
-      channels = await channels.json()
-      this.$store.commit('displayUserChannels', channels)
+     created(){
+       /*All methods prints data to console. This is just to see if it works. */
+      console.log('created')
+        this.loadUsers()
+        this.loadMessages()
+        this.loadChannels()
+        this.loadFriendList()
     }
 }
