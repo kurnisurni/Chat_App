@@ -1,20 +1,18 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.UserChannel;
-import com.example.demo.repositories.UserChannelRepo;
+import com.example.demo.entities.Channel;
+import com.example.demo.repositories.ChannelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class UserChannelService {
     @Autowired
-    private UserChannelRepo userChannelRepo;
+    private ChannelRepo channelRepo;
 
-
-    public List<UserChannel> findAllUserChannels(int id){
-        return userChannelRepo.findAllByUserId(id);
+    public List<Channel> findAllUserChannels(int id){
+        return channelRepo.findAllByUserId(id);
         }
 
 }

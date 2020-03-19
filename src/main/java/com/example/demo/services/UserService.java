@@ -5,7 +5,6 @@ import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -15,20 +14,12 @@ public class UserService {
     UserRepo userRepo;
 
     public List<User> findAllUsers() {
-        List<User> users = (List<User>) userRepo.findAll();
-
-        for (User user : users){
-            user.setPicture("pic-url");
-        }
-
-        return users;
+        return (List<User>) userRepo.findAll();
     }
 
     public User findOneUser (int id) {
         User user = userRepo.findById(id);
         if (user == null) return null;
-
-        user.setPicture("pic-url");
 
         return user;
     }

@@ -4,7 +4,6 @@ import com.example.demo.entities.Message;
 import com.example.demo.repositories.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -15,5 +14,9 @@ public class MessageService {
 
     public List<Message> findAllMessages(){
         return (List<Message>) messageRepo.findAll();
+    }
+
+    public Message postMessage(Message message){
+        return messageRepo.save(message);
     }
 }
