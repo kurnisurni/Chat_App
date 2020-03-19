@@ -1,13 +1,9 @@
 import { store } from './store.js'
 
-let ws;
-let isConnected = false;
-connect();
-
-function connect() {
     // change PORT to your backends PORT
-    ws = new WebSocket('ws://localhost:5000/my-secret-socket')
-    
+    const ws = new WebSocket('ws://localhost:5000/your-socket-route')
+    export default ws
+
     ws.onmessage = (e) => {
       showSomething(e.data);
       let data = JSON.parse(e.data)
@@ -20,25 +16,18 @@ function connect() {
         case 'message':
           console.log(data)
           break;
-        case 'new-pet':
-          store.commit('appendPet', data)
+        case 'new-message':
+          store.commit('sendMessage', data)
           break;
       }
-
-      // checks if data exists, and the check if it 
-      // contains the species property
-      // (common pattern in JS)
-      // if(data && data.species){
-      //   store.commit('appendPet', data)
-      // }
-
     }
 
     /**
      * onopen triggas när anslutningen
      * är genomförd
      */
-    ws.onopen = (e) => {
+
+    /*ws.onopen = (e) => {
         sendSomething();
         isConnected = true;
     };
@@ -47,8 +36,8 @@ function connect() {
         console.log("Closing websocket...");
     };
 
-  console.log("Connecting...");
-}
+  console.log("Connecting...");*/
+
 
 function disconnect() {
     if (ws != null) {
@@ -60,7 +49,6 @@ function disconnect() {
 
 function sendSomething() {
   let socketExample = {
-    action: 'message',
     message: 'Testing sockets',
     timestamp: Date.now()
   }
