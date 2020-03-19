@@ -1,8 +1,97 @@
-
-*{
+* {
   box-sizing: border-box;
 }
 
-body{
-  margin: 0;
+body, html {
+  height: 100%;
 }
+
+body {
+  margin: 0;
+  background-image: linear-gradient(rgb(71, 129,255), rgba(10, 2, 85, 0.856));
+}
+
+
+.hiddenGetUserMethod {
+  height: 0px;
+  width: 0px;
+}
+
+/*MESSAGES*/
+/*-------------------------------------------*/
+.messages {
+  background-color: rgb(1, 175, 175);         /*This one will not be here later. This is just to see what is what*/
+  display: flex;
+  flex-direction: column;
+}
+
+.messageDiv {
+  margin: 0;
+  display: flex;
+}
+
+.messageParagraph {
+  display: flex;
+}
+
+.messagePicture {
+  height: 2em;
+  width: 2em;
+  padding: 4px;
+  border-radius: 3px;
+}
+/*-------------------------------------------*/
+
+/*LOGIN COMPONENT*/
+
+.frontPage {
+  padding: 20px;
+  font-weight: 700;
+  text-align: center;
+  font-size: 45px;
+  color: #eee;
+}
+
+.h3LogIn {
+  text-align: center;
+  font-size: 25px;
+  color: #eee;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.loginForm input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  align-self: center;
+  width: 40%;
+}
+
+.showPasswordButton {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  align-self: center;
+  width: 15%;
+}
+
+.logInButton {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  align-self: center;
+  width: 15%;
+}
+
+.signUp {
+  padding: 30px;
+  font-size: 20px;
+  color: #eee;
+}
+
+/*-------------------------------------------*/
