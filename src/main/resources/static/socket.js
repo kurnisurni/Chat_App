@@ -1,16 +1,33 @@
 import { store } from './store.js'
 
-let ws;
-let isConnected = false;
-connect();
-
-function connect() {
     // change PORT to your backends PORT
-    ws = new WebSocket('ws://localhost:5000/your-socket-route');
+    const ws = new WebSocket('ws://localhost:5000/your-socket-route')
+    export default ws
+
     ws.onmessage = (e) => {
       showSomething(e.data);
+      let data = JSON.parse(e.data)
+
+      if(data.timestamp) {
+        console.log(new Date(data.timestamp).toLocaleString())
+      }
+
+      switch(data.action) {
+        case 'message':
+          console.log(data)
+          break;
+        case 'new-message':
+          store.commit('sendMessage', data)
+          break;
+      }
     }
-    ws.onopen = (e) => {
+
+    /**
+     * onopen triggas när anslutningen
+     * är genomförd
+     */
+
+    /*ws.onopen = (e) => {
         sendSomething();
         isConnected = true;
     };
@@ -19,8 +36,8 @@ function connect() {
         console.log("Closing websocket...");
     };
 
-  console.log("Connecting...");
-}
+  console.log("Connecting...");*/
+
 
 function disconnect() {
     if (ws != null) {
@@ -31,7 +48,17 @@ function disconnect() {
 }
 
 function sendSomething() {
-    ws.send(JSON.stringify({firstname: "Hello World!" }));
+  let socketExample = {
+    message: 'Testing sockets',
+    timestamp: Date.now()
+  }
+
+  let addressedMessage = {
+    action: 'message',
+    payload: socketExample
+  }
+
+    ws.send(JSON.stringify(socketExample));
 }
 
 function showSomething(message) {

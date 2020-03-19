@@ -1,3 +1,5 @@
+//import ws from '../socket.js'
+
 export default{
   template: `
       <div>
@@ -40,9 +42,9 @@ export default{
           console.log("could not post message")
           console.log(e)
         }
-          message = await message.json()
+          //message = await message.json()
           
-          this.$store.commit('sendMessage', message)
+          //this.$store.commit('sendMessage', message)
         }
       }
   },
