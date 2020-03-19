@@ -10,6 +10,11 @@ import java.util.List;
 @Repository
 public interface FriendListRepo extends CrudRepository<FriendList, Integer> {
 
+
+    /*@Query(value = "SELECT friends_list.user2, u.username " +
+            "FROM friends_list f JOIN users u ON" +
+            "WHERE f.user1 = ?1 ", nativeQuery = true)
+    List<FriendList> findAllByUser1(int user1Id);*/
     @Query(value = "SELECT friends_list.*, username " +
             "FROM friends_list, users " +
             "WHERE user1 = ?1 " +

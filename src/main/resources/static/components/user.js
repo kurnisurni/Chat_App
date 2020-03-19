@@ -2,8 +2,9 @@
 export default{
     template: `
         <div>
-            <div>{{userName}}</div>
-            <img :src="userPicture" alt="User Image" width="50" height="50">
+            <div>{{user.username}}</div>
+            <!-- Move width and height till css -->
+            <img :src="user.picture" alt="User Image" width="50" height="50">
         </div>
     `,
     data(){
@@ -12,4 +13,14 @@ export default{
             userPicture: this.$store.state.currentUser.picture
         }
     },
+    computed: {
+        user(){
+            return this.$store.state.currentUser
+        }
+    },
+    methods:{
+        logOut(){
+          
+        }
+    }
 }
