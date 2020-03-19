@@ -5,19 +5,19 @@ import { store } from './store.js'
     export default ws
 
     ws.onmessage = (e) => {
-      showSomething(e.data);
       let data = JSON.parse(e.data)
-
-      if(data.timestamp) {
-        console.log(new Date(data.timestamp).toLocaleString())
-      }
 
       switch(data.action) {
         case 'message':
           console.log(data)
           break;
         case 'new-message':
-          store.commit('sendMessage', data)
+          for (let i = 0; i < store.state.userChannels.length; i++) {
+            if (store.state.userChannels[i].id === data.channel_id){
+              store.commit('sendMessage', data)
+              break;
+            }
+          }
           break;
       }
     }
