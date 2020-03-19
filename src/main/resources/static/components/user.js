@@ -2,24 +2,14 @@
 export default{
     template: `
         <div>
-
+            <div>{{userName}}</div>
+            <img :src="userPicture" alt="User Image" width="50" height="50">
         </div>
     `,
-
-    props: []
-    ,
-
     data(){
         return{
-           
+            userName: this.$store.state.currentUser.username,
+            userPicture: this.$store.state.currentUser.picture
         }
     },
-    
-    methods: {
-        
-    },
-
-    computed: {
-          
-    }
 }
