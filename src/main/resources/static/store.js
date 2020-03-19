@@ -38,6 +38,9 @@ export const store = new Vuex.Store({
         message.message_time = new Date(message.message_time).toLocaleString()
         state.messages.push(message)
         console.log(state.messages)
+      },
+      appendChannel(state, channel){
+        state.channels.push(channel)
       }
     }
 })
