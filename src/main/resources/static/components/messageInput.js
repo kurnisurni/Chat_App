@@ -46,8 +46,6 @@ export default{
   },
 
   computed: {
-    userId(){
-      return this.$store.state.currentUser.id
-    }
+    
   }
 }

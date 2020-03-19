@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
        channels: [],
        friendList: [],
        messages: [],
-       loggedInUsers: [],
+       onlineUsers: [],
        currentUser: {},
        currentChannel: {}
     },
@@ -25,6 +25,9 @@ export const store = new Vuex.Store({
       },
       loginUser(state, user){
         state.currentUser = user
+      },
+      goOnline(state, user){
+        state.onlineUsers.push(user)
       },
       displayMessages(state, messages){
         for (let i = 0; i < messages.length; i++){

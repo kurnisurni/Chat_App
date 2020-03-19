@@ -22,15 +22,7 @@ export default{
     },
 
     methods:{
-       async getUser(userId){
-         let url = '/rest/users/' + userId
-
-         let user = await fetch(url)
-         user = await user.json()
-
-         this.userPic = user.picture
-         this.userName = user.username
-       },
+      
     },
 
     computed: {
