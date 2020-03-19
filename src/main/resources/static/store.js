@@ -9,7 +9,9 @@ export const store = new Vuex.Store({
        channels: [],
        friendList: [],
        messages: [],
-       currentUser: {}
+       loggedInUsers: [],
+       currentUser: {},
+       currentChannel: {}
     },
     mutations: {
       displayUsers(state, users){
@@ -38,6 +40,12 @@ export const store = new Vuex.Store({
         message.message_time = new Date(message.message_time).toLocaleString()
         state.messages.push(message)
         console.log(state.messages)
+      },
+      appendChannel(state, channel){
+        state.channels.push(channel)
+      },
+      setCurrentChannel(state, channel){
+        state.currentChannel = channel
       }
     }
 })

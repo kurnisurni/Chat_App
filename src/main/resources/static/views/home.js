@@ -3,6 +3,8 @@ import userChannels from '../components/channelList.js'
 import friendlist from '../components/friendList.js'
 import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
+import createChannel from '../components/createChannel.js'
+
 
 export default{
     components:{
@@ -11,7 +13,7 @@ export default{
        friendlist,
        messages,
        messageInput,
-      
+       createChannel
     },
 
     template:`
@@ -20,6 +22,8 @@ export default{
       <friendlist />
       <messages />
       <messageInput />
+      <createChannel />
+
     </div>
     `,
 
