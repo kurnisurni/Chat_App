@@ -8,8 +8,8 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
-        case 'message':
-          console.log(data)
+        case 'goOnline':
+          store.commit('goOnline', data)
           break;
         case 'new-message':
           for (let i = 0; i < store.state.userChannels.length; i++) {
