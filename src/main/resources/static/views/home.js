@@ -45,10 +45,13 @@ export default{
       async loadChannels(){
         //Loads only those channels, where current user is present, before home view is created
           let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
-          let channels = await fetch(url)
+          let userChannels = await fetch(url)
+          userChannels = await userChannels.json()
+          this.$store.commit('displayUserChannels', userChannels)
+
+          let channels = await fetch('/rest/channels')
           channels = await channels.json()
-          this.$store.commit('displayUserChannels', channels)
-          console.log(channels)
+          this.$store.commit('displayChannels', channels)
       },
 
       async loadFriendList(){
