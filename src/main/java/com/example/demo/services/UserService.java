@@ -13,6 +13,9 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
+    @Autowired
+    SocketService socketService;
+
     public List<User> findAllUsers() {
         return (List<User>) userRepo.findAll();
     }
@@ -20,6 +23,16 @@ public class UserService {
     public User findOneUser (int id) {
         User user = userRepo.findById(id);
         if (user == null) return null;
+
+        return user;
+    }
+
+    public User setUserToOnline(int id) {
+        User user = userRepo.findById(id);
+
+        user.action = "goOnline";
+
+        socketService.sendToAll(user, User.class);
 
         return user;
     }
