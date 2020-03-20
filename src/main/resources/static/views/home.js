@@ -16,6 +16,7 @@ export default{
 
     template:`
     <div>
+      <userChannels />
       <friendlist />
       <messages />
       <messageInput />

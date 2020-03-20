@@ -39,7 +39,6 @@ export default{
             user = await user.json()
             this.$store.commit("loginUser", user)
 
-            router.push('home')
           } catch (e){
             console.log(e)
           }
@@ -48,6 +47,9 @@ export default{
           url = '/rest/users/setOnline/' + user.id
           user = await fetch(url)
 
+          this.$store.commit('setCurrentChannel', 1)
+
+          router.push('home')
       },
 
       showOrHidePassword(){

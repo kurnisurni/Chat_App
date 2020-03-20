@@ -47,8 +47,9 @@ export const store = new Vuex.Store({
       appendChannel(state, channel){
         state.channels.push(channel)
       },
-      setCurrentChannel(state, channel){
-        state.currentChannel = channel
+      setCurrentChannel(state, channelId){
+        state.currentChannel = channelId
+        console.log(state.currentChannel)
       }
     }
 })

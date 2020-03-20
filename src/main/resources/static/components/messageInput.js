@@ -27,7 +27,7 @@ export default{
           let messageBody = {
             user_id: this.$store.state.currentUser.id,
             content: this.messageInput,
-            channel_id: 1,
+            channel_id: this.currentChannel,
             message_time: Date.now()
           }
           try{
@@ -46,6 +46,8 @@ export default{
   },
 
   computed: {
-    
+    currentChannel(){
+      return this.$store.state.currentChannel
+    }
   }
 }
