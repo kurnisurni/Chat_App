@@ -43,7 +43,11 @@ export default{
           } catch (e){
             console.log(e)
           }
-          
+
+          // gets the user that just logged in and adds it to all connected client's 'onlineUsers' in store.
+          url = '/rest/users/setOnline/' + user.id
+          user = await fetch(url)
+
       },
 
       showOrHidePassword(){
