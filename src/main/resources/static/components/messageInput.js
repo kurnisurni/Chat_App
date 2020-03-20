@@ -31,20 +31,16 @@ export default{
             message_time: Date.now()
           }
           try{
-           message = await fetch('/rest/messages',{
-            method: 'POST',
-            body: JSON.stringify(messageBody),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-          })
-        }catch(e){
-          console.log("could not post message")
+            message = await fetch('/rest/messages',{
+              method: 'POST',
+              body: JSON.stringify(messageBody),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+          }catch(e){
           console.log(e)
-        }
-          //message = await message.json()
-          
-          //this.$store.commit('sendMessage', message)
+          }
         }
       }
   },
