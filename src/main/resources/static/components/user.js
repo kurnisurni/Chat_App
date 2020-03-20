@@ -1,10 +1,12 @@
 
+import {disconnect} from '../socket.js'
 export default{
     template: `
         <div>
             <div>{{user.username}}</div>
-            <!-- Move width and height till css -->
+            <!-- Need to move width and height till css later -->
             <img :src="user.picture" alt="User Image" width="50" height="50">
+            <button @click="logOut">Log Out</button>
         </div>
     `,
     data(){
@@ -20,7 +22,8 @@ export default{
     },
     methods:{
         logOut(){
-          
+          disconnect()
+          this.$router.push('/')
         }
-    }
+    },
 }
