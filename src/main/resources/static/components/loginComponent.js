@@ -49,6 +49,9 @@ export default{
 
           this.$store.commit('setCurrentChannel', 1)
 
+          console.log(this.$store.state.currentUser)
+          console.log(this.$store.state.currentChannel)
+
           router.push('home')
       },
 

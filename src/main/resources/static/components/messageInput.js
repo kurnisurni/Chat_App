@@ -42,6 +42,8 @@ export default{
           console.log(e)
           }
         }
+
+        this.messageInput = ''
       }
   },
 
