@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
 * {
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 body, html {
@@ -44,7 +47,7 @@ body {
 
 /*LOGIN COMPONENT*/
 
-.frontPage {
+.LogInPage {
   padding: 20px;
   font-weight: 700;
   text-align: center;
@@ -95,3 +98,49 @@ body {
 }
 
 /*-------------------------------------------*/
+
+/*FRIENDLIST*/
+
+.friendList {
+  background-color: #fff;
+}
+
+/*-------------------------------------------*/
+
+/*FRONT PAGE*/
+
+.frontPage {
+display: flex;
+justify-content: center;
+}
+
+.leftBar {
+  width: 25%;
+}
+
+.messagesView {
+  width: 50%;
+}
+
+/*-------------------------------------------*/
+
+/*MESSAGE INPUT*/
+
+.messageForm {
+  position: relative;
+}
+
+.messageForm textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.messageForm button {
+  position: absolute;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  bottom: 0;
+  right: 0;
+}
