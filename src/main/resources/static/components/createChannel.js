@@ -1,5 +1,6 @@
 export default{
     template: `
+      <div>
         <form @submit.prevent="createNewChannel">
             <input v-model="name" type="text"
             required
@@ -8,6 +9,7 @@ export default{
             <button>Create New Channel</button>
 
         </form>
+       <div>
     `,
 
      props: []
