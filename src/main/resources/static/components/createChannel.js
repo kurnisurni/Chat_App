@@ -9,7 +9,7 @@ export default{
             <button>Create New Channel</button>
 
         </form>
-       <div>
+       </div>
     `,
 
      props: []
@@ -32,20 +32,33 @@ export default{
                 admin_id: this.$store.state.currentUser.id
             }
 
+        try{
             let channel = await fetch('/rest/channels',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newChannel)
-            })
-
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(newChannel)
+                        })
             channel = await channel.json()
 
             this.$store.commit('appendChannel', channel)
 
             this.name = ' '
+
+        } catch(e){
+             console.log("could not post message")
+             console.log(e)
         }
-    }
+        }
+
+    },
+
+    computed: {
+        admin_id(){
+          return this.$store.state.currentUser.id
+        }
+      }
+
 }
 
