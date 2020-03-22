@@ -10,23 +10,11 @@ public class FriendList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int user1;
-    private int user2;
-    private String time;
-    //Not sure if i'm allowed to add username here, since this db table doesn't have it
-    //username is from Users table. I needed it to join two tables in friendListRepo.
-    //Could have looped users in frontend, but then I could't get time column from this table.
-    private String username;
+    private int user;
+    private Long time;
+
 
     public FriendList() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public int getId() {
@@ -37,27 +25,19 @@ public class FriendList {
         this.id = id;
     }
 
-    public int getUser1() {
-        return user1;
+    public int getUser() {
+        return user;
     }
 
-    public void setUser1(int user1) {
-        this.user1 = user1;
+    public void setUser(int user) {
+        this.user = user;
     }
 
-    public int getUser2() {
-        return user2;
-    }
-
-    public void setUser2(int user2) {
-        this.user2 = user2;
-    }
-
-    public String getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 }

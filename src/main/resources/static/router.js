@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import home from './views/home.js'
 import login from './views/login.js'
+import userDetails from './components/userDetails.js'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -23,6 +24,11 @@ export const router = new VueRouter({
         name:"login",
         path: '/', 
         component: login
-      } 
+      },
+      {
+      name: "userDetails",
+      path: '/users/:id', 
+      component: userDetails
+    }, 
   ]
 });
