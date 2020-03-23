@@ -10,6 +10,8 @@ import java.util.List;
 public class ChannelService {
     @Autowired
     ChannelRepo channelRepo;
+    @Autowired
+    private SocketService socketService;
 
     public List<Channel> findAllChannels(){
         return (List<Channel>) channelRepo.findAll();
@@ -32,7 +34,19 @@ public class ChannelService {
     }
 
     public Channel createNewChannel(Channel newChannel){
-        return channelRepo.save(newChannel);
+        Channel channel = null;
+
+        try{
+            channel = channelRepo.save(newChannel);
+
+            channel.action = "new-channel";
+
+            socketService.sendToAll(channel, Channel.class);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return channel;
     }
 
 

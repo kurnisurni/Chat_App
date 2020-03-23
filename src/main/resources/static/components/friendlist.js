@@ -1,6 +1,6 @@
 export default{
   template:`
-    <div>
+    <div class="friendList">
       <h3>Friends:</h3>
         <ul>
           <li v-for="(friend,i) in friendList" :key="friend.id">

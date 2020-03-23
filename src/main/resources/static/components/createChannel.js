@@ -32,17 +32,15 @@ export default{
             }
 
         try{
-            channel = await fetch('/rest/channels',{
-                            method: 'POST',
-                            body: JSON.stringify(newChannel),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        })
+            let channel = await fetch('/rest/channels',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newChannel)
+            })
 
-             channel = await channel.json()
-             this.$store.commit('appendChannel', channel)
-             this.name = ' '
+            this.name = ' '
 
         } catch(e){
              console.log("could not post message")
