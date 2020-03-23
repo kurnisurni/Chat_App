@@ -38,6 +38,9 @@ export const store = new Vuex.Store({
       displayUserChannels(state, userChannels){
         state.userChannels = userChannels
       },
+      addUserChannel(state, userChannel){
+        
+      },
       sendMessage(state, message){
         console.log(message)
         message.message_time = new Date(message.message_time).toLocaleString()
@@ -47,8 +50,9 @@ export const store = new Vuex.Store({
       appendChannel(state, channel){
         state.channels.push(channel)
       },
-      setCurrentChannel(state, channel){
-        state.currentChannel = channel
+      setCurrentChannel(state, channelId){
+        state.currentChannel = channelId
+        console.log(state.currentChannel)
       }
     }
 })

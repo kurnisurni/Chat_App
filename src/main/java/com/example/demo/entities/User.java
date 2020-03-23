@@ -28,11 +28,11 @@ public class User {
         this.action = action;
     }
 
-    public String getPicture() {
+    public String getPicture_url() {
         return picture_url;
     }
 
-    public void setPicture(String picture_url) {
+    public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
     }
 
