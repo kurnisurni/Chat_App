@@ -18,6 +18,7 @@ export default{
     <div class="frontPage">
         <div class="leftBar">
           <friendlist />
+          <userChannels />
           <createChannel />
         </div>
         <div class="messagesView">
