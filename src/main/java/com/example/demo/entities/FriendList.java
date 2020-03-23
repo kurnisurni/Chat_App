@@ -10,7 +10,37 @@ public class FriendList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int user1;
+    private int user;
+    private Long time;
+
+
+    public FriendList() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+    /*private int user1;
     private int user2;
     private String time;
     //Not sure if i'm allowed to add username here, since this db table doesn't have it
@@ -60,4 +90,5 @@ public class FriendList {
     public void setTime(String time) {
         this.time = time;
     }
+    */
 }

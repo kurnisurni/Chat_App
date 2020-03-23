@@ -51,6 +51,8 @@ export const store = new Vuex.Store({
         state.channels.push(channel)
       },
       deleteFriend(state, index){
+        console.log(index)
+        console.log(state.friendList)
         state.friendList.splice(index, 1)
       },
       setCurrentChannel(state, channelId){
