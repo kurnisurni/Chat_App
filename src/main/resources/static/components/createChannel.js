@@ -23,10 +23,9 @@ export default{
 
     methods: {
         async createNewChannel(){
-            if(!this.name.trim()){
-                return
-            }
-
+            if (this.name != ''){
+            
+            let channel;
             let newChannel = {
                 name: this.name,
                 admin_id: this.$store.state.currentUser.id
@@ -46,16 +45,10 @@ export default{
         } catch(e){
              console.log("could not post message")
              console.log(e)
-        }
+            }
         }
 
-    },
-
-    computed: {
-        admin_id(){
-          return this.$store.state.currentUser.id
-        }
-      }
-
+    }
+   }
 }
 

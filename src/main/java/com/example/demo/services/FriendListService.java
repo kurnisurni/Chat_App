@@ -17,4 +17,7 @@ public class FriendListService {
     public List<FriendList> findAllByUser1(int user1id){
         return friendListRepo.findAllByUser1(user1id);
     }
+    public FriendList deleteOneByUser1(int user1Id){
+        return friendListRepo.deleteOneByUser1(user1Id);
+    }
 }
