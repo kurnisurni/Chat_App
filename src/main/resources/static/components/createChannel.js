@@ -34,15 +34,12 @@ export default{
 
         try{
             let channel = await fetch('/rest/channels',{
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(newChannel)
-                        })
-            channel = await channel.json()
-
-            this.$store.commit('appendChannel', channel)
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newChannel)
+            })
 
             this.name = ' '
 

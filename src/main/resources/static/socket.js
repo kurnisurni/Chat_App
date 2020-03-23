@@ -1,16 +1,36 @@
 import { store } from './store.js'
 
-let ws;
-let isConnected = false;
-connect();
-
-function connect() {
     // change PORT to your backends PORT
-    ws = new WebSocket('ws://localhost:5000/your-socket-route');
+    const ws = new WebSocket('ws://localhost:5000/your-socket-route')
+    export default ws
+
     ws.onmessage = (e) => {
-      showSomething(e.data);
+      let data = JSON.parse(e.data)
+
+      switch(data.action) {
+        case 'goOnline':
+          store.commit('goOnline', data)
+          break
+        case 'new-message':
+          for (let i = 0; i < store.state.userChannels.length; i++) {
+            if (store.state.userChannels[i].id === data.channel_id){
+              store.commit('sendMessage', data)
+              break
+            }
+          }
+          break
+        case 'new-channel':
+          store.commit('appendChannel', data)
+          break
+      }
     }
-    ws.onopen = (e) => {
+
+    /**
+     * onopen triggas när anslutningen
+     * är genomförd
+     */
+
+    /*ws.onopen = (e) => {
         sendSomething();
         isConnected = true;
     };
@@ -19,8 +39,8 @@ function connect() {
         console.log("Closing websocket...");
     };
 
-  console.log("Connecting...");
-}
+  console.log("Connecting...");*/
+
 
 function disconnect() {
     if (ws != null) {
@@ -31,7 +51,17 @@ function disconnect() {
 }
 
 function sendSomething() {
-    ws.send(JSON.stringify({firstname: "Hello World!" }));
+  let socketExample = {
+    message: 'Testing sockets',
+    timestamp: Date.now()
+  }
+
+  let addressedMessage = {
+    action: 'message',
+    payload: socketExample
+  }
+
+    ws.send(JSON.stringify(socketExample));
 }
 
 function showSomething(message) {

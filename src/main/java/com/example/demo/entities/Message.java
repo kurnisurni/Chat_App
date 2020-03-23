@@ -14,6 +14,9 @@ public class Message {
     private int channel_id;
     private long message_time;
 
+    @Transient
+    public String action;
+
     public Message(){}
 
     public int getId() {

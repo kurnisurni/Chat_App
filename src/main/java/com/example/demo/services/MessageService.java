@@ -12,11 +12,26 @@ public class MessageService {
     @Autowired
     MessageRepo messageRepo;
 
+    @Autowired
+    private SocketService socketService;
+
     public List<Message> findAllMessages(){
         return (List<Message>) messageRepo.findAll();
     }
 
     public Message postMessage(Message message){
-        return messageRepo.save(message);
+        Message dbMessage = null;
+
+        try{
+            dbMessage = messageRepo.save(message);
+
+            dbMessage.action = "new-message";
+
+            socketService.sendToAll(dbMessage, Message.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dbMessage;
     }
 }
