@@ -1,11 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.services.UserChannelsId;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -14,26 +10,26 @@ import java.io.Serializable;
 public class UserChannel implements Serializable {
 
     @Id
-    private int channelId;
+    private int channel_id;
     @Id
-    private int userId;
+    private int user_id;
 
     public UserChannel() {
     }
 
-    public int getChannelId() {
-        return channelId;
+    public int getChannel_id() {
+        return channel_id;
     }
 
-    public void setChannelId(int channelId) {
-        this.channelId = channelId;
+    public void setChannel_id(int channel_id) {
+        this.channel_id = channel_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }
