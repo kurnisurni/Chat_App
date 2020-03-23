@@ -13,6 +13,9 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
+    @Autowired
+    SocketService socketService;
+
     public List<User> findAllUsers() {
         return (List<User>) userRepo.findAll();
     }
@@ -24,7 +27,21 @@ public class UserService {
         return user;
     }
 
+    public User setUserToOnline(int id) {
+        User user = userRepo.findById(id);
+
+        user.action = "goOnline";
+
+        socketService.sendToAll(user, User.class);
+
+        return user;
+    }
+
     public User checkLogin(String username, String password){
         return userRepo.checkPassword(username, password);
+    }
+
+    public User register(User newUser) {
+        return userRepo.save(newUser);
     }
 }

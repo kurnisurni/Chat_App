@@ -27,4 +27,12 @@ public class UserController {
     public User checkLogin (@PathVariable String username, @PathVariable String password){
         return userService.checkLogin(username, password);
     }
+
+    @GetMapping("/users/setOnline/{id}")
+    public User setOnline(@PathVariable int id) { return userService.setUserToOnline(id); }
+
+    @PostMapping("/users")
+    public User register(@RequestBody User user) {
+        return userService.register(user);
+    }
 }
