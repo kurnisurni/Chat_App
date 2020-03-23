@@ -5,7 +5,6 @@ import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 
 
-
 export default{
     components:{
        userChannels,
