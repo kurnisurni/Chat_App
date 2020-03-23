@@ -22,6 +22,28 @@ import { store } from './store.js'
         case 'new-channel':
           store.commit('appendChannel', data)
           break
+        case 'delete-friend':
+          let friendList = store.state.friendList
+
+          console.log(data)
+
+          if (store.state.currentUser.id === data.user1id){
+            for (let i = 0; i < friendList.length; i++){
+              if (friendList[i].user === data.user2id){
+                store.commit('deleteFriend', i)
+              }
+            }
+          } else if (store.state.currentUser.id === data.user2id){
+            for (let i = 0; i < friendList.length; i++){
+              if (friendList[i].user === data.user1id){
+                store.commit('deleteFriend', i)
+              }
+            }
+          }
+          break
+        case 'delete-message':
+          store.commit('deleteMessage', data.index)
+          break
       }
     }
 
