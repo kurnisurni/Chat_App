@@ -30,4 +30,9 @@ public class UserController {
 
     @GetMapping("/users/setOnline/{id}")
     public User setOnline(@PathVariable int id) { return userService.setUserToOnline(id); }
+
+    @PostMapping("/users")
+    public User register(@RequestBody User user) {
+        return userService.register(user);
+    }
 }
