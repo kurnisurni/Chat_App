@@ -38,10 +38,6 @@ export default{
                 body: JSON.stringify(newChannel)
             })
 
-            channel = await channel.json()
-
-            this.$store.commit('appendChannel', channel)
-
             this.name = ' '
         }
     }

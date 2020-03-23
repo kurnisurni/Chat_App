@@ -10,15 +10,18 @@ import { store } from './store.js'
       switch(data.action) {
         case 'goOnline':
           store.commit('goOnline', data)
-          break;
+          break
         case 'new-message':
           for (let i = 0; i < store.state.userChannels.length; i++) {
             if (store.state.userChannels[i].id === data.channel_id){
               store.commit('sendMessage', data)
-              break;
+              break
             }
           }
-          break;
+          break
+        case 'new-channel':
+          store.commit('appendChannel', data)
+          break
       }
     }
 
