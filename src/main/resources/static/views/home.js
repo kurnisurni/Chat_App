@@ -15,12 +15,17 @@ export default{
     },
 
     template:`
-    <div>
-      <userChannels />
-      <friendlist />
-      <messages />
-      <messageInput />
-      <createChannel />
+    <div class="frontPage">
+        <div class="leftBar">
+          <friendlist />
+          <userChannels />
+          <createChannel />
+        </div>
+        <div class="messagesView">
+          <messages />
+          <messageInput />
+        </div>
+ 
 
     </div>
     `,
