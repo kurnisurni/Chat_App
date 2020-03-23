@@ -1,3 +1,5 @@
+//import ws from '../socket.js'
+
 export default{
   template: `
       <div>
@@ -25,31 +27,29 @@ export default{
           let messageBody = {
             user_id: this.$store.state.currentUser.id,
             content: this.messageInput,
-            channel_id: 1,
+            channel_id: this.currentChannel,
             message_time: Date.now()
           }
           try{
-           message = await fetch('/rest/messages',{
-            method: 'POST',
-            body: JSON.stringify(messageBody),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-          })
-        }catch(e){
-          console.log("could not post message")
+            message = await fetch('/rest/messages',{
+              method: 'POST',
+              body: JSON.stringify(messageBody),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+          }catch(e){
           console.log(e)
+          }
         }
-          message = await message.json()
-          
-          this.$store.commit('sendMessage', message)
-        }
+
+        this.messageInput = ''
       }
   },
 
   computed: {
-    userId(){
-      return this.$store.state.currentUser.id
+    currentChannel(){
+      return this.$store.state.currentChannel
     }
   }
 }

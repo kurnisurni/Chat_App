@@ -15,4 +15,10 @@ public interface FriendListRepo extends CrudRepository<FriendList, Integer> {
             "WHERE user1 = ?1 " +
             "AND user2 = users.id", nativeQuery = true)
     List<FriendList> findAllByUser1(int user1Id);
+
+    @Query(value = "delete friends_list.* " +
+            "FROM friends_list, users " +
+            "WHERE user1 = ?1 " +
+            "AND user2 = users.id", nativeQuery = true)
+    public FriendList deleteOneByUser1(int user1Id);
 }

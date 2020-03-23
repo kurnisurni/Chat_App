@@ -95,3 +95,13 @@ body {
 }
 
 /*-------------------------------------------*/
+/*CHANNEL LIST COMPONENT*/
+
+.channelList {
+  list-style: none;
+  cursor: pointer;
+}
+
+.channelList:hover {
+  color: #eee;
+}

@@ -23,42 +23,34 @@ export default{
 
     methods: {
         async createNewChannel(){
-            if(!this.name.trim()){
-                return
-            }
-
+            if (this.name != ''){
+            
+            let channel;
             let newChannel = {
                 name: this.name,
                 admin_id: this.$store.state.currentUser.id
             }
 
         try{
-            let channel = await fetch('/rest/channels',{
+            channel = await fetch('/rest/channels',{
                             method: 'POST',
+                            body: JSON.stringify(newChannel),
                             headers: {
                                 'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(newChannel)
+                            }
                         })
-            channel = await channel.json()
 
-            this.$store.commit('appendChannel', channel)
-
-            this.name = ' '
+             channel = await channel.json()
+             this.$store.commit('appendChannel', channel)
+             this.name = ' '
 
         } catch(e){
              console.log("could not post message")
              console.log(e)
-        }
+            }
         }
 
-    },
-
-    computed: {
-        admin_id(){
-          return this.$store.state.currentUser.id
-        }
-      }
-
+    }
+   }
 }
 

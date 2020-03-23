@@ -5,8 +5,8 @@ import java.io.Serializable;
 //Had to use composite PK to get the id
 public class UserChannelsId implements Serializable {
 
-    private int channelId;
-    private int userId;
+    private int channel_id;
+    private int user_id;
 
     public UserChannelsId() {}
 }
