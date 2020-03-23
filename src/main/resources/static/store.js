@@ -59,8 +59,11 @@ export const store = new Vuex.Store({
         state.currentChannel = channelId
         console.log(state.currentChannel)
       },
-
        appendUser(state, user){
-       state.users.push(user)}
+       state.users.push(user)
+      },
+      deleteMessage(state, index){
+        state.messages.splice(index, 1)
+      }
     }
 })

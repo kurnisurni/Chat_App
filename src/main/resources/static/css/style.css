@@ -43,6 +43,10 @@ body {
   padding: 4px;
   border-radius: 3px;
 }
+
+.removeMessage, .deleteMsgButton {
+  cursor: pointer;
+}
 /*-------------------------------------------*/
 
 /*LOGIN COMPONENT*/

@@ -41,6 +41,9 @@ import { store } from './store.js'
             }
           }
           break
+        case 'delete-message':
+          store.commit('deleteMessage', data.index)
+          break
       }
     }
 
