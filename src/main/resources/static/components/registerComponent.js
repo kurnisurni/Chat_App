@@ -3,23 +3,20 @@ import { router } from "../router.js"
 export default {
     template: `
     <section>
-    <h1>Welcome!</h1>
-    <h2>Not a member yet? Please, register to start a conversation!</h2>
-    <div>
-    {{ users }}
-    </div>
-    <form @submit.prevent="registerNewMember">
-    <h3>Sign up:</h3>
-        <input v-model="username" type="text" required placeholder="Enter username">
-        <input v-model="password" type="passwordType" required placeholder="Enter password">
+        <h1 class="registerPageTitle">Welcome!</h1>
+            <h2 class="registerPreface">Not a member, yet? Please, register to start a conversation!</h2>
 
-        <button @click=showOrHidePassword>{{ buttonText }}</button>
-                    <button type="button" @click="signUp">Sign up</button>
-                </section>
-                <h4>Already a member?</h4>
-                <router-link to="/">Login</router-link>
-
-    </form>
+           <nav>
+            <form class="registerForm" @submit.prevent="registerNewMember">
+            <h3 class="h3Register">Sign up:</h3>
+            <input v-model="username" type="text" required placeholder="Enter username">
+            <input v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
+            <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
+            <button class="registerBtn">Sign up</button>
+            <h4 class="h4Register">Already a member?</h4>
+            <router-link to="/">Login</router-link>
+            </form>
+            </nav>
     </section>
     `,
     data(){
@@ -46,7 +43,7 @@ export default {
                 password: this.password,
             }
 
-            let signUp = await fetch('http://localhost:5000/rest/users',{
+            let signUp = await fetch('/rest/users',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +52,7 @@ export default {
         })
         result = await result.json()
 
-        this.$store.commit('displayUsers', users)
+        this.$store.commit('appendUser', result)
 
         this.username = ''
         this.password = ''

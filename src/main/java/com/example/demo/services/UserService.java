@@ -40,4 +40,8 @@ public class UserService {
     public User checkLogin(String username, String password){
         return userRepo.checkPassword(username, password);
     }
+
+    public User register(User newUser) {
+return userRepo.save(newUser);
+    }
 }
