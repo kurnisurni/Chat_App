@@ -24,6 +24,7 @@ body {
 /*-------------------------------------------*/
 .messages {
   background-color: rgb(1, 175, 175);         /*This one will not be here later. This is just to see what is what*/
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
