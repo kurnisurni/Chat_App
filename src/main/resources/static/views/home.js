@@ -55,7 +55,6 @@ export default{
           console.log('Channels:')
           console.log(channels)
       },
-
       async loadFriendList(){
          //Loads user friends, before home view is created
           let url = '/rest/friend-list/' + this.$store.state.currentUser.id
@@ -64,20 +63,21 @@ export default{
           let users = []
           try{
             for (let i = 0; i < friends.length; i++){
-              let user = friends[i]
-              let url = '/rest/users/' + user.user
+              let friendship = friends[i]
+              let url = '/rest/users/' + friendship.user
               let friend = await fetch(url)
               friend = await friend.json()
+              friend["friendshipTime"] = friendship.time
+              console.log('-------------')
               users.push(friend)
+              console.log(friend)
             }
           }catch(e){
             console.log(e)
           }
            this.$store.commit('displayFriendship', users)
            console.log('Friends:')
-           console.log(users)
-            
-            
+           console.log(users)      
       }
     },
 

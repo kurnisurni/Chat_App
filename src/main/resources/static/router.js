@@ -25,10 +25,5 @@ export const router = new VueRouter({
         path: '/', 
         component: login
       },
-      {
-      name: "userDetails",
-      path: '/users/:id', 
-      component: userDetails
-    }, 
   ]
 });

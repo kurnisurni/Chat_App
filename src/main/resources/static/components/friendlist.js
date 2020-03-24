@@ -9,30 +9,33 @@ export default{
         <ul>
           <li v-for="friend in friendList" 
               :key="friend.id"
-              @click="goToFriendDetails(friend.id)">
-            <h4>User: {{ friend.username }}</h4>            
-            <modal v-if="showModal" class="modal-route">
-              <div class="modal-content">
-                <userDetails />
-              </div>
-            </modal>
-          
+              @click="goToFriendDetails(friend)"
+              >
+            <h4>User: {{ friend.username }}</h4>          
           </li>
         </ul>
+        <div v-if="showModal" class="modal-route">
+              <div class="modal-content"> 
+                <userDetails :friendship="activeFriend"/>
+               </div>
+        </div>
     </div>
   `,
 
   data(){
     return{
-      showModal: false
+      showModal: false,
+      activeFriend: null
     }
   },
   methods:{
-    goToFriendDetails(id){
-      console.log(id)
-      this.$router.push('/users/' + id)
+    goToFriendDetails(friend){
+     this.activeFriend = friend
       this.showModal = true
     },
+    close() {
+      this.showModal = false;
+    }
   },
 
   computed:{

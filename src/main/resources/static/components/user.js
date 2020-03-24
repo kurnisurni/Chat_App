@@ -8,8 +8,6 @@ export default{
             <!-- Need to move width and height till css later -->
             <img :src="user.picture" alt="User Image" width="50" height="50">
             <button @click="logOut">Log Out</button>
-            
-        
         </div>
     `,
     data(){

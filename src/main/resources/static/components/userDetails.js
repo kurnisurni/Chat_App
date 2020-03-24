@@ -1,25 +1,22 @@
+
 export default {
     template: `
       <div>
-        <h2>{{ user.username }}</h2>
-        <img :src="user.picture" alt="User Image" width="50" height="50">
+        <div class="modal">
+          <div class="close-x">
+              <button @click="close">Close</button>
+        </div>
+          <h2>{{ friendship.username }}</h2>
+          <img :src="friendship.picture" alt="User Image" width="80" height="80">
+          <p>Friend Since: {{ friendship.friendshipTime }}</p>
+        </div>
       </div>
     `,
-    data() {
-      return {
-        user: {
-          username: '',
-          picture: ''
-        }
+     props : ['friendship']
+     ,
+     methods:{
+      close() {
+        this.$parent.close();
       }
-    },
-    async created() { 
-     console.log(this.$route.params.id);
-  
-      let user = await fetch('/rest/users/' + this.$route.params.id)    
-      user = await user.json()
-      console.log(user);
-
-      this.user = user
-    }
+     }
   }

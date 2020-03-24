@@ -26,6 +26,8 @@ public class UserController {
     @GetMapping("/users/login/{username}/{password}")
     public User checkLogin (@PathVariable String username, @PathVariable String password){
         return userService.checkLogin(username, password);
+        //Gör post mapping, och request body ist för @PathVariable
+        //Man skickar aldrig med lösenord till frontend  för säkerhetsskäl
     }
 
     @GetMapping("/users/setOnline/{id}")
