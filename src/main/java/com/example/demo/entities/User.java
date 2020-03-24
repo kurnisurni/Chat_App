@@ -9,7 +9,6 @@ public class User {
     @Id     // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Autoincrement
     private int id;
-
     private String username;
     private String password;
     private String picture_url;

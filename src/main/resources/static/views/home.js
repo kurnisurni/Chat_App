@@ -1,3 +1,4 @@
+import user from '../components/user.js'
 import userChannels from '../components/channelList.js'
 import friendlist from '../components/friendList.js'
 import messages from '../components/messages.js'
@@ -7,6 +8,7 @@ import createChannel from '../components/createChannel.js'
 
 export default{
     components:{
+       user,
        userChannels,
        friendlist,
        messages,
@@ -36,6 +38,7 @@ export default{
           let users = await fetch('/rest/users')
           users = await users.json()
           this.$store.commit('displayUsers', users)
+          console.log('Users:')
           console.log(users)
       },
 
@@ -44,6 +47,7 @@ export default{
           let messages = await fetch('/rest/messages')
           messages = await messages.json()
           this.$store.commit('displayMessages', messages)
+          console.log('Messages:')
           console.log(messages)
       },
 
@@ -63,13 +67,27 @@ export default{
 
       async loadFriendList(){
          //Loads user friends, before home view is created
-
           let url = '/rest/friend-list/' + this.$store.state.currentUser.id
-          let users = await fetch(url)
-          users = await users.json()
-          this.$store.commit('displayFriends', users)
-          console.log(users)
-    
+          let friends = await fetch(url)
+          friends = await friends.json()
+          let users = []
+          try{
+            for (let i = 0; i < friends.length; i++){
+              let friendship = friends[i]
+              let url = '/rest/users/' + friendship.user
+              let friend = await fetch(url)
+              friend = await friend.json()
+              friend["friendshipTime"] = friendship.time
+              console.log('-------------')
+              users.push(friend)
+              console.log(friend)
+            }
+          }catch(e){
+            console.log(e)
+          }
+           this.$store.commit('displayFriendship', users)
+           console.log('Friends:')
+           console.log(users)      
       }
     },
 
