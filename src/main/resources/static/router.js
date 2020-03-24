@@ -31,6 +31,6 @@ export const router = new VueRouter({
      path: '/register',
      component: register
      }
-      },
+      
   ]
 });
