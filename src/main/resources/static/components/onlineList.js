@@ -11,14 +11,16 @@ export default {
             <h3>Online:</h3>
                 <ul>
                     <li v-for="user in online" 
-                    :key="user.id">
+                    :key="user.id"
+                    v-if="user.id !== currentUser.id">
                     <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>
                 <h3>Offline:</h3>
                 <ul>
                     <li v-for="user in offline" 
-                    :key="user.id">
+                    :key="user.id"
+                    v-if="user.id !== currentUser.id">
                     <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>          
@@ -29,16 +31,18 @@ computed: {
     users(){
       return this.$store.state.users
     },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
     online(){
-        return this.users.filter(user => {
-            // returnera en boolean
-            return user.online === true
-    }) },
+      return this.$store.state.onlineUsers
+        /**/ 
+    },
     offline(){
-        return this.users.filter(user => {
-            // returnera en boolean
-            return user.online === false
-    })} 
+      return this.users.filter(user => user.online === false)
+    }
   },
-
+  methods: {
+    
+  }
 }

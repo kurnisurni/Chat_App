@@ -29,24 +29,44 @@ export default{
     computed: {
 
     },
+
+    created(){
+      this.loadUsers()
+    },
     methods:{
       async logIn(){
-          let url = '/rest/users/login/' + this.username + '/' + this.password
+          const url = '/rest/users/login'
+
+          const userToLogin = {
+            username: this.username,
+            password: this.password
+          }
+
+          for (let user of this.$store.state.onlineUsers){
+            if (user.username === userToLogin.username){
+              console.log('user already logged in')
+              return
+            }
+          }
 
           let user;
           try{
-            user = await fetch(url)
+            user = await fetch(url, {
+            method:'POST',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userToLogin)
+            })
+
             user = await user.json()
-            this.$store.commit("loginUser", user)
-            // gets the user that just logged in and adds it to all connected client's 'onlineUsers' in store.
+            this.$store.commit('loginUser', user)
+            this.$store.commit('setCurrentChannel', 1)
 
-          this.$store.commit('setCurrentChannel', 1)
+            console.log(this.$store.state.currentUser)
+            console.log(this.$store.state.currentChannel)
 
-          console.log(this.$store.state.currentUser)
-          console.log(this.$store.state.currentChannel)
-
-          router.push('home')
-
+            router.push('home')
           } catch (e){
             console.log(e)
             console.log('probably wrong username or password')
@@ -63,6 +83,22 @@ export default{
           this.passwordType = 'password'
           this.buttonText = 'Show Password'
         }
+      },
+      async loadUsers(){
+        //Loads all online users so that we can keep from logging in twice, will be solved with sessions later
+          let users = await fetch('/rest/users')
+          users = await users.json()
+          this.$store.commit('displayUsers', users)
+          console.log('Users:')
+          console.log(users)
+
+
+          let onlineUsers = users.filter(user => user.online)
+          console.log(onlineUsers)
+
+          for (let user of onlineUsers){
+            this.$store.commit('goOnline', user)
+          }
       }
     }
 }

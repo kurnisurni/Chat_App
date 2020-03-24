@@ -33,6 +33,16 @@ export const store = new Vuex.Store({
 
       goOnline(state, user){
         state.onlineUsers.push(user)
+        for (let use of store.state.users){
+          if (use.id === user.id){
+            use.online = true
+          }
+        }
+        console.log(state.onlineUsers)
+      },
+
+      goOffline(state, index){
+        state.onlineUsers.splice(index, 1)
       },
 
       displayMessages(state, messages){
