@@ -1,5 +1,6 @@
 export default{
     template: `
+      <div>
         <form @submit.prevent="createNewChannel">
             <input v-model="name" type="text"
             required
@@ -8,6 +9,7 @@ export default{
             <button>Create New Channel</button>
 
         </form>
+       </div>
     `,
 
      props: []
@@ -21,15 +23,15 @@ export default{
 
     methods: {
         async createNewChannel(){
-            if(!this.name.trim()){
-                return
-            }
-
+            if (this.name != ''){
+            
+            let channel;
             let newChannel = {
                 name: this.name,
                 admin_id: this.$store.state.currentUser.id
             }
 
+        try{
             let channel = await fetch('/rest/channels',{
                 method: 'POST',
                 headers: {
@@ -38,12 +40,15 @@ export default{
                 body: JSON.stringify(newChannel)
             })
 
-            channel = await channel.json()
-
-            this.$store.commit('appendChannel', channel)
-
             this.name = ' '
+
+        } catch(e){
+             console.log("could not post message")
+             console.log(e)
+            }
         }
+
     }
+   }
 }
 

@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.DeleteClass;
 import com.example.demo.entities.Message;
 import com.example.demo.repositories.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,21 @@ public class MessageService {
         }
 
         return dbMessage;
+    }
+
+    public void deleteById(int id, int index){
+
+        DeleteClass deleteClass = new DeleteClass();
+
+        try {
+            deleteClass.setIndex(index);
+            deleteClass.setAction("delete-message");
+
+            messageRepo.deleteById(id);
+
+            socketService.sendToAll(deleteClass, DeleteClass.class);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

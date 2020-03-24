@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import home from './views/home.js'
 import login from './views/login.js'
+import register from './views/register.js'
 import userDetails from './components/userDetails.js'
 
 export const router = new VueRouter({
@@ -12,18 +13,24 @@ export const router = new VueRouter({
   routes: [
       {
         name:"login2",
-        path: '/index.html', 
+        path: '/index.html',
         component: login
       },
       {
         name:"home",
-        path: '/home', 
+        path: '/home',
         component: home
       },
       {
         name:"login",
-        path: '/', 
+        path: '/',
         component: login
+      },
+      {
+     name:"register",
+     path: '/register',
+     component: register
+     }
       },
   ]
 });

@@ -13,6 +13,9 @@ public class Channel {
     private String name;
     private int adminId;
 
+    @Transient
+    public String action;
+
     public Channel() {
     }
 

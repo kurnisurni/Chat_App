@@ -17,12 +17,17 @@ export default{
     },
 
     template:`
-    <div>
-      <user />
-      <friendlist />
-      <messages />
-      <messageInput />
-      <createChannel />
+    <div class="frontPage">
+        <div class="leftBar">
+          <friendlist />
+          <userChannels />
+          <createChannel />
+        </div>
+        <div class="messagesView">
+          <messages />
+          <messageInput />
+        </div>
+ 
 
     </div>
     `,
@@ -46,15 +51,20 @@ export default{
           console.log(messages)
       },
 
-      async loadChannels(){
+      async loadUserChannels(){
         //Loads only those channels, where current user is present, before home view is created
           let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
-          let channels = await fetch(url)
-          channels = await channels.json()
-          this.$store.commit('displayUserChannels', channels)
-          console.log('Channels:')
-          console.log(channels)
+          let userChannels = await fetch(url)
+          userChannels = await userChannels.json()
+          this.$store.commit('displayUserChannels', userChannels)
       },
+
+      async loadChannels(){
+        let channels = await fetch('/rest/channels')
+        channels = await channels.json()
+        this.$store.commit('displayChannels', channels)
+      },
+
       async loadFriendList(){
          //Loads user friends, before home view is created
           let url = '/rest/friend-list/' + this.$store.state.currentUser.id
@@ -86,6 +96,7 @@ export default{
       console.log('created')
         this.loadUsers()
         this.loadMessages()
+        this.loadUserChannels()
         this.loadChannels()
         this.loadFriendList()
     }

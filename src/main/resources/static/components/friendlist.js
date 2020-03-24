@@ -4,7 +4,7 @@ export default{
     userDetails
   },
   template:`
-    <div>
+    <div class="friendList">
       <h3>Friends:</h3>
         <ul>
           <li v-for="friend in friendList" 

@@ -39,4 +39,5 @@ public class FriendList {
     public void setTime(String time) {
         this.time = time;
     }
+    */
 }
