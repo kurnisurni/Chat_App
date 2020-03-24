@@ -21,6 +21,7 @@ export default{
     template:`
     <div class="frontPage">
         <div class="leftBar">
+          <user />
           <friendlist />
           <userChannels />
           <createChannel />
