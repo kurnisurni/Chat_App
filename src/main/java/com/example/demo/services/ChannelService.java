@@ -4,13 +4,14 @@ import com.example.demo.entities.Channel;
 import com.example.demo.repositories.ChannelRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ChannelService {
     @Autowired
     ChannelRepo channelRepo;
+    @Autowired
+    private SocketService socketService;
 
     public List<Channel> findAllChannels(){
         return (List<Channel>) channelRepo.findAll();
@@ -33,7 +34,19 @@ public class ChannelService {
     }
 
     public Channel createNewChannel(Channel newChannel){
-        return channelRepo.save(newChannel);
+        Channel channel = null;
+
+        try{
+            channel = channelRepo.save(newChannel);
+
+            channel.action = "new-channel";
+
+            socketService.sendToAll(channel, Channel.class);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return channel;
     }
 
 

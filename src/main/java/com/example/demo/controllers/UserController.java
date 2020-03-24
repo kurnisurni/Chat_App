@@ -1,11 +1,9 @@
 package com.example.demo.controllers;
 
-
 import com.example.demo.entities.User;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,7 +13,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //@CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
@@ -24,5 +21,20 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getOneUser (@PathVariable int id) {
         return userService.findOneUser(id);
+    }
+
+    @GetMapping("/users/login/{username}/{password}")
+    public User checkLogin (@PathVariable String username, @PathVariable String password){
+        return userService.checkLogin(username, password);
+        //Gör post mapping, och request body ist för @PathVariable
+        //Man skickar aldrig med lösenord till frontend  för säkerhetsskäl
+    }
+
+    @GetMapping("/users/setOnline/{id}")
+    public User setOnline(@PathVariable int id) { return userService.setUserToOnline(id); }
+
+    @PostMapping("/users")
+    public User register(@RequestBody User user) {
+        return userService.register(user);
     }
 }

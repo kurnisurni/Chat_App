@@ -9,21 +9,30 @@ public class User {
     @Id     // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Autoincrement
     private int id;
-
     private String username;
     private String password;
-
     private String picture_url;
+
+    @Transient
+    public String action;
 
     public User() {
     }
 
-    public String getPicture() {
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getPicture_url() {
         return picture_url;
     }
 
-    public void setPicture(String picture) {
-        this.picture_url = picture;
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
     }
 
     public String getPassword() {
