@@ -64,11 +64,11 @@ import { store } from './store.js'
   console.log("Connecting...");*/
 
 
-function disconnect() {
+export function disconnect() {
     if (ws != null) {
         ws.close();
     }
-    isConnected = false;
+    //isConnected = false;
     console.log("Disconnected");
 }
 

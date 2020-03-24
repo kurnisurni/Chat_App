@@ -7,7 +7,7 @@ export const store = new Vuex.Store({
        users: [],
        userChannels: [],
        channels: [],
-       friendList: [],
+       friendShips: [],
        messages: [],
        onlineUsers: [],
        currentUser: {},
@@ -20,8 +20,10 @@ export const store = new Vuex.Store({
       displayChannels(state, channels){
         state.channels = channels;
       },
-      displayFriends(state, friends){
-        state.friendList = friends;
+      displayFriendship(state, friendShips){
+        state.friendShips = friendShips;
+        console.log(friendShips)
+        
       },
       loginUser(state, user){
         state.currentUser = user
