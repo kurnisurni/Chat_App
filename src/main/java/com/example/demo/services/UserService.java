@@ -27,14 +27,12 @@ public class UserService {
         return user;
     }
 
-    public User setUserToOnline(int id) {
-        User user = userRepo.findById(id);
+    public void setUserToOnline(User user) {
 
         user.action = "goOnline";
-
-        socketService.sendToAll(user, User.class);
-
-        return user;
+        user.setOnline(true);                           // Måste sättas till false när du loggar ut
+        userRepo.save(user);                            // Måste ha med denna även i utloggningen
+        socketService.sendToAll(user, User.class);      // Uppdaterar alla som ör online att "jag" precis gått online
     }
 
     public User checkLogin(String username, String password){

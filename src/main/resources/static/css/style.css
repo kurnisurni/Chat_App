@@ -102,6 +102,8 @@ body {
   color: #eee;
 }
 
+/*-------------------------------------------*/
+
 /*REGISTER COMPONENT*/
 .registerPage {
   padding: 20px;
@@ -152,6 +154,13 @@ body {
 
 .friendList {
   background-color: #fff;
+  padding-bottom: 10px;
+}
+
+.friendList h3 {
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 15px;
 }
 
 /*-------------------------------------------*/
@@ -164,6 +173,10 @@ justify-content: center;
 }
 
 .leftBar {
+  width: 25%;
+}
+
+.rightBar {
   width: 25%;
 }
 
@@ -194,6 +207,9 @@ justify-content: center;
   bottom: 0;
   right: 0;
 }
+
+/*-------------------------------------------*/
+
 /*CHANNEL LIST COMPONENT*/
 
 .channelList {
@@ -204,6 +220,9 @@ justify-content: center;
 .channelList:hover {
   color: #eee;
 }
+
+/*-------------------------------------------*/
+
 /* friendList and userDetail Component */
 .modal {
   position: absolute;
@@ -225,3 +244,22 @@ justify-content: center;
   font-size: 30px;
 }
 /*-------------------------------------------*/
+
+/*ONLINE LIST*/
+
+.onlineList {
+  background-color: aqua;
+}
+
+.onlineList h3 {
+  margin: 0;
+  padding-top: 10px;
+}
+
+/*-------------------------------------------*/
+
+/*CHANNEL*/
+
+.channel {
+  padding-left: 15px;
+}
