@@ -153,6 +153,7 @@ body {
 
 .friendList {
   background-color: #fff;
+  padding-bottom: 10px;
 }
 
 .friendList h3 {
@@ -255,3 +256,9 @@ justify-content: center;
 }
 
 /*-------------------------------------------*/
+
+/*CHANNEL*/
+
+.channel {
+  padding-left: 15px;
+}

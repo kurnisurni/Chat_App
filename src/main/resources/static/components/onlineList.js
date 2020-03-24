@@ -1,4 +1,4 @@
-import user from "./user"
+import user from "./user.js"
 
 
 export default {
@@ -7,20 +7,21 @@ export default {
     },
     template: `
         <div class="onlineList">
+            <h2>Users</h2>
             <h3>Online:</h3>
                 <ul>
                     <li v-for="user in online" 
                     :key="user.id">
-                    <h4>User: {{ user.username }}</h4>          
+                    <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>
+                <h3>Offline:</h3>
                 <ul>
                     <li v-for="user in offline" 
                     :key="user.id">
-                    <h4>User: {{ user.username }}</h4>          
+                    <h4>{{ user.username }}</h4>          
                     </li>
-                </ul>
-            <h3>Offline:</h3>
+                </ul>          
         </div>
     `,
 

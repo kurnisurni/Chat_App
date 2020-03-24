@@ -1,6 +1,6 @@
 export default{
   template: `
-  <div>
+  <div class="channel">
     <h3>Your Channels:</h3>
     <div class="channelList" v-for="channel in userChannels" :key="channel.id">
       <h4 class="channelNameInList" @click="goToChannel(channel)">
