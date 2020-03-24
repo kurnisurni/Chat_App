@@ -12,6 +12,15 @@ public class User {
     private String username;
     private String password;
     private String picture_url;
+    private boolean online;
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 
     @Transient
     public String action;
