@@ -17,9 +17,11 @@ export const store = new Vuex.Store({
       displayUsers(state, users){
         state.users = users;
       },
+
       displayChannels(state, channels){
         state.channels = channels;
       },
+
       displayFriendship(state, friendShips){
         state.friendShips = friendShips;
         console.log(friendShips)
@@ -28,18 +30,22 @@ export const store = new Vuex.Store({
       loginUser(state, user){
         state.currentUser = user
       },
+
       goOnline(state, user){
         state.onlineUsers.push(user)
       },
+
       displayMessages(state, messages){
         for (let i = 0; i < messages.length; i++){
           messages[i].message_time = new Date(messages[i].message_time).toLocaleString()
         }
         state.messages = messages
       },
+
       displayUserChannels(state, userChannels){
         state.userChannels = userChannels
       },
+
       addUserChannel(state, userChannel){
         
       },
@@ -49,21 +55,26 @@ export const store = new Vuex.Store({
         state.messages.push(message)
         console.log(state.messages)
       },
+
       appendChannel(state, channel){
         state.channels.push(channel)
       },
+
       deleteFriend(state, index){
         console.log(index)
         console.log(state.friendList)
         state.friendList.splice(index, 1)
       },
+
       setCurrentChannel(state, channelId){
         state.currentChannel = channelId
         console.log(state.currentChannel)
       },
+
        appendUser(state, user){
        state.users.push(user)
       },
+      
       deleteMessage(state, index){
         state.messages.splice(index, 1)
       }
