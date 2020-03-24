@@ -23,19 +23,26 @@ public class UserController {
         return userService.findOneUser(id);
     }
 
-    @GetMapping("/users/login/{username}/{password}")
-    public User checkLogin (@PathVariable String username, @PathVariable String password){
-        User user = userService.checkLogin(username, password);
-        if (user != null) {
-        userService.setUserToOnline(user);
-        }
-        return user;
+    @PostMapping("/users/login")
+    public User checkLogin (@RequestBody User user){
+        return userService.setUserToOnline(user);
+
+        //userService.setUserToOnline(userToLogin);
+
         //Gör post mapping, och request body ist för @PathVariable
         //Man skickar aldrig med lösenord till frontend  för säkerhetsskäl
+    }
+
+    @PutMapping("/users/logout")
+    public User logOut(@RequestBody User user){
+        return userService.logOut(user);
     }
 
     @PostMapping("/users")
     public User register(@RequestBody User user) {
         return userService.register(user);
     }
+
+
+
 }

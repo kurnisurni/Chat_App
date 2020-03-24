@@ -5,6 +5,7 @@ import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 import onlineList from '../components/onlineList.js'
+import { store } from '../store.js'
 
 
 export default{
@@ -39,14 +40,26 @@ export default{
     `,
 
     methods:{
-      async loadUsers(){
+      /*async loadUsers(){
         //Loads all users before home view is created
           let users = await fetch('/rest/users')
           users = await users.json()
           this.$store.commit('displayUsers', users)
           console.log('Users:')
           console.log(users)
-      },
+
+
+          let onlineUsers = users.filter(user => user.online && user.id != this.$store.state.currentUser.id)
+          console.log(onlineUsers)
+
+          this.$store.commit('goOnline', onlineUsers)
+
+          /*for (let user of users) {
+            if (user.online){
+              this.$store.commit('goOnline', user)
+            }
+          }
+      },*/
 
       async loadMessages(){
         //Loads all messages before home view is created
@@ -100,7 +113,7 @@ export default{
      created(){
        /*All methods prints data to console. This is just to see if it works. */
       console.log('created')
-        this.loadUsers()
+        //this.loadUsers()
         this.loadMessages()
         this.loadUserChannels()
         this.loadChannels()

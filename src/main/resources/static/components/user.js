@@ -21,7 +21,26 @@ export default{
         }
     },
     methods:{
-        logOut(){
+        async logOut(){
+
+          const url = '/rest/users/logout'
+
+          const userToLogout = {
+            id: this.$store.state.currentUser.id
+          }
+
+          try{
+            await fetch(url, {
+            method:'PUT',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userToLogout)
+            })
+          } catch(e){
+            console.log(e)
+          }
+
           disconnect()
           this.$router.push('/')
         }
