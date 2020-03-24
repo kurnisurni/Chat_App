@@ -1,7 +1,7 @@
-import userDetails from './userDetails.js'
+import friendDetails from './friendDetails.js'
 export default{
   components:{
-    userDetails
+    friendDetails
   },
   template:`
     <div class="friendList">
@@ -16,7 +16,7 @@ export default{
         </ul>
         <div v-if="showModal" class="modal-route">
               <div class="modal-content"> 
-                <userDetails :friendship="activeFriend"/>
+                <friendDetails :friendship="activeFriend"/>
                </div>
         </div>
     </div>

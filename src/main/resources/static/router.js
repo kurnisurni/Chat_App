@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 import home from './views/home.js'
 import login from './views/login.js'
 import register from './views/register.js'
-import userDetails from './components/userDetails.js'
+import userDetails from './components/friendDetails.js'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -30,7 +30,6 @@ export const router = new VueRouter({
      name:"register",
      path: '/register',
      component: register
-     }
-      
+     } 
   ]
 });

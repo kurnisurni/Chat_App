@@ -7,7 +7,8 @@ export default {
               <button @click="close">Close</button>
         </div>
           <h2>{{ friendship.username }}</h2>
-          <img :src="friendship.picture" alt="User Image" width="80" height="80">
+          <img :src="friendship.picture_url" alt="User Image" width="80" height="80">
+          
           <p>Friend Since: {{ friendship.friendshipTime }}</p>
         </div>
       </div>
