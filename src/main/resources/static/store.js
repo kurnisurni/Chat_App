@@ -16,19 +16,11 @@ export const store = new Vuex.Store({
     },
     mutations: {
       saveAccessToken(state, userAndToken){
-        try{
-          const token = JSON.parse(localStorage.getItem('accessToken'))
-          if (token.user){
-            console.log("can't log in")
-          }
-        } catch(e){
-          console.log(e)
-          localStorage.setItem('accessToken', JSON.stringify(userAndToken))
-          state.userAndToken = userAndToken
-          console.log(state.userAndToken)
-        }
-        
+        localStorage.setItem('accessToken', JSON.stringify(userAndToken))
+        state.userAndToken = userAndToken
+        console.log(state.userAndToken)
       },
+      
       displayUsers(state, users){
         state.users = users;
       },

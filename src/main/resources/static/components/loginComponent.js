@@ -41,46 +41,44 @@ export default{
           password: this.password
         }        
 
-          try{
-            const alreadyLoggedIn = JSON.parse(localStorage.getItem('accessToken'))
-            const us = alreadyLoggedIn.user
-          } catch (e){
-            try{
-              let result = await fetch(url, {
-              method:'POST',
-              headers: {
-                'Content-Type':'application/json'
-              },
-              body: JSON.stringify(userToLogin)
-              })
-    
-              result = await result.json()
-              console.log(result)
-    
-              let user = await fetch('/rest/users/' + result.id)
-              user = await user.json()
-    
-              console.log(user)
-    
-              const userAndToken = {
-                user: user,
-                token: result.accessToken
-              }
-    
-              console.log(userAndToken)
-    
-              this.$store.commit('saveAccessToken', userAndToken)
-              
-              console.log(this.$store.state.userAndToken)
-            } catch (e){
-              console.log(e)
-            }
-    
-            router.push('home')
-          }
-          
+        try{
+          const alreadyLoggedIn = JSON.parse(localStorage.getItem('accessToken'))
+          const us = alreadyLoggedIn.user
 
-          
+          console.log('You are already logged in as: ' + us.username + '!\n Please log out before attempting another login!')
+        } catch (e){
+          try{
+            let result = await fetch(url, {
+            method:'POST',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userToLogin)
+            })
+  
+            result = await result.json()
+            console.log(result)
+  
+            let user = await fetch('/rest/users/' + result.id)
+            user = await user.json()
+  
+            console.log(user)
+  
+            const userAndToken = {
+              user: user,
+              token: result.accessToken
+            }
+  
+            console.log(userAndToken)
+  
+            this.$store.commit('saveAccessToken', userAndToken)
+            
+            console.log(this.$store.state.userAndToken)
+          } catch (e){
+            console.log(e)
+          }
+        }
+        router.push('/')          
       },
 
       showOrHidePassword(){

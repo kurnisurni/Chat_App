@@ -11,9 +11,79 @@ import register from './views/register.js'
 import ws from './socket.js'
 import {disconnect} from '../socket.js'
 
+export const router = new VueRouter({
+  mode: 'history',
+  routes: [
+      {
+        name:"login",
+        path: '/login',
+        component: login,
+        async beforeEnter(to, from, next){
+          try{
+            const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
+            const us = tokenFromStorage.user
+            /*if (tokenFromStorage.user != undefined){
+
+              const userToLogout = {
+                id: tokenFromStorage.user.id
+              }
+  
+              const url = '/rest/users/logout'
+  
+              try{
+                await fetch(url, {
+                method:'PUT',
+                headers: {
+                  'Content-Type':'application/json'
+                },
+                body: JSON.stringify(userToLogout)
+                })
+              } catch(e){
+                console.log(e)
+              }
+  
+              localStorage.clear()
+              try{
+                if(ws.OPEN) disconnect()
+              } catch(e){
+                console.log(e)
+              }
+            }*/
+            next('/')
+          } catch(e){
+            next()
+          }
+        }
+      },
+      {
+        name:"home",
+        path: '/home',
+        component: home,
+        async beforeEnter(to, from, next) {
+          checkToken(to, from, next)
+        } 
+      },
+      {
+        name:"entryPoint",
+        path: '/',
+        component: home,
+        async beforeEnter(to, from, next){
+          checkToken(to, from, next)
+        }
+      },
+      {
+     name:"register",
+     path: '/register',
+     component: register
+     }
+      
+  ]
+});
+
 async function checkToken(to, from, next){
   try{
     const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
+    const us = tokenFromStorage.user
 
     const userAndToken = {
       user: tokenFromStorage.user,
@@ -49,72 +119,3 @@ async function checkToken(to, from, next){
   }
   
 }
-
-export const router = new VueRouter({
-  mode: 'history',
-  routes: [
-      {
-        name:"login",
-        path: '/login',
-        component: login,
-        async beforeEnter(to, from, next){
-          try{
-            
-            const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
-            if (tokenFromStorage.user != undefined){
-
-              const userToLogout = {
-                id: tokenFromStorage.user.id
-              }
-  
-              const url = '/rest/users/logout'
-  
-              try{
-                await fetch(url, {
-                method:'PUT',
-                headers: {
-                  'Content-Type':'application/json'
-                },
-                body: JSON.stringify(userToLogout)
-                })
-              } catch(e){
-                console.log(e)
-              }
-  
-              localStorage.clear()
-              try{
-                if(ws.OPEN) disconnect()
-              } catch(e){
-                console.log(e)
-              }
-            }
-            next()
-          } catch(e){
-            next()
-          }
-        }
-      },
-      {
-        name:"home",
-        path: '/home',
-        component: home,
-        async beforeEnter(to, from, next) {
-          checkToken(to, from, next)
-        } 
-      },
-      {
-        name:"entryPoint",
-        path: '/',
-        component: home,
-        async beforeEnter(to, from, next){
-          checkToken(to, from, next)
-        }
-      },
-      {
-     name:"register",
-     path: '/register',
-     component: register
-     }
-      
-  ]
-});

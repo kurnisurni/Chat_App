@@ -52,6 +52,7 @@ export default{
         console.log(onlineUsers)
 
         for (let user of onlineUsers){
+          if (!this.$store.state.onlineUsers.includes(user))
           this.$store.commit('goOnline', user)
         }
     },
