@@ -1,5 +1,6 @@
 import Vue from './libs/vue.esm.browser.js'
 import VueRouter from './libs/vue-router.esm.browser.js'
+import { store } from './store.js'
 Vue.use(VueRouter)
 
 
@@ -19,7 +20,23 @@ export const router = new VueRouter({
       {
         name:"home",
         path: '/home',
-        component: home
+        component: home,
+        beforeEnter(to, from, next) {
+          if (
+            fetch('/home', {
+              headers: {
+                'Content-Type':'application/json'
+              },
+              body: store.state.accessToken
+            })
+          ){
+            next()
+          } else {
+            next({
+              name:'login'
+            })
+          }
+        } 
       },
       {
         name:"login",

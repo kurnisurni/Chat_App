@@ -10,6 +10,8 @@ import { store } from './store.js'
       switch(data.action) {
         case 'goOnline':
           store.commit('goOnline', data)
+          store.commit('loginUser', data)
+          store.commit('setCurrentChannel', 1)
           break
         case 'goOffline':
           for (let i = 0; i < store.state.onlineUsers.length; i++){

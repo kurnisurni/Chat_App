@@ -11,9 +11,14 @@ export const store = new Vuex.Store({
        messages: [],
        onlineUsers: [],
        currentUser: {},
-       currentChannel: {}
+       currentChannel: {},
+       accessToken: ''
     },
     mutations: {
+      setAccessToken(state, token){
+        state.accessToken = token
+      }
+      ,
       displayUsers(state, users){
         state.users = users;
       },

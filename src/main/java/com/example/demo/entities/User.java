@@ -14,18 +14,33 @@ public class User {
     private String picture_url;
     private boolean online;
 
+    private String roles;
+
+    @Transient
+    public String action;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
     public boolean isOnline() {
         return online;
     }
 
     public void setOnline(boolean online) {
         this.online = online;
-    }
-
-    @Transient
-    public String action;
-
-    public User() {
     }
 
     public String getAction() {

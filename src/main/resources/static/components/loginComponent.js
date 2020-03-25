@@ -35,44 +35,32 @@ export default{
     },
     methods:{
       async logIn(){
-          const url = '/rest/users/login'
+        const url = '/rest/auth/signin'
 
-          const userToLogin = {
-            username: this.username,
-            password: this.password
-          }
+        const userToLogin = {
+          username: this.username,
+          password: this.password
+        }
 
-          for (let user of this.$store.state.onlineUsers){
-            if (user.username === userToLogin.username){
-              console.log('user already logged in')
-              return
-            }
-          }
+        let result;
+        try{
+          result = await fetch(url, {
+          method:'POST',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(userToLogin)
+          })
 
-          let user;
-          try{
-            user = await fetch(url, {
-            method:'POST',
-            headers: {
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify(userToLogin)
-            })
+          result = await token.json()
 
-            user = await user.json()
-            this.$store.commit('loginUser', user)
-            this.$store.commit('setCurrentChannel', 1)
+          this.$store.commit('setAccessToken', result.accessToken)
+        } catch (e){
+          console.log(e)
+          console.log('probably wrong username or password')
+        }
 
-            console.log(this.$store.state.currentUser)
-            console.log(this.$store.state.currentChannel)
-
-            router.push('home')
-          } catch (e){
-            console.log(e)
-            console.log('probably wrong username or password')
-          }
-
-          
+        router.push('home')
       },
 
       showOrHidePassword(){
