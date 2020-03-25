@@ -22,10 +22,7 @@ import com.example.demo.services.UserDetailsServiceImpl;
 
     @Configuration
     @EnableWebSecurity
-    @EnableGlobalMethodSecurity(
-            // securedEnabled = true,
-            // jsr250Enabled = true,
-            prePostEnabled = true)
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
     public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Autowired
         UserDetailsServiceImpl userDetailsService;
@@ -60,7 +57,7 @@ import com.example.demo.services.UserDetailsServiceImpl;
                     .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests().antMatchers("/**").permitAll()
-                    .antMatchers("/rest/**").permitAll()
+                    .antMatchers("/**").permitAll()
                     .anyRequest().authenticated();
 
             http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+//@RequestMapping("/")
 public class ViewController {
 
     /*@GetMapping("/user")
@@ -22,9 +23,15 @@ public class ViewController {
         return "Moderator Board.";
     }*/
 
-    @GetMapping("/home")
-    @PreAuthorize("hasRole('ALL')")
-    public boolean adminAccess() {
-        return true;
+    @GetMapping("/rest/auth/checkToken")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String checkToken(){
+        return "valid token";
     }
+
+    /*@GetMapping("/home")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminAccess() {
+        return "working";
+    }*/
 }

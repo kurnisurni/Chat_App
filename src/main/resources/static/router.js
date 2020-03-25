@@ -1,47 +1,114 @@
 import Vue from './libs/vue.esm.browser.js'
 import VueRouter from './libs/vue-router.esm.browser.js'
 import { store } from './store.js'
+
 Vue.use(VueRouter)
 
 
 import home from './views/home.js'
 import login from './views/login.js'
 import register from './views/register.js'
-import userDetails from './components/userDetails.js'
+import ws from './socket.js'
+import {disconnect} from '../socket.js'
+
+async function checkToken(to, from, next){
+  try{
+    const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
+
+    const userAndToken = {
+      user: tokenFromStorage.user,
+      token: tokenFromStorage.token
+    }
+    store.commit('saveAccessToken', userAndToken)
+
+    const bearer = 'Bearer ' + store.state.userAndToken.token
+
+    let result
+
+    try{
+      result = await fetch('/rest/auth/checkToken', {
+        headers: {
+          'Authorization': bearer
+        }
+      })
+    } catch(e){
+      console.log(e)
+    } 
+
+    let currentUser = await fetch('/rest/users/' + store.state.userAndToken.user.id)
+    currentUser = await currentUser.json()
+    
+    store.commit('loginUser', currentUser)
+    store.commit('setCurrentChannel', 1)
+
+    if (result.ok){
+      next()
+    }
+  } catch (e){
+    next('/login')
+  }
+  
+}
 
 export const router = new VueRouter({
   mode: 'history',
   routes: [
       {
-        name:"login2",
-        path: '/index.html',
-        component: login
+        name:"login",
+        path: '/login',
+        component: login,
+        async beforeEnter(to, from, next){
+          try{
+            
+            const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
+            if (tokenFromStorage.user != undefined){
+
+              const userToLogout = {
+                id: tokenFromStorage.user.id
+              }
+  
+              const url = '/rest/users/logout'
+  
+              try{
+                await fetch(url, {
+                method:'PUT',
+                headers: {
+                  'Content-Type':'application/json'
+                },
+                body: JSON.stringify(userToLogout)
+                })
+              } catch(e){
+                console.log(e)
+              }
+  
+              localStorage.clear()
+              try{
+                if(ws.OPEN) disconnect()
+              } catch(e){
+                console.log(e)
+              }
+            }
+            next()
+          } catch(e){
+            next()
+          }
+        }
       },
       {
         name:"home",
         path: '/home',
         component: home,
-        beforeEnter(to, from, next) {
-          if (
-            fetch('/home', {
-              headers: {
-                'Content-Type':'application/json'
-              },
-              body: store.state.accessToken
-            })
-          ){
-            next()
-          } else {
-            next({
-              name:'login'
-            })
-          }
+        async beforeEnter(to, from, next) {
+          checkToken(to, from, next)
         } 
       },
       {
-        name:"login",
+        name:"entryPoint",
         path: '/',
-        component: login
+        component: home,
+        async beforeEnter(to, from, next){
+          checkToken(to, from, next)
+        }
       },
       {
      name:"register",

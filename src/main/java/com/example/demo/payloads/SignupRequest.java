@@ -9,7 +9,7 @@ public class SignupRequest {
     @Size(min = 3, max = 20)
     private String username;
 
-    private String role;
+    private Set<String> role;
 
     @NotBlank
     @Size(min = 3, max = 40)
@@ -31,11 +31,11 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public String getRole() {
+    public Set<String> getRole() {
         return this.role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Set<String> role) {
         this.role = role;
     }
 }

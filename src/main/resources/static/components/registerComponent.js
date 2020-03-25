@@ -41,6 +41,7 @@ export default {
             let user = {
                 username: this.username,
                 password: this.password,
+                role: ["admin", "user"]
             }
 
             try{

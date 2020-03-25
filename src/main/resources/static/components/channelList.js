@@ -26,7 +26,22 @@ export default{
     }
   },
   methods: {
-    goToChannel(channel){
+    async goToChannel(channel){
+
+      /*const bearer = 'Bearer ' + this.$store.state.accessToken
+
+      const result = await fetch('/api/test/all', {
+        headers: {
+          'Authorization': bearer,
+        }
+      })
+
+      console.log(result)
+
+      const hasToken = await result.json()
+
+      console.log(hasToken)*/
+
       if (!this.userChannels.includes(channel)) this.addChannelToUserChannels(channel)
       this.$store.commit('setCurrentChannel', channel.id)
     },
