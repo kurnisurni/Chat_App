@@ -8,8 +8,6 @@ Vue.use(VueRouter)
 import home from './views/home.js'
 import login from './views/login.js'
 import register from './views/register.js'
-import ws from './socket.js'
-import {disconnect} from '../socket.js'
 
 export const router = new VueRouter({
   mode: 'history',
@@ -22,33 +20,7 @@ export const router = new VueRouter({
           try{
             const tokenFromStorage = JSON.parse(localStorage.getItem('accessToken'))
             const us = tokenFromStorage.user
-            /*if (tokenFromStorage.user != undefined){
-
-              const userToLogout = {
-                id: tokenFromStorage.user.id
-              }
-  
-              const url = '/rest/users/logout'
-  
-              try{
-                await fetch(url, {
-                method:'PUT',
-                headers: {
-                  'Content-Type':'application/json'
-                },
-                body: JSON.stringify(userToLogout)
-                })
-              } catch(e){
-                console.log(e)
-              }
-  
-              localStorage.clear()
-              try{
-                if(ws.OPEN) disconnect()
-              } catch(e){
-                console.log(e)
-              }
-            }*/
+            
             next('/')
           } catch(e){
             next()
