@@ -41,8 +41,9 @@ export default{
             console.log(e)
           }
 
+          localStorage.clear()
           disconnect()
-          this.$router.push('/')
+          this.$router.push('/login')
         }
     },
 }

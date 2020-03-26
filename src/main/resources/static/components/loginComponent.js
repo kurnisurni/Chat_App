@@ -31,48 +31,54 @@ export default{
     },
 
     created(){
-      this.loadUsers()
     },
     methods:{
       async logIn(){
-          const url = '/rest/users/login'
+        const url = '/rest/auth/signin'
 
-          const userToLogin = {
-            username: this.username,
-            password: this.password
-          }
+        const userToLogin = {
+          username: this.username,
+          password: this.password
+        }        
 
-          for (let user of this.$store.state.onlineUsers){
-            if (user.username === userToLogin.username){
-              console.log('user already logged in')
-              return
-            }
-          }
+        try{
+          const alreadyLoggedIn = JSON.parse(localStorage.getItem('accessToken'))
+          const us = alreadyLoggedIn.user
 
-          let user;
+          console.log('You are already logged in as: ' + us.username + '!\n Please log out before attempting another login!')
+        } catch (e){
           try{
-            user = await fetch(url, {
+            let result = await fetch(url, {
             method:'POST',
             headers: {
               'Content-Type':'application/json'
             },
             body: JSON.stringify(userToLogin)
             })
-
+  
+            result = await result.json()
+            console.log(result)
+  
+            let user = await fetch('/rest/users/' + result.id)
             user = await user.json()
-            this.$store.commit('loginUser', user)
-            this.$store.commit('setCurrentChannel', 1)
-
-            console.log(this.$store.state.currentUser)
-            console.log(this.$store.state.currentChannel)
-
-            router.push('home')
+  
+            console.log(user)
+  
+            const userAndToken = {
+              user: user,
+              token: result.accessToken
+            }
+  
+            console.log(userAndToken)
+  
+            this.$store.commit('saveAccessToken', userAndToken)
+            
+            console.log(this.$store.state.userAndToken)
           } catch (e){
             console.log(e)
-            console.log('probably wrong username or password')
           }
-
-          
+        }
+        router.push('/')          
       },
 
       showOrHidePassword(){
@@ -83,22 +89,7 @@ export default{
           this.passwordType = 'password'
           this.buttonText = 'Show Password'
         }
-      },
-      async loadUsers(){
-        //Loads all online users so that we can keep from logging in twice, will be solved with sessions later
-          let users = await fetch('/rest/users')
-          users = await users.json()
-          this.$store.commit('displayUsers', users)
-          console.log('Users:')
-          console.log(users)
-
-
-          let onlineUsers = users.filter(user => user.online)
-          console.log(onlineUsers)
-
-          for (let user of onlineUsers){
-            this.$store.commit('goOnline', user)
-          }
       }
+      
     }
 }
