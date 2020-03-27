@@ -35,8 +35,7 @@ computed: {
       return this.$store.state.currentUser
     },
     online(){
-      return this.$store.state.onlineUsers
-        /**/ 
+      return this.$store.state.onlineUsers 
     },
     offline(){
       return this.users.filter(user => user.online === false)
