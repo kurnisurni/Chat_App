@@ -25,6 +25,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,9 +46,9 @@ public class AuthController {
 
     @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
+    
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder getEncoder() { return encoder; }
 
     @Autowired
     JwtUtils jwtUtils;
@@ -69,7 +71,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        User userToLogin = userRepository.checkPassword(userDetails.getUsername(), userDetails.getPassword());
+        User userToLogin = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));;
         userToLogin.action = "goOnline";
         userToLogin.setOnline(true);
         userRepository.save(userToLogin);
