@@ -33,9 +33,9 @@ export default{
           <!-- <messages />
           <messageInput /> -->
         </div>
-        <div class="rightBar">
-          <!-- <onlineList /> -->
-        </div>
+        <!-- <div class="rightBar">
+          <onlineList />
+        </div> -->
  
 
     </div>

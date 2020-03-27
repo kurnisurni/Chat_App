@@ -175,15 +175,15 @@ justify-content: center;
 }
 
 .leftBar {
-  width: 25%;
+  width: 20%;
 }
 
-.rightBar {
+/* .rightBar {
   width: 25%;
-}
+} */
 
 .messagesView {
-  width: 50%;
+  width: 80%;
 }
 
 /*-------------------------------------------*/
@@ -271,6 +271,6 @@ justify-content: center;
 /* channelComponent */
 
 .channelComponent {
-  /* display: flex; */
+  display: flex;
 
 }
