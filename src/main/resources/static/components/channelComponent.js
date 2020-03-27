@@ -15,6 +15,7 @@ export default {
         <h2>{{ channel.name }}</h2>     <!-- Here we need to make a navbar and pick up the channel name -->
         </nav>
         <messages />
+        <messageInput />
       </div>
 
       <div>
@@ -37,7 +38,7 @@ export default {
               </ul>      
       </div>  
     </div>
-    <messageInput />
+    
   </div>
   `,
   computed: {
