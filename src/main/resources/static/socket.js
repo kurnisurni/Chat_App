@@ -10,6 +10,14 @@ import { store } from './store.js'
       switch(data.action) {
         case 'goOnline':
           store.commit('goOnline', data)
+          store.commit('setCurrentChannel', 1)
+          break
+        case 'goOffline':
+          for (let i = 0; i < store.state.onlineUsers.length; i++){
+            if (store.state.onlineUsers[i].id === data.id) {
+              store.commit('goOffline', i)
+            }
+          }
           break
         case 'new-message':
           for (let i = 0; i < store.state.userChannels.length; i++) {

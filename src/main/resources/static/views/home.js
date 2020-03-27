@@ -4,6 +4,8 @@ import friendlist from '../components/friendList.js'
 import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
+import onlineList from '../components/onlineList.js'
+import { store } from '../store.js'
 
 
 export default{
@@ -13,12 +15,14 @@ export default{
        friendlist,
        messages,
        messageInput,
-       createChannel
+       createChannel,
+       onlineList,
     },
 
     template:`
     <div class="frontPage">
         <div class="leftBar">
+          <user />
           <friendlist />
           <userChannels />
           <createChannel />
@@ -27,6 +31,9 @@ export default{
           <messages />
           <messageInput />
         </div>
+        <div class="rightBar">
+          <onlineList />
+        </div>
  
 
     </div>
@@ -34,13 +41,21 @@ export default{
 
     methods:{
       async loadUsers(){
-        //Loads all users before home view is created
-          let users = await fetch('/rest/users')
-          users = await users.json()
-          this.$store.commit('displayUsers', users)
-          console.log('Users:')
-          console.log(users)
-      },
+        let users = await fetch('/rest/users')
+        users = await users.json()
+        this.$store.commit('displayUsers', users)
+        console.log('Users:')
+        console.log(users)
+
+
+        let onlineUsers = users.filter(user => user.online)
+        console.log(onlineUsers)
+
+        for (let user of onlineUsers){
+          if (!this.$store.state.onlineUsers.includes(user))
+          this.$store.commit('goOnline', user)
+        }
+    },
 
       async loadMessages(){
         //Loads all messages before home view is created

@@ -27,7 +27,7 @@ export default{
 
     methods:{
       askIfDelete(messageId){
-        if (this.removing === ''){
+        if (this.removing !== messageId){
           this.removing = messageId
         } else this.removing = ''
         
