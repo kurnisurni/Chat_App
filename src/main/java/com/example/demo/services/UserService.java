@@ -27,18 +27,43 @@ public class UserService {
         return user;
     }
 
-    public User setUserToOnline(int id) {
-        User user = userRepo.findById(id);
+    public User setUserToOnline(User user) {
 
-        user.action = "goOnline";
+        User userToLogin = null;
 
-        socketService.sendToAll(user, User.class);
+        try{
+            userToLogin = userRepo.checkPassword(user.getUsername(), user.getPassword());
+            userToLogin.action = "goOnline";
+            userToLogin.setOnline(true);                           // Måste sättas till false när du loggar ut
+            userRepo.save(userToLogin);                            // Måste ha med denna även i utloggningen
+            socketService.sendToAll(userToLogin, User.class);      // Uppdaterar alla som ör online att "jag" precis gått online
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
-        return user;
+        return userToLogin;
     }
 
-    public User checkLogin(String username, String password){
+    /*public User checkLogin(String username, String password){
         return userRepo.checkPassword(username, password);
+    }*/
+
+    public User logOut(User user){
+
+        User userToLogout = null;
+
+        try{
+            userToLogout = userRepo.findById(user.getId());
+            userToLogout.action = "goOffline";
+            userToLogout.setOnline(false);
+            userRepo.save(userToLogout);
+            socketService.sendToAll(userToLogout, User.class);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return userToLogout;
+
     }
 
     public User register(User newUser) {
