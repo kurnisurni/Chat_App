@@ -1,12 +1,11 @@
 import user from '../components/user.js'
 import userChannels from '../components/channelList.js'
-import friendlist from '../components/friendList.js'
+import friendlist from '../components/friendlist.js'
 import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 import onlineList from '../components/onlineList.js'
 import { store } from '../store.js'
-
 
 
 export default{
@@ -35,8 +34,6 @@ export default{
         <div class="rightBar">
           <onlineList />
         </div>
- 
-
     </div>
     `,
 
