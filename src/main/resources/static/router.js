@@ -47,8 +47,7 @@ export const router = new VueRouter({
      name:"register",
      path: '/register',
      component: register
-     }
-      
+     } 
   ]
 });
 
