@@ -6,6 +6,7 @@ import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 
 
+
 export default{
     components:{
        user,
@@ -19,6 +20,7 @@ export default{
     template:`
     <div class="frontPage">
         <div class="leftBar">
+          <user />
           <friendlist />
           <userChannels />
           <createChannel />

@@ -1,5 +1,4 @@
 import {disconnect} from '../socket.js'
-
 export default{
 
     template: `
@@ -13,7 +12,7 @@ export default{
     data(){
         return{
             userName: this.$store.state.currentUser.username,
-            userPicture: this.$store.state.currentUser.picture
+            userPicture: this.$store.state.currentUser.picture_url
         }
     },
     computed: {
