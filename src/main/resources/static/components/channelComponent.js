@@ -8,23 +8,28 @@ export default {
   },
   template: `
   <div class="channelComponent">
-    
-    <div class="headerCard">
-      <h2>{{ channel.name }}</h2>
-    </div>
-
-      <div class="onlineOffline" v-for="item in usersInChannels" :key="item.channel_id + item.user_id">
-          <div v-for="user in users" :key="user.id">
-              <h3>Online</h3>
-              <p v-if="item.user_id === user.id && item.channel_id === channel.id && loggedInUsers.includes(user)">
-                {{ user.name }}
-              </p>
-              <h3>Offline</h3>
-              <p v-if="item.user_id === user.id && item.channel_id === channel.id && !loggedInUsers.includes(user)">
-                {{ user.name }}
-              </p>
-          </div>
+      <div class="headerCard">
+        <h2>{{ channel.name }}</h2>
       </div>
+          <div>
+              <h2>Users</h2>
+                <h3>Online:</h3>
+                    <ul v-for="userChannels in allUserChannels">
+                        <li v-for="user in online" 
+                        :key="user.id"
+                        v-if="userChannels.channel_id === channel.id && userChannels.user_id === user.id && user.id !== currentUser.id">
+                        <h4>{{ user.username }}</h4>          
+                        </li>
+                    </ul>
+                    <h3>Offline:</h3>
+                    <ul>
+                        <li v-for="user in offline" 
+                        :key="user.id"
+                        v-if="user.id !== currentUser.id">
+                        <h4>{{ user.username }}</h4>          
+                        </li>
+                    </ul>      
+          </div>
     <messages />
     <messageInput />
   </div>
@@ -39,8 +44,17 @@ export default {
     users(){
       return this.$store.state.users
     },
-    loggedInUsers(){
-      return this.$store.state.loggedInUsers
+    online(){
+      return this.$store.state.onlineUsers 
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
+    offline(){
+      return this.users.filter(user => user.online === false)
+    },
+    allUserChannels() {
+      return this.$store.state.allUserChannels
     }
   }
 }

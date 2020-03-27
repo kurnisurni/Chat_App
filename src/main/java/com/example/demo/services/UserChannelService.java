@@ -23,4 +23,7 @@ public class UserChannelService {
         return userChannelRepo.save(userChannel);
     }
 
+    public List<UserChannel> findAll() {
+        return (List<UserChannel>)userChannelRepo.findAll();
+    }
 }

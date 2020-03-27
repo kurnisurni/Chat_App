@@ -24,7 +24,9 @@ body {
 /*-------------------------------------------*/
 .messages {
   background-color: rgb(1, 175, 175);         /*This one will not be here later. This is just to see what is what*/
-  height: 100%;
+  position: relative; 
+  overflow: auto;
+  height: 750px;
   display: flex;
   flex-direction: column;
 }
@@ -262,4 +264,13 @@ justify-content: center;
 
 .channel {
   padding-left: 15px;
+}
+
+/*-------------------------------------------*/
+
+/* channelComponent */
+
+.channelComponent {
+  /* display: flex; */
+
 }

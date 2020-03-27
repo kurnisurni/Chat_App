@@ -29,12 +29,12 @@ export default{
           <createChannel />
         </div>
         <div class="messagesView">
-        <!-- <channelComponent /> -->
-          <messages />
-          <messageInput />
+        <channelComponent />
+          <!-- <messages />
+          <messageInput /> -->
         </div>
         <div class="rightBar">
-          <onlineList />
+          <!-- <onlineList /> -->
         </div>
  
 
@@ -105,6 +105,12 @@ export default{
            this.$store.commit('displayFriendship', users)
            console.log('Friends:')
            console.log(users)      
+      },
+
+      async loadAllUserChannels() {
+        let allChannels = await fetch('/rest/users/channels')
+        allChannels = await allChannels.json()
+        this.$store.commit()
       }
     },
 
