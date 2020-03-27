@@ -1,5 +1,4 @@
 import {disconnect} from '../socket.js'
-
 export default{
 
     template: `
