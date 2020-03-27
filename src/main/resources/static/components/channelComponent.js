@@ -32,7 +32,7 @@ export default {
       return this.$store.state.currentChannel
     },
     usersInChannels(){
-      return this.$store.state.usersInChannels
+      return this.$store.state.userChannels
     },
     users(){
       return this.$store.state.users

@@ -34,12 +34,12 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
                 });
     }
 
-    @Bean
+    /*@Bean
     public DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.sqlite.JDBC");
         dataSourceBuilder.url("jdbc:sqlite:chat-app.db");
         return dataSourceBuilder.build();
-    }
+    }*/
 }
 
