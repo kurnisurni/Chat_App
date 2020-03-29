@@ -10,6 +10,7 @@ import { store } from './store.js'
       switch(data.action) {
         case 'new-user':
           store.commit('appendUser', user)
+          break
         case 'goOnline':
           store.commit('goOnline', data)
           store.commit('setCurrentChannel', 1)
