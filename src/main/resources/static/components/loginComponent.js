@@ -59,8 +59,7 @@ export default{
             result = await result.json()
             console.log(result.error)
 
-            
-
+            if (!result.error){
               let user = await fetch('/rest/users/' + result.id)
             user = await user.json()
   
@@ -72,7 +71,9 @@ export default{
             }
   
             console.log(userAndToken)
-            
+            this.$store.commit('saveAccessToken', userAndToken)
+            }
+
           } catch (e){
             console.log(e)
           }

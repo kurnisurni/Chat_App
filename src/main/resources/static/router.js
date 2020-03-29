@@ -54,7 +54,7 @@ async function checkToken(to, from, next){
       token: tokenFromStorage.token
     }
 
-    const bearer = 'Bearer ' + store.state.userAndToken.token
+    const bearer = 'Bearer ' + userAndToken.token
 
     let result
 
@@ -71,8 +71,8 @@ async function checkToken(to, from, next){
     console.log(result.ok)
     
     if (result.ok){
+      
       store.commit('saveAccessToken', userAndToken)
-
       let currentUser = await fetch('/rest/users/' + store.state.userAndToken.user.id)
       currentUser = await currentUser.json()
       store.commit('loginUser', currentUser)
