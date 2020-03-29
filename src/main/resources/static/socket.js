@@ -8,6 +8,8 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
+        case 'new-user':
+          store.commit('appendUser', user)
         case 'goOnline':
           store.commit('goOnline', data)
           store.commit('setCurrentChannel', 1)
