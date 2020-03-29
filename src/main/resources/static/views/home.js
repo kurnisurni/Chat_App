@@ -48,11 +48,8 @@ export default{
 
         let onlineUsers = users.filter(user => user.online)
         console.log(onlineUsers)
-
-        for (let user of onlineUsers){
-          if (!this.$store.state.onlineUsers.includes(user))
-          this.$store.commit('goOnline', user)
-        }
+          
+        this.$store.commit('loadOnlineUsers', onlineUsers)
     },
 
       async loadMessages(){
@@ -66,7 +63,7 @@ export default{
 
       async loadUserChannels(){
         //Loads only those channels, where current user is present, before home view is created
-          let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+          let url = '/rest/users/channels/id/' +  this.$store.state.currentUser.id
           let userChannels = await fetch(url)
           userChannels = await userChannels.json()
           this.$store.commit('displayUserChannels', userChannels)
