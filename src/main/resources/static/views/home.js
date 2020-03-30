@@ -32,7 +32,7 @@ export default{
         <div class="messagesView">
           <channelComponent />
         </div>
-        <!-- <div class="rightBar">
+        <div class="rightBar">
           <onlineList />
         </div>
     </div>
