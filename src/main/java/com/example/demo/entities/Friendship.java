@@ -1,22 +1,23 @@
 package com.example.demo.entities;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name="friends_list")
-public class FriendList {
+public class Friendship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int user;
+
+    private int user1;
+    private int user2;
     private long time;
 
     @Transient
     public String action;
 
-    public FriendList() {
+    public Friendship() {
     }
 
     public int getId() {
@@ -27,12 +28,20 @@ public class FriendList {
         this.id = id;
     }
 
-    public int getUser() {
-        return user;
+    public int getUser1() {
+        return user1;
     }
 
-    public void setUser(int user1) {
-        this.user = user1;
+    public void setUser1(int user1) {
+        this.user1 = user1;
+    }
+
+    public int getUser2() {
+        return user2;
+    }
+
+    public void setUser2(int user2) {
+        this.user2 = user2;
     }
 
     public long getTime() {

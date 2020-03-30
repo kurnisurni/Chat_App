@@ -15,9 +15,9 @@ export default{
           </li>
         </ul>
         <div v-if="showModal" class="modal-route">
-              <div class="modal-content"> 
-                <userDetails :friendship="activeFriend"/>
-               </div>
+          <div class="modal-content"> 
+            <userDetails :friend="activeFriend"/>
+          </div>
         </div>
     </div>
   `,
@@ -31,6 +31,8 @@ export default{
   methods:{
     goToFriendDetails(friend){
      this.activeFriend = friend
+     console.log('-----Active friend----')
+     console.log(this.activeFriend)
       this.showModal = true
     },
     close() {

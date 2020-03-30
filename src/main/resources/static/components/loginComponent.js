@@ -29,32 +29,56 @@ export default{
     computed: {
 
     },
+
+    created(){
+    },
     methods:{
       async logIn(){
-          let url = '/rest/users/login/' + this.username + '/' + this.password
+        const url = '/rest/auth/signin'
 
-          let user;
+        const userToLogin = {
+          username: this.username,
+          password: this.password
+        }        
+
+        try{
+          const alreadyLoggedIn = JSON.parse(localStorage.getItem('accessToken'))
+          const us = alreadyLoggedIn.user.username
+
+          console.log('You are already logged in as: ' + us + '!\n Please log out before attempting another login!')
+        } catch (e){
           try{
-            user = await fetch(url)
+            let result = await fetch(url, {
+            method:'POST',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userToLogin)
+            })
+
+            result = await result.json()
+            console.log(result.error)
+
+            if (!result.error){
+              let user = await fetch('/rest/users/' + result.id)
             user = await user.json()
-            this.$store.commit("loginUser", user)
-            // gets the user that just logged in and adds it to all connected client's 'onlineUsers' in store.
-          url = '/rest/users/setOnline/' + user.id
-          user = await fetch(url)
-
-          this.$store.commit('setCurrentChannel', 1)
-
-          console.log(this.$store.state.currentUser)
-          console.log(this.$store.state.currentChannel)
-
-          router.push('home')
+  
+            console.log(user)
+  
+            const userAndToken = {
+              user: user,
+              token: result.accessToken
+            }
+  
+            console.log(userAndToken)
+            this.$store.commit('saveAccessToken', userAndToken)
+            }
 
           } catch (e){
             console.log(e)
-            console.log('probably wrong username or password')
           }
-
-          
+        }
+        router.push('/')          
       },
 
       showOrHidePassword(){
@@ -66,5 +90,6 @@ export default{
           this.buttonText = 'Show Password'
         }
       }
+      
     }
 }

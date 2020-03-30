@@ -1,9 +1,12 @@
 import user from '../components/user.js'
 import userChannels from '../components/channelList.js'
-import friendlist from '../components/friendList.js'
+import friendlist from '../components/friendlist.js'
 import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
+import onlineList from '../components/onlineList.js'
+import channelComponent from '../components/channelComponent.js'
+import { store } from '../store.js'
 
 
 export default{
@@ -13,7 +16,9 @@ export default{
        friendlist,
        messages,
        messageInput,
-       createChannel
+       createChannel,
+       onlineList,
+       channelComponent
     },
 
     template:`
@@ -25,23 +30,28 @@ export default{
           <createChannel />
         </div>
         <div class="messagesView">
-          <messages />
-          <messageInput />
+          <channelComponent />
         </div>
- 
-
+        <div class="rightBar">
+          <onlineList />
+        </div>
     </div>
     `,
 
     methods:{
       async loadUsers(){
-        //Loads all users before home view is created
-          let users = await fetch('/rest/users')
-          users = await users.json()
-          this.$store.commit('displayUsers', users)
-          console.log('Users:')
-          console.log(users)
-      },
+        let users = await fetch('/rest/users')
+        users = await users.json()
+        this.$store.commit('displayUsers', users)
+        console.log('Users:')
+        console.log(users)
+
+
+        let onlineUsers = users.filter(user => user.online)
+        console.log(onlineUsers)
+          
+        this.$store.commit('loadOnlineUsers', onlineUsers)
+    },
 
       async loadMessages(){
         //Loads all messages before home view is created
@@ -54,7 +64,7 @@ export default{
 
       async loadUserChannels(){
         //Loads only those channels, where current user is present, before home view is created
-          let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+          let url = '/rest/users/channels/id/' +  this.$store.state.currentUser.id
           let userChannels = await fetch(url)
           userChannels = await userChannels.json()
           this.$store.commit('displayUserChannels', userChannels)
@@ -64,6 +74,7 @@ export default{
         let channels = await fetch('/rest/channels')
         channels = await channels.json()
         this.$store.commit('displayChannels', channels)
+        this.$store.commit('setCurrentChannel', channels[0])
       },
 
       async loadFriendList(){
@@ -89,6 +100,14 @@ export default{
            this.$store.commit('displayFriendship', users)
            console.log('Friends:')
            console.log(users)      
+      },
+
+      async loadAllUserChannels() {
+        let allChannels = await fetch('/rest/users/channels')
+        allChannels = await allChannels.json()
+        this.$store.commit('allUserChannels', allChannels)
+        console.log(allChannels);
+        
       }
     },
 
@@ -100,5 +119,6 @@ export default{
         this.loadUserChannels()
         this.loadChannels()
         this.loadFriendList()
+        this.loadAllUserChannels()
     }
 }

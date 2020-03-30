@@ -11,20 +11,13 @@ export default {
     <div class="headerCard">
       <h2>{{ channel.name }}</h2>
     </div>
-    <div class="onlineOffline" v-for="item in usersInChannels" :key="item.channel_id + item.user_id">
-      <div v-for="user in users" :key="user.id">
-        <h3>Online</h2>
-        <p v-if="item.user_id === user.id && item.channel_id === channel.id && loggedInUsers.includes(user)">
-          {{ user.name }}
-        </p>
-        <h3>Offline</h3>
-        <p v-if="item.user_id === user.id && item.channel_id === channel.id && !loggedInUsers.includes(user)">
-          {{ user.name }}
-        </p>
+    
+      <div class="msgDiv" ref="mesgDiv">
+      <messages />
       </div>
-    </div>
-    <messages />
-    <messageInput />
+      <div class="msgInputDiv">
+      <messageInput />
+      </div>
   </div>
   `,
   computed: {
@@ -37,8 +30,20 @@ export default {
     users(){
       return this.$store.state.users
     },
-    loggedInUsers(){
-      return this.$store.state.loggedInUsers
+    online(){
+      return this.$store.state.onlineUsers 
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
+    offline(){
+      return this.users.filter(user => user.online === false)
+    },
+    allUserChannels() {
+      return this.$store.state.allUserChannels
     }
+  },
+  mounted(){
+    
   }
 }
