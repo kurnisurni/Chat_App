@@ -85,6 +85,12 @@ export const store = new Vuex.Store({
         state.friendList.splice(index, 1)
       },
 
+      addFriend(state, friendShip){
+      console.log(friendShip)
+      state.friendShips.push(friendShip)
+      console.log(state.friendShips)
+      },
+
       setCurrentChannel(state, channel){
         state.currentChannel = channel
         console.log(state.currentChannel)
