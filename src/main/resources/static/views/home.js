@@ -74,6 +74,7 @@ export default{
         let channels = await fetch('/rest/channels')
         channels = await channels.json()
         this.$store.commit('displayChannels', channels)
+        this.$store.commit('setCurrentChannel', channels[0])
       },
 
       async loadFriendList(){
@@ -99,6 +100,14 @@ export default{
            this.$store.commit('displayFriendship', users)
            console.log('Friends:')
            console.log(users)      
+      },
+
+      async loadAllUserChannels() {
+        let allChannels = await fetch('/rest/users/channels')
+        allChannels = await allChannels.json()
+        this.$store.commit('allUserChannels', allChannels)
+        console.log(allChannels);
+        
       }
     },
 
@@ -110,5 +119,6 @@ export default{
         this.loadUserChannels()
         this.loadChannels()
         this.loadFriendList()
+        this.loadAllUserChannels()
     }
 }
