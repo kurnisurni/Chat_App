@@ -16,7 +16,7 @@ export default {
                         @click="removeFriend(details.id)">Remove Friend</button>
 
                 <button v-if="!details.friendshipTime"
-                @click="addFriend()">Add As a Friend</button>
+                @click="addFriend(details.id)">Add As a Friend</button>
           </div>
     `,
     //one user from messages.js, another - from onlineList.js
@@ -37,28 +37,27 @@ export default {
           console.log(e)
         }
       },
-      async addFriend(){
-        if(!this.friend.contains(username)) {
-            friends.add(username);
-            }
-            let friendToAdd = {
-            username = this.username,
-            user_id: this.$store.state.currentUser.id
-            friendshipTime = this.friendshipTime;
-            }
-        let url = 'rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
-                try{
-                  await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(friendToAdd)
-                  })
-                } catch(e){
-                  console.log(e)
-                }
-      }
+      async addFriend(userId){
+      
+        let friendToAdd = {
+        user1: this.$store.state.currentUser.id,
+        user2: userId,
+        time: Date.now()
+        }
+
+        let url = 'rest/friend-list'
+        try{
+          await fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(friendToAdd)
+          })
+        } catch(e){
+          console.log(e)
+        }
+  }
      },
      data(){
        return{

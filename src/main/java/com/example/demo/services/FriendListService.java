@@ -37,4 +37,15 @@ public class FriendListService {
             e.printStackTrace();
         }
     }
+
+    public FriendList addFriend(FriendList friendList){
+
+        FriendList newFriendShip = friendListRepo.save(friendList);
+
+        newFriendShip.action = "new-friendship";
+
+        socketService.sendToAll(newFriendShip, FriendList.class);
+
+        return newFriendShip;
+    }
 }

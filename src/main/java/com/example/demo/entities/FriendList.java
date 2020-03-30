@@ -14,6 +14,9 @@ public class FriendList {
     private int user2;
     private String time;
 
+    @Transient
+    public String action;
+
     public FriendList() {
     }
 

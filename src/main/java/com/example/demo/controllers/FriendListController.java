@@ -24,4 +24,9 @@ public class FriendListController {
     public void deleteOneByUser1(@PathVariable int user1Id, @PathVariable int user2Id){
         friendListService.deleteOneByUser1(user1Id, user2Id);
     }
+
+    @PostMapping("/friend-list")
+    public FriendList addFriend(@RequestBody FriendList friendList) {
+        return friendListService.addFriend(friendList);
+    }
 }
