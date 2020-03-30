@@ -5,6 +5,7 @@ import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 import onlineList from '../components/onlineList.js'
+import channelComponent from '../components/channelComponent.js'
 import { store } from '../store.js'
 
 
@@ -17,6 +18,7 @@ export default{
        messageInput,
        createChannel,
        onlineList,
+       channelComponent
     },
 
     template:`
@@ -28,8 +30,7 @@ export default{
           <createChannel />
         </div>
         <div class="messagesView">
-          <messages />
-          <messageInput />
+          <channelComponent />
         </div>
         <div class="rightBar">
           <onlineList />
