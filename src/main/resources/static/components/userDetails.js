@@ -7,8 +7,16 @@ export default {
                     <button @click="close">Close</button>
                   </div>
                 <h2>{{ details.username }}</h2>
-                <img :src="details.picture_url" alt="User Image" width="80" height="80">
+                <img :src="details.picture_url" 
+                      alt="User Image" 
+                      width="80" 
+                      height="80"
+                      >
                 <p v-if="details.friendshipTime">Friend Since: {{ details.friendshipTime }}</p>
+                <button v-if="details.friendshipTime" 
+                        @click="removeFriend(details.id)">Remove Friend</button>
+
+                <button v-if="!details.friendshipTime">Add As Friend</button>
           </div>
      </div>
     `,
@@ -18,9 +26,18 @@ export default {
      ,                                 
      methods:{
       close() {
-        console.log(this.$parent)
-        this.$parent.close();
+        this.$parent.close()
       },
+      async removeFriend(userId){
+        let url = 'rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
+        try{
+          await fetch(url, {
+            method: 'DELETE'
+          })
+        } catch(e){
+          console.log(e)
+        }
+      }
      },
      data(){
        return{
