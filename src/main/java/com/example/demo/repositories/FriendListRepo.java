@@ -22,6 +22,12 @@ public interface FriendListRepo extends CrudRepository<FriendList, Integer> {
            "FROM friends_list\n" +
            "WHERE user1 = :id OR user2 = :id", nativeQuery = true)
     List<FriendList> findAllByUser1(@Param("id")int user1Id);
+    /*@Query(value = "SELECT friends_list.*, username " +
+            "FROM friends_list, users " +
+            "WHERE user1 = ?1 " +
+            "AND user2 = users.id", nativeQuery = true)
+    List<FriendList> findAllByUser1(int user1Id);*/
+    
 
     //deletes the row that contains both userIds passed by the params
     @Modifying

@@ -11,11 +11,13 @@ import com.example.demo.configs.JwtUtils;
 import com.example.demo.entities.ERole;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.User;
+import com.example.demo.entities.UserChannel;
 import com.example.demo.payloads.JwtResponse;
 import com.example.demo.payloads.LoginRequest;
 import com.example.demo.payloads.MessageResponse;
 import com.example.demo.payloads.SignupRequest;
 import com.example.demo.repositories.RoleRepository;
+import com.example.demo.repositories.UserChannelRepo;
 import com.example.demo.repositories.UserRepo;
 import com.example.demo.services.SocketService;
 import com.example.demo.services.UserDetailsImpl;
@@ -25,6 +27,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +50,10 @@ public class AuthController {
     RoleRepository roleRepository;
 
     @Autowired
-    PasswordEncoder encoder;
+    UserChannelRepo userChannelRepo;
+    
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder getEncoder() { return encoder; }
 
     @Autowired
     JwtUtils jwtUtils;
@@ -69,7 +76,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        User userToLogin = userRepository.checkPassword(userDetails.getUsername(), userDetails.getPassword());
+        User userToLogin = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));;
         userToLogin.action = "goOnline";
         userToLogin.setOnline(true);
         userRepository.save(userToLogin);
@@ -124,7 +132,14 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+
+        user.setOnline(false);
+        User newUser = userRepository.save(user);
+        newUser.action = "new-user";
+
+        socketService.sendToAll(newUser, User.class);
+        UserChannel newUserChannel = new UserChannel(1, newUser.getId());
+        userChannelRepo.save(newUserChannel);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

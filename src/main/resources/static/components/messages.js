@@ -4,15 +4,24 @@ export default{
     userDetails
   },
     template:`
-      <div class="messages">
+      <div class="messages" ref="msgs">
         <div v-for="(message, i) in messages" :key="message.id">
           <div v-if="message.channel_id === currentChannel">
             <div v-for="user in users" :key="user.id" @click="goToUserDetails(user)">
               <div class="messageDiv" v-if="message.user_id === user.id">
-                <img class="messagePicture" :src=user.picture_url>
-                <p class="messageParagraph">{{ user.username }}: {{ message.content }}, {{ message.message_time }}</p>
-                <div v-if="message.user_id === currentUser.id" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
-                <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
+                
+                <div class="userAndPicDiv">
+                  
+                  <img class="messagePicture" :src=user.picture_url>
+                  <h4 class="msgUser">{{ user.username }}</h4>
+                  <p class="messageTime">{{ message.message_time }}</p>
+                  <div class="messageParagraph">
+                    <p class="msgP">{{ message.content }}</p>
+                    <div v-if="message.user_id === currentUser.id" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
+                    <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -74,7 +83,11 @@ export default{
         return this.$store.state.currentUser
       },
     },
-    created(){
-      
+    updated(){
+      let messageContainer = this.$refs.msgs
+      console.log(messageContainer)
+      console.log(messageContainer.scrollHeight)
+      console.log(messageContainer.scrollTop)
+      messageContainer.scrollTop = messageContainer.scrollHeight
     }
 }
