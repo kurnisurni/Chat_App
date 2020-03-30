@@ -105,7 +105,9 @@ export default{
       async loadAllUserChannels() {
         let allChannels = await fetch('/rest/users/channels')
         allChannels = await allChannels.json()
-        this.$store.commit()
+        this.$store.commit('allUserChannels', allChannels)
+        console.log(allChannels);
+        
       }
     },
 
@@ -117,5 +119,6 @@ export default{
         this.loadUserChannels()
         this.loadChannels()
         this.loadFriendList()
+        this.loadAllUserChannels()
     }
 }
