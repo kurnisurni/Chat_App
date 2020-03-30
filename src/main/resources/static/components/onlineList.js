@@ -1,9 +1,11 @@
 import user from "./user.js"
+import userDetails from './userDetails.js'
 
 
 export default {
     components: {
-    user
+    user,
+    userDetails
     },
     template: `
         <div class="onlineList">
@@ -11,19 +13,31 @@ export default {
             <h3>Online:</h3>
                 <ul>
                     <li v-for="user in online" 
+                    @click="goToUserDetails(user)" 
                     :key="user.id"
                     v-if="user.id !== currentUser.id && checkUserChannel(user.id)">
                     <h4>{{ user.username }}</h4>          
                     </li>
+                    <!-- <div v-if="showModal" class="modal-route">
+                      <div class="modal-content"> 
+                        <userDetails :onlineUser="clickedUser"/>
+                      </div>
+                    </div> -->
                 </ul>
                 <h3>Offline:</h3>
                 <ul>
-                    <li v-for="user in offline" 
+                    <li v-for="user in offline"
+                    @click="goToUserDetails(user)" 
                     :key="user.id"
                     v-if="user.id !== currentUser.id && checkUserChannel(user.id)">
                     <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>          
+                    <div v-if="showModal" class="modal-route">
+                      <div class="modal-content"> 
+                        <userDetails :offlineUser="user"/>
+                      </div>
+                    </div>
         </div>
     `,
 
@@ -45,6 +59,12 @@ computed: {
     },
     userChannels() {
       return this.$store.state.allUserChannels
+    }
+  },
+  data(){
+    return{
+      user: null,
+      showModal: false
     }
   },
   methods: {
