@@ -99,6 +99,12 @@ export default{
            this.$store.commit('displayFriendship', users)
            console.log('Friends:')
            console.log(users)      
+      },
+
+      async loadAllUserChannels() {
+        let allChannels = await fetch('/rest/users/channels')
+        allChannels = await allChannels.json()
+        this.$store.commit()
       }
     },
 

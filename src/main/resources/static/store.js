@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
        onlineUsers: [],
        currentUser: {},
        currentChannel: {},
-       userAndToken: {}
+       userAndToken: {},
+       allUserChannels: []
     },
     mutations: {
       saveAccessToken(state, userAndToken){
@@ -98,6 +99,15 @@ export const store = new Vuex.Store({
       
       deleteMessage(state, index){
         state.messages.splice(index, 1)
+      },
+
+      allUserChannels(state, channels){
+        state.allUserChannels = channels
+      },
+
+      addToAllChannels(state, userChannel) {
+        state.allUserChannels.push(userChannel)
       }
+      
     }
 })

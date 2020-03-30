@@ -30,8 +30,17 @@ export default {
     users(){
       return this.$store.state.users
     },
-    loggedInUsers(){
-      return this.$store.state.loggedInUsers
+    online(){
+      return this.$store.state.onlineUsers 
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
+    offline(){
+      return this.users.filter(user => user.online === false)
+    },
+    allUserChannels() {
+      return this.$store.state.allUserChannels
     }
   },
   mounted(){
