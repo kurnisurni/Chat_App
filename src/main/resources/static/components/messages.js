@@ -85,9 +85,6 @@ export default{
     },
     updated(){
       let messageContainer = this.$refs.msgs
-      console.log(messageContainer)
-      console.log(messageContainer.scrollHeight)
-      console.log(messageContainer.scrollTop)
       messageContainer.scrollTop = messageContainer.scrollHeight
     }
 }

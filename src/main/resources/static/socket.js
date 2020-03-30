@@ -8,6 +8,18 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
+        case 'new-friendship':
+          console.log(data)
+          if (data.user1 === store.state.currentUser.id){
+            getFriend(data.user2, data.time).then( user => {
+              store.commit('addFriend', user)
+            })
+          } else if (data.user2 === store.state.currentUser.id){
+            getFriend(data.user1, data.time).then( user => {
+              store.commit('addFriend', user)
+            })
+          }
+          break
         case 'new-user':
           store.commit('appendUser', data)
           break
@@ -58,22 +70,14 @@ import { store } from './store.js'
       }
     }
 
-    /**
-     * onopen triggas när anslutningen
-     * är genomförd
-     */
+    async function getFriend(friendId, friendshiptime){
+      let newFriend = await fetch('/rest/users/' + friendId)
+      newFriend = await newFriend.json()
 
-    /*ws.onopen = (e) => {
-        sendSomething();
-        isConnected = true;
-    };
+      newFriend["friendshipTime"] = friendshiptime
 
-    ws.onclose = (e) => {
-        console.log("Closing websocket...");
-    };
-
-  console.log("Connecting...");*/
-
+      return newFriend
+    }
 
 export function disconnect() {
     if (ws != null) {
@@ -81,22 +85,4 @@ export function disconnect() {
     }
     //isConnected = false;
     console.log("Disconnected");
-}
-
-function sendSomething() {
-  let socketExample = {
-    message: 'Testing sockets',
-    timestamp: Date.now()
-  }
-
-  let addressedMessage = {
-    action: 'message',
-    payload: socketExample
-  }
-
-    ws.send(JSON.stringify(socketExample));
-}
-
-function showSomething(message) {
-    console.log(message);
 }

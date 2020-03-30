@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.DeleteFriend;
 import com.example.demo.entities.FriendList;
+import com.example.demo.entities.Friendship;
 import com.example.demo.services.FriendListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class FriendListController {
     }
 
     @PostMapping("/friend-list")
-    public FriendList addFriend(@RequestBody FriendList friendList) {
-        return friendListService.addFriend(friendList);
+    public Friendship addFriend(@RequestBody Friendship friendship) {
+        return friendListService.addFriend(friendship);
     }
 }
