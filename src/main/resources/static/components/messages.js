@@ -27,9 +27,9 @@ export default{
           </div>
         </div>
             <div v-if="showModal" class="modal-route">
-                  <div class="modal-content"> 
-                    <userDetails :user="clickedUser"/>
-                  </div>
+              <div class="modal-content"> 
+                <userDetails :user="clickedUser"/>
+              </div>
             </div>
       </div>
     `,

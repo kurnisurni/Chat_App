@@ -12,8 +12,10 @@ export default {
           </div>
      </div>
     `,
-     props : ['friend', 'user', 'offlineUser']
-     ,
+    //one user from messages.js, another - from onlineList.js
+    // This because i don't wish to complicate if-else in created(), now its still readable :D 
+     props : ['friend', 'user', 'user']  
+     ,                                 
      methods:{
       close() {
         console.log(this.$parent)
@@ -26,25 +28,19 @@ export default {
        }
      },
      created(){
-        if(this.friend){
-          this.details = this.friend
-        }
-        else{
-          for(let friend of this.friendList){
-            if(this.user.id === friend.id){
-              this.details = friend
-            }
-              // else if(this.onlineUser.id === friend.id){
-              //   this.details = friend
-              // }
-              else if(this.offlineUser.id === friend.id){
-                this.details = friend
-              }
+      if(this.friend){
+        this.details = this.friend
+      }
+      else{
+        for(let friend of this.friendList){
+          if(this.user.id === friend.id){
+            this.details = friend
           }
         }
-        if(!this.details){
-          this.details = this.user
-        }
+      }
+      if(!this.details){
+        this.details = this.user
+      }   
      },
     
      computed:{
