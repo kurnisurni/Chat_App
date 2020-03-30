@@ -12,7 +12,7 @@ export default {
                 <ul>
                     <li v-for="user in online" 
                     :key="user.id"
-                    v-if="user.id !== currentUser.id">
+                    v-if="user.id !== currentUser.id && checkUserChannel(user.id)">
                     <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>
@@ -20,7 +20,7 @@ export default {
                 <ul>
                     <li v-for="user in offline" 
                     :key="user.id"
-                    v-if="user.id !== currentUser.id">
+                    v-if="user.id !== currentUser.id && checkUserChannel(user.id)">
                     <h4>{{ user.username }}</h4>          
                     </li>
                 </ul>          
@@ -39,9 +39,25 @@ computed: {
     },
     offline(){
       return this.users.filter(user => user.online === false)
+    },
+    channel(){
+      return this.$store.state.currentChannel
+    },
+    userChannels() {
+      return this.$store.state.allUserChannels
     }
   },
   methods: {
-    
+    checkUserChannel(userId) {
+      let isUserInChannel = false
+
+      for (let userChannel of this.userChannels) {
+        if(userChannel.channel_id === this.channel.id && userChannel.user_id === userId) {
+          isUserInChannel = true
+          break
+        }
+      }
+      return isUserInChannel
+    }
   }
 }

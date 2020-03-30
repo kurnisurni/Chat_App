@@ -6,7 +6,7 @@ export default{
     template:`
       <div class="messages" ref="msgs">
         <div v-for="(message, i) in messages" :key="message.id">
-          <div v-if="message.channel_id === currentChannel">
+          <div v-if="message.channel_id === currentChannel.id">
             <div v-for="user in users" :key="user.id" @click="goToUserDetails(user)">
               <div class="messageDiv" v-if="message.user_id === user.id">
                 

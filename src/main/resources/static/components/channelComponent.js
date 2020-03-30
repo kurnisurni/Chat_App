@@ -10,14 +10,14 @@ export default {
   <div class="channelComponent">
     <div class="headerCard">
       <h2>{{ channel.name }}</h2>
+    </div>
     
-    </div>
-    <div class="msgDiv" ref="mesgDiv">
-    <messages />
-    </div>
-    <div class="msgInputDiv">
-    <messageInput />
-    </div>
+      <div class="msgDiv" ref="mesgDiv">
+      <messages />
+      </div>
+      <div class="msgInputDiv">
+      <messageInput />
+      </div>
   </div>
   `,
   computed: {
