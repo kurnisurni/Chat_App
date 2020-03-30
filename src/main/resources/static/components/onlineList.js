@@ -39,7 +39,10 @@ computed: {
     },
     offline(){
       return this.users.filter(user => user.online === false)
-    }
+    },
+    channel(){
+      return this.$store.state.currentChannel
+    },
   },
   methods: {
     

@@ -74,6 +74,7 @@ export default{
         let channels = await fetch('/rest/channels')
         channels = await channels.json()
         this.$store.commit('displayChannels', channels)
+        this.$store.commit('setCurrentChannel', channels[0])
       },
 
       async loadFriendList(){
