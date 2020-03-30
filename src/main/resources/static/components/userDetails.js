@@ -27,6 +27,21 @@ export default {
       close() {
         this.$parent.close()
       },
+      checkUserType(){
+        if(this.friend){
+          this.details = this.friend
+        }
+        else{
+          for(let friend of this.friendList){
+            if(this.user.id === friend.id){
+              this.details = friend
+            }
+          }
+        }
+        if(!this.details){
+          this.details = this.user
+        }   
+       },
       async removeFriend(userId){
         let url = 'rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
         try{
@@ -65,19 +80,10 @@ export default {
        }
      },
      created(){
-      if(this.friend){
-        this.details = this.friend
-      }
-      else{
-        for(let friend of this.friendList){
-          if(this.user.id === friend.id){
-            this.details = friend
-          }
-        }
-      }
-      if(!this.details){
-        this.details = this.user
-      }   
+       this.checkUserType()
+     },
+     updated(){
+       this.checkUserType()
      },
     
      computed:{

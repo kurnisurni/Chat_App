@@ -46,19 +46,21 @@ import { store } from './store.js'
           store.commit('appendChannel', data)
           break
         case 'delete-friend':
-          let friendList = store.state.friendList
+          let friendList = store.state.friendShips
 
           console.log(data)
 
           if (store.state.currentUser.id === data.user1id){
             for (let i = 0; i < friendList.length; i++){
-              if (friendList[i].user === data.user2id){
+              if (friendList[i].id === data.user2id){
+                console.log(friendList[i])
                 store.commit('deleteFriend', i)
               }
             }
           } else if (store.state.currentUser.id === data.user2id){
             for (let i = 0; i < friendList.length; i++){
-              if (friendList[i].user === data.user1id){
+              if (friendList[i].id === data.user1id){
+                console.log(friendList[i])
                 store.commit('deleteFriend', i)
               }
             }

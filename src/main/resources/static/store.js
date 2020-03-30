@@ -35,6 +35,9 @@ export const store = new Vuex.Store({
       },
 
       displayFriendship(state, friendShips){
+        for (let friendShip of friendShips){
+          friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
+        }
         state.friendShips = friendShips;
         console.log(friendShips)
         
@@ -80,13 +83,12 @@ export const store = new Vuex.Store({
       },
 
       deleteFriend(state, index){
-        console.log(index)
-        console.log(state.friendList)
-        state.friendList.splice(index, 1)
+        state.friendShips.splice(index, 1)
       },
 
       addFriend(state, friendShip){
       console.log(friendShip)
+      friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
       state.friendShips.push(friendShip)
       console.log(state.friendShips)
       },

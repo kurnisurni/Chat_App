@@ -12,7 +12,7 @@ public class Friendship {
 
     private int user1;
     private int user2;
-    private String time;
+    private long time;
 
     @Transient
     public String action;
@@ -44,11 +44,11 @@ public class Friendship {
         this.user2 = user2;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }

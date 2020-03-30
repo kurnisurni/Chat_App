@@ -11,7 +11,7 @@ public class FriendList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int user;
-    private String time;
+    private long time;
 
     @Transient
     public String action;
@@ -35,11 +35,11 @@ public class FriendList {
         this.user = user1;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }
