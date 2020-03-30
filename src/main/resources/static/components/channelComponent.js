@@ -10,14 +10,14 @@ export default {
   <div class="channelComponent">
     <div class="headerCard">
       <h2>{{ channel.name }}</h2>
+    </div>
     
-    </div>
-    <div class="msgDiv" ref="mesgDiv">
-    <messages />
-    </div>
-    <div class="msgInputDiv">
-    <messageInput />
-    </div>
+      <div class="msgDiv" ref="mesgDiv">
+      <messages />
+      </div>
+      <div class="msgInputDiv">
+      <messageInput />
+      </div>
   </div>
   `,
   computed: {
@@ -30,8 +30,17 @@ export default {
     users(){
       return this.$store.state.users
     },
-    loggedInUsers(){
-      return this.$store.state.loggedInUsers
+    online(){
+      return this.$store.state.onlineUsers 
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
+    offline(){
+      return this.users.filter(user => user.online === false)
+    },
+    allUserChannels() {
+      return this.$store.state.allUserChannels
     }
   },
   mounted(){

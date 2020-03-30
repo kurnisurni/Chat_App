@@ -12,7 +12,7 @@ export default {
           </div>
      </div>
     `,
-     props : ['friend', 'user']
+     props : ['friend', 'user', 'offlineUser']
      ,
      methods:{
       close() {
@@ -34,6 +34,12 @@ export default {
             if(this.user.id === friend.id){
               this.details = friend
             }
+              // else if(this.onlineUser.id === friend.id){
+              //   this.details = friend
+              // }
+              else if(this.offlineUser.id === friend.id){
+                this.details = friend
+              }
           }
         }
         if(!this.details){
