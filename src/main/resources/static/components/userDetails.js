@@ -1,7 +1,6 @@
 
 export default {
     template: `
-      <div>
           <div class="modal"> 
                   <div class="close-x">
                     <button @click="close">Close</button>
@@ -18,7 +17,6 @@ export default {
 
                 <button v-if="!details.friendshipTime">Add As Friend</button>
           </div>
-     </div>
     `,
     //one user from messages.js, another - from onlineList.js
     // This because i don't wish to complicate if-else in created(), now its still readable :D 
