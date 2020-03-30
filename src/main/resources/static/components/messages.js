@@ -27,9 +27,9 @@ export default{
           </div>
         </div>
             <div v-if="showModal" class="modal-route">
-                  <div class="modal-content"> 
-                    <userDetails :user="clickedUser"/>
-                  </div>
+              <div class="modal-content"> 
+                <userDetails :user="clickedUser"/>
+              </div>
             </div>
       </div>
     `,
@@ -85,9 +85,6 @@ export default{
     },
     updated(){
       let messageContainer = this.$refs.msgs
-      console.log(messageContainer)
-      console.log(messageContainer.scrollHeight)
-      console.log(messageContainer.scrollTop)
       messageContainer.scrollTop = messageContainer.scrollHeight
     }
 }
