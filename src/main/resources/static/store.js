@@ -83,14 +83,12 @@ export const store = new Vuex.Store({
       },
 
       deleteFriend(state, index){
-        console.log(index)
-        console.log(state.friendList)
-        state.friendList.splice(index, 1)
+        state.friendShips.splice(index, 1)
       },
 
       addFriend(state, friendShip){
       console.log(friendShip)
-      friendShip.time = new Date(friendShip.time).toLocaleString()
+      friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
       state.friendShips.push(friendShip)
       console.log(state.friendShips)
       },
