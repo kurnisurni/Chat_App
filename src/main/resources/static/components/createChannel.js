@@ -25,10 +25,9 @@ export default{
         async createNewChannel(){
             if (this.name != ''){
             
-            let channel;
             let newChannel = {
                 name: this.name,
-                admin_id: this.$store.state.currentUser.id
+                adminid: this.$store.state.currentUser.id
             }
 
         try{
@@ -40,7 +39,7 @@ export default{
                 body: JSON.stringify(newChannel)
             })
 
-            this.name = ' '
+            this.name = ''
 
         } catch(e){
              console.log("could not post message")

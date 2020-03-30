@@ -1,11 +1,12 @@
 import user from '../components/user.js'
 import userChannels from '../components/channelList.js'
-import friendlist from '../components/friendList.js'
+import friendlist from '../components/friendlist.js'
 import messages from '../components/messages.js'
 import messageInput from '../components/messageInput.js'
 import createChannel from '../components/createChannel.js'
 import onlineList from '../components/onlineList.js'
 import channelComponent from '../components/channelComponent.js'
+import { store } from '../store.js'
 
 
 export default{
@@ -29,15 +30,11 @@ export default{
           <createChannel />
         </div>
         <div class="messagesView">
-        <channelComponent />
-          <!-- <messages />
-          <messageInput /> -->
+          <channelComponent />
         </div>
         <!-- <div class="rightBar">
           <onlineList />
-        </div> -->
- 
-
+        </div>
     </div>
     `,
 
@@ -52,11 +49,8 @@ export default{
 
         let onlineUsers = users.filter(user => user.online)
         console.log(onlineUsers)
-
-        for (let user of onlineUsers){
-          if (!this.$store.state.onlineUsers.includes(user))
-          this.$store.commit('goOnline', user)
-        }
+          
+        this.$store.commit('loadOnlineUsers', onlineUsers)
     },
 
       async loadMessages(){
@@ -70,7 +64,7 @@ export default{
 
       async loadUserChannels(){
         //Loads only those channels, where current user is present, before home view is created
-          let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+          let url = '/rest/users/channels/id/' +  this.$store.state.currentUser.id
           let userChannels = await fetch(url)
           userChannels = await userChannels.json()
           this.$store.commit('displayUserChannels', userChannels)

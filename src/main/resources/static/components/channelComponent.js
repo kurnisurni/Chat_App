@@ -7,38 +7,17 @@ export default {
     messageInput
   },
   template: `
-  <div>
-    <div class="channelComponent">
-
-      <div class="headerCard">
-        <nav>
-        <h2>{{ channel.name }}</h2>     <!-- Here we need to make a navbar and pick up the channel name -->
-        </nav>
-        <messages />
-        <messageInput />
-      </div>
-
-      <div>
-          <h2>Users</h2>
-            <h3>Online:</h3>
-              <ul v-for="userChannels in allUserChannels">
-                  <li v-for="user in online" 
-                  :key="user.id"
-                  v-if="userChannels.channel_id === channel.id && userChannels.user_id === user.id && user.id !== currentUser.id">
-                  <h4>{{ user.username }}</h4>          
-                  </li>
-              </ul>
-              <h3>Offline:</h3>
-              <ul>
-                  <li v-for="user in offline" 
-                  :key="user.id"
-                  v-if="user.id !== currentUser.id">
-                  <h4>{{ user.username }}</h4>          
-                  </li>
-              </ul>      
-      </div>  
-    </div>
+  <div class="channelComponent">
+    <div class="headerCard">
+      <h2>{{ channel.name }}</h2>
     
+    </div>
+    <div class="msgDiv" ref="mesgDiv">
+    <messages />
+    </div>
+    <div class="msgInputDiv">
+    <messageInput />
+    </div>
   </div>
   `,
   computed: {
@@ -63,5 +42,8 @@ export default {
     allUserChannels() {
       return this.$store.state.allUserChannels
     }
+  },
+  mounted(){
+    
   }
 }
