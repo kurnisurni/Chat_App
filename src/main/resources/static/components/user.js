@@ -7,10 +7,11 @@ export default{
   },
   template: `
     <div>
-      <div @click="goToUserDetails(user)">{{user.username}}</div>
-      <!-- Need to move width and height till css later -->
-      <img :src="user.picture_url" alt="User Image" width="50" height="50">
-      
+      <div @click="goToUserDetails(user)">
+        <div>{{user.username}}</div>
+        <!-- Need to move width and height till css later -->
+        <img :src="user.picture_url" alt="User Image" width="50" height="50">
+      </div>
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
           <userDetails :loggedInUser="user"/>
