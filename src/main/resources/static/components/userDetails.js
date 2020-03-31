@@ -53,7 +53,6 @@ export default {
         }
       },
       async addFriend(userId){
-      
             let friendToAdd = {
             user1: this.$store.state.currentUser.id,
             user2: userId,
