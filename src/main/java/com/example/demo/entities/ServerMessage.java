@@ -11,7 +11,10 @@ public class ServerMessage {
     private int id;
     private String message;
     private int channel_id;
-    private String time;
+    private long time;
+
+    @Transient
+    public String action;
 
     public ServerMessage(){}
 
@@ -39,11 +42,11 @@ public class ServerMessage {
         this.channel_id = channel_id;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 }
