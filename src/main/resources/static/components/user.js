@@ -10,8 +10,7 @@ export default{
       <div @click="goToUserDetails(user)">{{user.username}}</div>
       <!-- Need to move width and height till css later -->
       <img :src="user.picture_url" alt="User Image" width="50" height="50">
-      <button @click="logOut">Log Out</button>
-
+      
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
           <userDetails :loggedInUser="user"/>
