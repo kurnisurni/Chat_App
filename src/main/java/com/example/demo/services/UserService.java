@@ -82,7 +82,10 @@ public class UserService {
         User userToUpdate = null;
         try{
             userToUpdate = userRepo.findById(user.getId());
-            userRepo.save(user);
+            userToUpdate.setPicture_url(user.getPicture_url());
+            userToUpdate = userRepo.save(userToUpdate);
+            userToUpdate.action = "update picture";
+            socketService.sendToAll(userToUpdate, User.class);
         }catch(Exception e){
             e.printStackTrace();
         }

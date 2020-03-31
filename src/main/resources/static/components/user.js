@@ -71,6 +71,7 @@ export default{
     },
 
     async updateUser(){
+      console.log(this.picture)
       const userToUpdate = {
         id: this.$store.state.currentUser.id,
         picture_url: this.picture
@@ -83,7 +84,8 @@ export default{
             },
             body: JSON.stringify(userToUpdate)
           })
-
+          console.log(this.$store.state.currentUser);
+          
           this.picture = ''
           
   

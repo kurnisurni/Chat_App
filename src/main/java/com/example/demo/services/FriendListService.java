@@ -45,7 +45,9 @@ public class FriendListService {
 
 
     public Friendship addFriend(Friendship friendship){
-        return friendListRepo.save(friendship);
+        Friendship newFriendShip = friendshipRepo.save(friendship);
+        newFriendShip.action = "new-friendship";
+        socketService.sendToAll(newFriendShip, Friendship.class);
+        return newFriendShip;
     }
-
 }
