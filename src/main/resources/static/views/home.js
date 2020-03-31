@@ -58,8 +58,7 @@ export default{
           let messages = await fetch('/rest/messages')
           messages = await messages.json()
           this.$store.commit('displayMessages', messages)
-          console.log('Messages:')
-          console.log(messages)
+          //console.log(messages)
       },
 
       async loadUserChannels(){
@@ -90,9 +89,7 @@ export default{
               let friend = await fetch(url)
               friend = await friend.json()
               friend["friendshipTime"] = friendship.time
-              console.log('-------------')
               users.push(friend)
-              console.log(friend)
             }
           }catch(e){
             console.log(e)

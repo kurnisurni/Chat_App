@@ -74,8 +74,20 @@ public class UserService {
         return userToLogout;
 
     }
-
     public User register(User newUser) {
         return userRepo.save(newUser);
     }
+
+    public User updateUser(User user){
+        User userToUpdate = null;
+        try{
+            userToUpdate = userRepo.findById(user.getId());
+            userRepo.save(user);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return userToUpdate;
+    }
+
 }
+

@@ -3,6 +3,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.DeleteFriend;
 import com.example.demo.entities.FriendList;
+import com.example.demo.entities.Friendship;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.FriendListRepo;
 import com.example.demo.repositories.FriendshipRepo;
@@ -43,8 +44,8 @@ public class FriendListService {
     }
 
 
-    public FriendList addFriend(FriendList friendList){
-        return friendListRepo.save(friendList);
+    public Friendship addFriend(Friendship friendship){
+        return friendListRepo.save(friendship);
     }
 
 }

@@ -12,6 +12,12 @@ export default{
         <!-- Need to move width and height till css later -->
         <img :src="user.picture_url" alt="User Image" width="50" height="50">
       </div>
+
+        <form @submit.prevent="updateUser">
+        <input v-model="picture" type="text" placeholder="Add image url here..">
+        <button>update picture</button>
+        </form>
+
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
           <userDetails :loggedInUser="user"/>
@@ -22,7 +28,8 @@ export default{
   data(){
   return{
     showModal: false,
-    loggedInUser: null
+    loggedInUser: null,
+    picture: ''
     }
   },
   computed: {
@@ -61,6 +68,28 @@ export default{
     },
     close() {
       this.showModal = false;
-    }
     },
+
+    async updateUser(){
+      const userToUpdate = {
+        id: this.$store.state.currentUser.id,
+        picture_url: this.picture
+      }
+        try{
+          await fetch('rest/users', {
+            method:'PUT',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userToUpdate)
+          })
+
+          this.picture = ''
+          
+  
+    }catch(e){
+      console.log(e)
+      }
+    },
+  }
 }
