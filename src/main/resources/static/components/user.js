@@ -14,7 +14,7 @@ export default{
 
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
-          <userDetails :myself="user"/>
+          <userDetails :loggedInUser="user"/>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@ export default{
   data(){
   return{
     showModal: false,
-    myself: null
+    loggedInUser: null
     }
   },
   computed: {
@@ -56,7 +56,7 @@ export default{
     },
 
     goToUserDetails(user){
-      this.myself = user
+      this.loggedInUser = user
       this.showModal = true
     },
     close() {
