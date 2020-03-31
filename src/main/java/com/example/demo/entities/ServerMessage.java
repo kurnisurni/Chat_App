@@ -12,6 +12,7 @@ public class ServerMessage {
     private String message;
     private int channel_id;
     private String time;
+    private String imageUrl;
 
     public ServerMessage(){}
 
@@ -45,5 +46,13 @@ public class ServerMessage {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

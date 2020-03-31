@@ -15,11 +15,13 @@ export default{
                   <img class="messagePicture" :src=user.picture_url>
                   <h4 class="msgUser">{{ user.username }}</h4>
                   <p class="messageTime">{{ message.message_time }}</p>
+
                   <div class="messageParagraph">
                     <p class="msgP">{{ message.content }}</p>
                     <div v-if="message.user_id === currentUser.id" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
                     <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
                   </div>
+                  
                 </div>
                 
               </div>

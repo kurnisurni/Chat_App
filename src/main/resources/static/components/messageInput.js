@@ -1,4 +1,5 @@
 //import ws from '../socket.js'
+import { create_UUID } from '../utilities/uuid.js'
 
 export default{
   template: `
@@ -11,8 +12,21 @@ export default{
         cols="30" 
         @keydown="inputHandler"
         required></textarea>
-        <button>Send</button>
+
+        <button 
+        class ="shareButton"
+        type="file" 
+        name="files" 
+        accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
+        multiple 
+        @change="filesChange($event.target.files)">
+        📁
+        </button>
+
+        <button class="sendButton">Send</button>
         </form>
+
+
       </div>
   `,
 
@@ -21,7 +35,9 @@ export default{
 
   data(){
       return{
-         messageInput: ''
+         messageInput: '',
+         images: [],
+         imageFiles: null
       }
   },
   
@@ -40,7 +56,8 @@ export default{
           user_id: this.$store.state.currentUser.id,
           content: this.messageInput,
           channel_id: this.currentChannel.id,
-          message_time: Date.now()
+          message_time: Date.now(),
+          imageUrl: this.images[0]
         }
         try{
           message = await fetch('/rest/messages',{
@@ -56,6 +73,35 @@ export default{
       }
 
       this.messageInput = ''
+    },
+
+    async filesChange(fileList) {
+      if (!fileList.length) return;
+
+      // handle file changes
+      const formData = new FormData();
+
+      // reset images array on file change
+      this.images = []
+
+      // append the files to FormData
+      Array.from(Array(fileList.length).keys())
+        .map(x => {
+
+          // create a new unique filename
+          const uuid = create_UUID()
+
+          let fileExt = fileList[x].name
+          fileExt = fileExt.slice(fileExt.lastIndexOf('.'))
+          const filename = uuid + fileExt
+
+          // save image url in frontend array
+          this.images.push('/uploads/' + filename)
+          formData.append("files", fileList[x], filename);
+        });
+
+      // store formData to be sent later
+      this.imageFiles = formData
     }
   },
 
