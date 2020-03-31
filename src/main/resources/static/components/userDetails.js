@@ -12,16 +12,16 @@ export default {
                       height="80"
                       >
                 <p v-if="details.friendshipTime">Friend Since: {{ details.friendshipTime }}</p>
-                <button v-if="details.friendshipTime" 
+                <button v-if="details.friendshipTime && !myself" 
                         @click="removeFriend(details.id)">Remove Friend</button>
 
-                <button v-if="!details.friendshipTime"
+                <button v-if="!details.friendshipTime && !myself"
                 @click="addFriend(details.id)">Add As a Friend</button>
           </div>
     `,
     //one user from messages.js, another - from onlineList.js
     // This because i don't wish to complicate if-else in created(), now its still readable :D 
-     props : ['friend', 'user', 'user']  
+     props : ['friend', 'user', 'user', 'myself']  
      ,                                 
      methods:{
       close() {
@@ -30,6 +30,8 @@ export default {
       checkUserType(){
         if(this.friend){
           this.details = this.friend
+        }else if(this.myself){
+          this.details = this.myself
         }
         else{
           for(let friend of this.friendList){
