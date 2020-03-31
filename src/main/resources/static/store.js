@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
        channels: [],
        friendShips: [],
        messages: [],
+       serverMessages: [],
        onlineUsers: [],
        currentUser: {},
        currentChannel: {},
@@ -61,10 +62,23 @@ export const store = new Vuex.Store({
       },
 
       displayMessages(state, messages){
-        for (let i = 0; i < messages.length; i++){
+        /*for (let i = 0; i < messages.length; i++){
           messages[i].message_time = new Date(messages[i].message_time).toLocaleString()
-        }
+        }*/
         state.messages = messages
+      },
+
+      loadAllServerMessages(state, messages){
+        /*for (let msg of messages){
+          msg.time = new Date(msg.time).toLocaleString()
+        }*/
+        state.serverMessages = messages
+      },
+
+      addServerMessage(state, message){
+        //message.time = new Date(message.time).toLocaleString()
+        state.serverMessages.push(message)
+        console.log(state.serverMessages)
       },
 
       displayUserChannels(state, userChannels){
@@ -73,7 +87,7 @@ export const store = new Vuex.Store({
 
       sendMessage(state, message){
         console.log(message)
-        message.message_time = new Date(message.message_time).toLocaleString()
+        //message.message_time = new Date(message.message_time).toLocaleString()
         state.messages.push(message)
         console.log(state.messages)
       },
@@ -108,6 +122,23 @@ export const store = new Vuex.Store({
 
       allUserChannels(state, channels){
         state.allUserChannels = channels
+      },
+
+      deleteUserChannel(state, userChannel){
+        for (let i = 0; i < state.allUserChannels.length; i++){
+          if (state.allUserChannels[i].channel_id === userChannel.channel_id && state.allUserChannels[i].user_id === userChannel.user_id){
+            state.allUserChannels.splice(i, 1)
+          }
+        }
+
+        console.log(state.userChannels)
+        for (let i = 0; i < state.userChannels.length; i++){
+          if (state.userChannels[i].id === userChannel.channel_id && userChannel.user_id === state.currentUser.id){
+            state.userChannels.splice(i, 1)
+          }
+        }
+
+        console.log(state.userChannels)
       },
 
       addToAllChannels(state, userChannel) {

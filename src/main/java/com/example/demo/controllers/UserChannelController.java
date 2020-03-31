@@ -27,4 +27,9 @@ public class UserChannelController {
 
     @PostMapping("/userChannels")
     public UserChannel addUserToChannel(@RequestBody UserChannel userChannel) { return userChannelService.addUserToChannel(userChannel); }
+
+    @DeleteMapping("/userChannels")
+    public void deleteUserChannel(@RequestBody UserChannel userChannel) {
+        userChannelService.deleteUserChannel(userChannel);
+    }
 }

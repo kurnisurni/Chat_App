@@ -77,6 +77,14 @@ export default{
         this.$store.commit('setCurrentChannel', channels[0])
       },
 
+      async loadServerMessages(){
+        let messages = await fetch('/rest/serverMessages')
+        messages = await messages.json()
+
+        this.$store.commit('loadAllServerMessages', messages)
+        console.log(this.$store.state.serverMessages)
+      },
+
       async loadFriendList(){
          //Loads user friends, before home view is created
           let url = '/rest/friend-list/' + this.$store.state.currentUser.id
@@ -120,5 +128,6 @@ export default{
         this.loadChannels()
         this.loadFriendList()
         this.loadAllUserChannels()
+        this.loadServerMessages()
     }
 }
