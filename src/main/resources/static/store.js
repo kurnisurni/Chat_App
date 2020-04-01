@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
       localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
       localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
       
-      state.currentChannel = state.channels[0]
+      state.currentChannel = state.userChannels[0]
     },
 
     deleteFriend(state, index){
@@ -167,7 +167,7 @@ export const store = new Vuex.Store({
         }
       }
 
-      state.currentChannel = state.channels[0]
+      state.currentChannel = state.userChannels[0]
       localStorage.setItem('currentChannel', JSON.stringify(state.currentChannel))
 
     },

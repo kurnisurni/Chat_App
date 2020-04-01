@@ -1,27 +1,34 @@
 import messages from './messages.js'
 import messageInput from './messageInput.js'
 import adminWindow from './adminWindow.js'
+import noChannels from './noChannels.js'
 
 export default {
   components: {
     messages,
     messageInput,
-    adminWindow
+    adminWindow,
+    noChannels
   },
   template: `
   <div class="channelComponent">
-    <div class="headerCard">
+    <div class="headerCard" v-if="hasJoinedChannels()">
       <h2 class="channelNameHeader">{{ channel.name }}</h2>
       <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.adminid != currentUser.id">Leave channel</button>
       <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Administration</button>
     </div>
-    <div class="adminWindow" v-if="adminWindowOpen && isAdmin()">
+    <div class="adminWindow" v-if="adminWindowOpen && isAdmin() && hasJoinedChannels()">
       <adminWindow />
     </div>
-    <div class="msgDiv" ref="mesgDiv" v-if="!adminWindowOpen">
+
+    <div class="noChannels" v-if="!hasJoinedChannels()">
+      <noChannels />
+    </div>
+
+    <div class="msgDiv" ref="mesgDiv" v-if="!adminWindowOpen && hasJoinedChannels()">
       <messages />
     </div>
-    <div class="msgInputDiv" v-if="!adminWindowOpen">
+    <div class="msgInputDiv" v-if="!adminWindowOpen && hasJoinedChannels()">
       <messageInput />
     </div>
   </div>
@@ -41,7 +48,7 @@ export default {
     allChannels(){
       return this.$store.state.channels
     },
-    usersInChannels(){
+    userChannels(){
       return this.$store.state.userChannels
     },
     users(){
@@ -61,6 +68,13 @@ export default {
     }
   },
   methods: {
+
+    hasJoinedChannels(){
+      if (this.userChannels.length > 0){
+        return true
+      } else return false
+    },
+
     isAdmin(){
       if (this.currentUser.id === this.channel.adminid && this.channelId === this.channel.id){
         return true
