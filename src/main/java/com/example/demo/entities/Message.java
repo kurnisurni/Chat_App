@@ -13,6 +13,7 @@ public class Message {
     private String content;
     private int channel_id;
     private long message_time;
+    private String imageUrl;
 
     @Transient
     public String action;
@@ -57,5 +58,13 @@ public class Message {
 
     public void setMessage_time(long message_time) {
         this.message_time = message_time;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
