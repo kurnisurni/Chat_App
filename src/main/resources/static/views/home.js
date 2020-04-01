@@ -47,10 +47,12 @@ export default{
         this.$store.commit('displayMessages', JSON.parse(localStorage.getItem('allMessages')))
         this.$store.commit('loadAllServerMessages', JSON.parse(localStorage.getItem('allServerMessages')))
         this.$store.commit('loadOfflineMessages', JSON.parse(localStorage.getItem('offlineMessages')))
-        console.log('Messages sent when you were offline - home:')
-        console.log(this.$store.state.offlineMessages)
-        this.$store.commit('displayUserChannels', JSON.parse(localStorage.getItem('userChannels')))
-        this.$store.commit('setCurrentChannel', JSON.parse(localStorage.getItem('currentChannel')))
+       
+        if (JSON.parse(localStorage.getItem('userChannels')).length > 0){
+          this.$store.commit('displayUserChannels', JSON.parse(localStorage.getItem('userChannels')))
+          this.$store.commit('setCurrentChannel', JSON.parse(localStorage.getItem('currentChannel')))
+        }
+        
         this.$store.commit('allUserChannels', JSON.parse(localStorage.getItem('allUserChannels')))
       }
     },
