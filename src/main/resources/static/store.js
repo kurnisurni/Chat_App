@@ -19,23 +19,27 @@ export const store = new Vuex.Store({
     },
     mutations: {
       saveAccessToken(state, userAndToken){
-        localStorage.setItem('accessToken', JSON.stringify(userAndToken))
         state.userAndToken = userAndToken
+        localStorage.setItem('accessToken', JSON.stringify(userAndToken))
       },
       
       displayUsers(state, users){
         state.users = users;
+        localStorage.setItem('allUsers', JSON.stringify(users))
       },
 
       loadOnlineUsers(state, users){
         state.onlineUsers = users
+        localStorage.setItem('onlineUsers', JSON.stringify(users))
       },
 
       displayChannels(state, channels){
         state.channels = channels;
+        localStorage.setItem('allChannels', JSON.stringify(channels))
       },
 
       displayFriendship(state, friendShips){
+        localStorage.setItem('allFriendShips', JSON.stringify(friendShips))
         for (let friendShip of friendShips){
           friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
         }
@@ -43,90 +47,110 @@ export const store = new Vuex.Store({
       },
       loginUser(state, user){
         state.currentUser = user
+        localStorage.setItem('currentUser', JSON.stringify(user))
       },
 
       goOnline(state, user){
         state.onlineUsers.push(user)
-        for (let use of store.state.users){
+        localStorage.setItem('onlineUsers', JSON.stringify(state.onlineUsers))
+        for (let use of state.users){
           if (use.id === user.id){
             use.online = true
           }
         }
+        localStorage.setItem('allUsers', JSON.stringify(state.users))
       },
 
       goOffline(state, index){
         state.onlineUsers.splice(index, 1)
+        localStorage.setItem('onlineUsers', JSON.stringify(state.onlineUsers))
       },
 
       displayMessages(state, messages){
         state.messages = messages
+        localStorage.setItem('allMessages', JSON.stringify(messages))
       },
 
       loadAllServerMessages(state, messages){
         state.serverMessages = messages
+        localStorage.setItem('allServerMessages', JSON.stringify(messages))
       },
 
       loadOfflineMessages(state, messages){
         state.offlineMessages = messages
+        localStorage.setItem('offlineMessages', JSON.stringify(messages))
       },
 
       addServerMessage(state, message){
         state.serverMessages.push(message)
+        localStorage.setItem('allServerMessages', JSON.stringify(state.serverMessages))
       },
 
       displayUserChannels(state, userChannels){
         state.userChannels = userChannels
+        localStorage.setItem('userChannels', JSON.stringify(userChannels))
       },
 
       sendMessage(state, message){
         state.messages.push(message)
+        localStorage.setItem('allMessages', JSON.stringify(state.messages))
       },
 
       appendChannel(state, channel){
         state.channels.push(channel)
+        localStorage.setItem('allChannels', JSON.stringify(state.channels))
       },
 
       deleteFriend(state, index){
         state.friendShips.splice(index, 1)
+        localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
       },
 
       addFriend(state, friendShip){
-      friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
-      state.friendShips.push(friendShip)
+        localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
+        friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
+        state.friendShips.push(friendShip)
       },
 
       setCurrentChannel(state, channel){
         state.currentChannel = channel
+        localStorage.setItem('currentChannel', JSON.stringify(channel))
       },
 
        appendUser(state, user){
        state.users.push(user)
+       localStorage.setItem('allUsers', JSON.stringify(state.users))
       },
       
       deleteMessage(state, index){
         state.messages.splice(index, 1)
+        localStorage.setItem('allMessages', JSON.stringify(state.messages))
       },
 
       allUserChannels(state, channels){
         state.allUserChannels = channels
+        localStorage.setItem('allUserChannels', JSON.stringify(channels))
       },
 
       deleteUserChannel(state, userChannel){
         for (let i = 0; i < state.allUserChannels.length; i++){
           if (state.allUserChannels[i].channel_id === userChannel.channel_id && state.allUserChannels[i].user_id === userChannel.user_id){
             state.allUserChannels.splice(i, 1)
+            localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
           }
         }
 
         for (let i = 0; i < state.userChannels.length; i++){
           if (state.userChannels[i].id === userChannel.channel_id && userChannel.user_id === state.currentUser.id){
             state.userChannels.splice(i, 1)
+            localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
           }
         }
       },
 
       addToAllChannels(state, userChannel) {
         state.allUserChannels.push(userChannel)
+        localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
       }
       
     }
