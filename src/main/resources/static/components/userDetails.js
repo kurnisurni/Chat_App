@@ -86,6 +86,7 @@ export default {
     },
     updateUser(){
       this.$parent.updateUser(this.picture)
+      this.picture = ''
     }
   },
   data(){

@@ -43,4 +43,9 @@ public class ChannelController {
     public Channel changeChannelName(@RequestBody Channel idAndName){
         return channelService.changeChannelName(idAndName);
     }
+
+    @DeleteMapping("/channels/{id}")
+    public void deleteChannel(@PathVariable int id){
+        channelService.deleteChannel(id);
+    }
 }

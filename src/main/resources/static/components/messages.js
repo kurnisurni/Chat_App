@@ -20,13 +20,14 @@ export default{
                   <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
                   <div class="messageParagraph">
                     <p class="msgP">{{ message.content }}</p>
-                    <div v-if="message.user_id === currentUser.id" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
+                    <div v-if="message.user_id === currentUser.id || currentUser.id === currentChannel.adminid" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
                     <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
                   </div>
                 </div>
                 
               </div>
             </div>
+
           </div>
           <div v-for="serverMessage in serverMessages" :key="serverMessage.id">
             <div v-if="serverMessage.channel_id === currentChannel.id && correctTime(serverMessage, i)">

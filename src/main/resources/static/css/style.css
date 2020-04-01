@@ -354,10 +354,27 @@ body {
 
 /*ADMIN WINDOW*/
 
+.kickUsersDiv {
+  margin-top: 3em;
+}
+
+.usersToKick {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 1em;
+}
+
 .usersInChannels {
   display: flex;
+  flex-direction: row;
 }
 
 .kickUser {
   cursor: pointer;
+  margin: 0;
+}
+
+.userInAdminWindow {
+  margin: 0;
 }

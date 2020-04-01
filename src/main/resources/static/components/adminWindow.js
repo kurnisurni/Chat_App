@@ -8,20 +8,29 @@ export default {
       <button class="changeChannelNameButton">Submit</button>
     </form>
 
-    <div v-for="user in users" :key="user.id">
-      <div class="usersInChannels" v-if="userInChannel(user)">
-        <p class="userInAdminWindow">{{ user.username }}</p>
-        <p class="kickUser" @click="askIfKick(user)">🗑️</p>
-        <button type="button" @click="kickUser(user)" v-if="kicking === user.id">Kick user</button>
+    <div class="kickUsersDiv">
+      <div class="usersToKick" v-for="user in users" :key="user.id" v-if="userInChannel(user)">
+        <div class="usersInChannels">
+          <p class="userInAdminWindow">{{ user.username }}</p>
+          <p class="kickUser" @click="askIfKick(user)">🗑️</p>
+          <button type="button" @click="kickUser(user)" v-if="kicking === user.id">Kick user</button>
+        </div>
       </div>
     </div>
+
+    <div class="deleteChannelButtonDiv" v-if="currentChannel.id !== allChannels[0].id">
+      <button type="button" class="deleteChannelButton" @click="showDeleteConfirmation">Delete channel</button>
+      <button type="button" class="confirmDeleteChannel" v-if="confirmDeleteButton" @click="deleteChannel">Confirm</button>
+    </div>
+    
   </div>
   `,
 
   data(){
     return {
       newChannelName: '',
-      kicking: ''
+      kicking: '',
+      confirmDeleteButton: false
     }
   },
 
@@ -34,10 +43,25 @@ export default {
     },
     currentChannel(){
       return this.$store.state.currentChannel
+    },
+    allChannels(){
+      return this.$store.state.channels
     }
   },
 
   methods: {
+    showDeleteConfirmation(){
+      if (!this.confirmDeleteButton) {
+        this.confirmDeleteButton = true
+      } else this.confirmDeleteButton = false
+    },
+
+    async deleteChannel(){
+      await fetch('/rest/channels/' + this.currentChannel.id, {
+        method: 'DELETE'
+      })
+    },
+
     askIfKick(user){
       if (this.kicking != user.id){
         this.kicking = user.id

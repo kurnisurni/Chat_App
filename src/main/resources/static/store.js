@@ -101,6 +101,26 @@ export const store = new Vuex.Store({
       localStorage.setItem('allChannels', JSON.stringify(state.channels))
     },
 
+    deleteChannel(state, channelId){
+      
+      let allChnls = state.channels.filter(ch => ch.id !== channelId)
+      let newUserChannels = state.userChannels.filter(usch => usch.id !== channelId)
+      let allUsCh = state.allUserChannels.filter(uch => uch.channel_id !== channelId)
+      let allMsg = state.messages.filter(msg => msg.channel_id !== channelId)
+
+      state.messages = allMsg
+      state.channels = allChnls
+      state.userChannels = newUserChannels
+      state.allUserChannels = allUsCh
+
+      localStorage.setItem('allChannels', JSON.stringify(state.channels))
+      localStorage.setItem('currentChannel', JSON.stringify(state.channels[0]))
+      localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
+      localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
+      
+      state.currentChannel = state.channels[0]
+    },
+
     deleteFriend(state, index){
       state.friendShips.splice(index, 1)
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
@@ -145,7 +165,11 @@ export const store = new Vuex.Store({
           state.userChannels.splice(i, 1)
           localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
         }
-        }
+      }
+
+      state.currentChannel = state.channels[0]
+      localStorage.setItem('currentChannel', JSON.stringify(state.currentChannel))
+
     },
 
     addToAllChannels(state, userChannel) {
@@ -185,10 +209,6 @@ export const store = new Vuex.Store({
       localStorage.setItem('allChannels', JSON.stringify(state.channels))
       localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
       localStorage.setItem('currentChannel', JSON.stringify(channel))
-
-      console.log(JSON.parse(localStorage.getItem('allChannels')))
-      console.log(JSON.parse(localStorage.getItem('userChannels')))
-      console.log(JSON.parse(localStorage.getItem('currentChannel')))
 
       state.currentChannel = channel
       state.channels = JSON.parse(localStorage.getItem('allChannels'))
