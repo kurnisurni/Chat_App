@@ -17,12 +17,12 @@ export default {
       <button v-if="!details.friendshipTime && !loggedInUser"
               @click="addFriend(details.id)">Add As a Friend</button>
 
-      <button v-if="loggedInUser" @click="logOut">Log Out</button>
+      <button class="logoutButton" v-if="loggedInUser" @click="logOut">Log Out</button>
 
       <form v-if="loggedInUser" @submit.prevent="updateUser(picture)">
         <label for="img-input-field"> Change Profile Picture: </label>
         <input class="img-input-field" v-model="picture" type="text" placeholder="Add image url here..">
-        <button>Update Picture</button>
+        <button class="updatePictureButton" >Update Picture</button>
       </form>
     </div>
   `,
