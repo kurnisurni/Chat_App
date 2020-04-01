@@ -75,8 +75,23 @@ public class UserService {
         return userToLogout;
 
     }
-
     public User register(User newUser) {
         return userRepo.save(newUser);
     }
+
+    public User updateUser(User user){
+        User userToUpdate = null;
+        try{
+            userToUpdate = userRepo.findById(user.getId());
+            userToUpdate.setPicture_url(user.getPicture_url());
+            userToUpdate = userRepo.save(userToUpdate);
+            userToUpdate.action = "update picture";
+            socketService.sendToAll(userToUpdate, User.class);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return userToUpdate;
+    }
+
 }
+
