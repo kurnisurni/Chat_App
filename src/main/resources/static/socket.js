@@ -75,6 +75,15 @@ import { store } from './store.js'
         case 'delete-message':
           store.commit('deleteMessage', data.index)
           break
+
+        case 'update picture':
+          for(let user of store.state.users){
+            if(user.id === data.id){
+              store.commit('updatePicture', user)
+              break
+            }
+          }
+          break
       }
     }
 
