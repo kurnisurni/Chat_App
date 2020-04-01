@@ -3,7 +3,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.DeleteFriend;
 import com.example.demo.entities.FriendList;
-import com.example.demo.entities.User;
+import com.example.demo.entities.Friendship;
 import com.example.demo.repositories.FriendListRepo;
 import com.example.demo.repositories.FriendshipRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +42,14 @@ public class FriendListService {
         }
     }
 
+    public Friendship addFriend(Friendship friendship){
 
-    public FriendList addFriend(FriendList friendList){
-        return friendListRepo.save(friendList);
+        Friendship newFriendShip = friendshipRepo.save(friendship);
+
+        newFriendShip.action = "new-friendship";
+
+        socketService.sendToAll(newFriendShip, Friendship.class);
+
+        return newFriendShip;
     }
-
 }

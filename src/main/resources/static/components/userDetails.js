@@ -54,25 +54,25 @@ export default {
       },
       async addFriend(userId){
       
-            let friendToAdd = {
-            user1: this.$store.state.currentUser.id,
-            user2: userId,
-            time: Date.now()
-            }
+        let friendToAdd = {
+        user1: this.$store.state.currentUser.id,
+        user2: userId,
+        time: Date.now()
+        }
 
         let url = 'rest/friend-list'
-                try{
-                  await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(friendToAdd)
-                  })
-                } catch(e){
-                  console.log(e)
-                }
-      }
+        try{
+          await fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(friendToAdd)
+          })
+        } catch(e){
+          console.log(e)
+        }
+  }
      },
      data(){
        return{

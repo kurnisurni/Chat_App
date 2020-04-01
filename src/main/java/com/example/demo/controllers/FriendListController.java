@@ -28,8 +28,8 @@ public class FriendListController {
     }
 
     @PostMapping("/friend-list")
-    public FriendList addFriend(@RequestBody FriendList friendList) {
-        return friendListService.addFriend(friendList);
+    public Friendship addFriend(@RequestBody Friendship friendship) {
+        return friendListService.addFriend(friendship);
     }
 }
 
