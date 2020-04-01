@@ -109,6 +109,17 @@ body {
   margin-top: 1em;
 }
 
+.newMessageAlert {
+  font-size: 0.6em;
+  line-height: 3em;
+  text-align: center;
+  color: red;
+  border: solid 1px black;
+  border-radius: 2px;
+  margin-bottom: 0;
+  margin-left: 5em;
+}
+
 .timeAndMessage {
   display: flex;
   flex-direction: row;

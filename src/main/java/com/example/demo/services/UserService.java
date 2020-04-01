@@ -65,6 +65,7 @@ public class UserService {
             userToLogout = userRepo.findById(user.getId());
             userToLogout.action = "goOffline";
             userToLogout.setOnline(false);
+            userToLogout.setLogoff_time(user.getLogoff_time());
             userRepo.save(userToLogout);
             socketService.sendToAll(userToLogout, User.class);
         } catch (Exception e){

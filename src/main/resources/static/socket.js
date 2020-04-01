@@ -8,6 +8,12 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
+        case 'delete-userchannel':
+          store.commit('deleteUserChannel', data)
+          break
+        case 'new-server-message':
+          store.commit('addServerMessage', data)
+          break
         case 'new-friendship':
           console.log(data)
           if (data.user1 === store.state.currentUser.id){
