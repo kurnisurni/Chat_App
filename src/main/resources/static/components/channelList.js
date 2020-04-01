@@ -58,8 +58,9 @@ export default{
 
       console.log(channelToAdd)
 
+      //add channel to currentUser's userChannels in database
       try{
-      channelToAdd = await fetch('/rest/userChannels', {
+        await fetch('/rest/userChannels', {
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
@@ -70,10 +71,36 @@ export default{
         console.log(e)
       }
 
-      let url = 'rest/users/channels/id/' +  this.$store.state.currentUser.id
+      //add channel to userChannels in store
+      let url = '/rest/users/channels/id/' +  this.$store.state.currentUser.id
       let userChannels = await fetch(url)
       userChannels = await userChannels.json()
       this.$store.commit('displayUserChannels', userChannels)
+
+
+      //post server message saying user has joined room
+      const srvMsg = this.$store.state.currentUser.username + ' has just joined the channel!'
+
+      console.log(srvMsg)
+
+      let serverMessage = {
+        message: srvMsg,
+        channel_id: channel.id,
+        time: Date.now()
+      }
+
+      try{
+        await fetch('/rest/serverMessages', {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(serverMessage)
+        })
+      } catch (e) {
+        console.log(e)
+      }
+      
     }
   }
 }

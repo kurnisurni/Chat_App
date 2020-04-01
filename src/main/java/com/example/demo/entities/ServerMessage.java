@@ -14,6 +14,9 @@ public class ServerMessage {
     private String time;
     private String imageUrl;
 
+    @Transient
+    public String action;
+
     public ServerMessage(){}
 
     public int getId() {
@@ -40,11 +43,11 @@ public class ServerMessage {
         this.channel_id = channel_id;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
