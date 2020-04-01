@@ -13,15 +13,13 @@ export default{
         @keydown="inputHandler"
         required></textarea>
 
-        <button 
+        <input 
         class ="shareButton"
         type="file" 
         name="files" 
         accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
         multiple 
         @change="filesChange($event.target.files)">
-        📁
-        </button>
 
         <button class="sendButton">Send</button>
         </form>
@@ -70,6 +68,23 @@ export default{
         }catch(e){
         console.log(e)
         }
+      }
+
+      try {
+        response = await response.json()
+
+        // if we created an entity we then
+        // send the image files
+        await fetch('/api/upload-files', {
+          method: 'POST',
+          body: this.imageFiles
+        });
+
+        this.imageFiles = null
+        this.images = []
+      } 
+      catch {
+        console.warn('Could not create entity'); 
       }
 
       this.messageInput = ''
