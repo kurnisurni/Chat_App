@@ -9,22 +9,16 @@ export default {
   template: `
   <div class="channelComponent">
     <div class="headerCard">
-      <h2>{{ channel.name }}</h2>
+      <h2 class="channelNameHeader">{{ channel.name }}</h2>
+      <button class="leaveChannelButton" @click="leaveChannel">Leave channel</button>
     </div>
-    <div class="onlineOffline" v-for="item in usersInChannels" :key="item.channel_id + item.user_id">
-      <div v-for="user in users" :key="user.id">
-        <h3>Online</h2>
-        <p v-if="item.user_id === user.id && item.channel_id === channel.id && loggedInUsers.includes(user)">
-          {{ user.name }}
-        </p>
-        <h3>Offline</h3>
-        <p v-if="item.user_id === user.id && item.channel_id === channel.id && !loggedInUsers.includes(user)">
-          {{ user.name }}
-        </p>
-      </div>
-    </div>
+    
+    <div class="msgDiv" ref="mesgDiv">
     <messages />
+    </div>
+    <div class="msgInputDiv">
     <messageInput />
+    </div>
   </div>
   `,
   computed: {
@@ -37,8 +31,59 @@ export default {
     users(){
       return this.$store.state.users
     },
-    loggedInUsers(){
-      return this.$store.state.loggedInUsers
+    online(){
+      return this.$store.state.onlineUsers 
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    },
+    offline(){
+      return this.users.filter(user => user.online === false)
+    },
+    allUserChannels() {
+      return this.$store.state.allUserChannels
+    }
+  },
+  methods: {
+    async leaveChannel(){
+      const userChannelToDelete = {
+        channel_id: this.channel.id,
+        user_id: this.currentUser.id
+      }
+
+      try {
+        await fetch('/rest/userChannels', {
+          method:'DELETE',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(userChannelToDelete)
+        })
+      } catch (error) {
+        console.log(error);
+      }
+
+      const srvMsg = this.currentUser.username + ' just left the channel!'
+
+      const newServerMessage = {
+        message: srvMsg,
+        channel_id: this.channel.id,
+        time: Date.now()
+      }
+
+      try {
+        await fetch('/rest/serverMessages', {
+          method:'POST',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(newServerMessage)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+
+      this.$store.commit('setCurrentChannel', this.$store.state.channels[0])
     }
   }
 }
