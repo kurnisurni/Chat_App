@@ -8,6 +8,7 @@ export default{
             <!-- Need to move width and height till css later -->
             <img :src="user.picture_url" alt="User Image" width="50" height="50">
             <button @click="logOut">Log Out</button>
+            <button @click="showOfflineMessages">New Messages</button>
         </div>
     `,
     data(){
@@ -18,32 +19,40 @@ export default{
     computed: {
         user(){
             return this.$store.state.currentUser
+        },
+        offlineMessages(){
+          return this.$store.state.offlineMessages
         }
     },
     methods:{
-        async logOut(){
+      showOfflineMessages(){
+        //öppna en modal med alla offline messages uppdelade efter kanal
+      },
 
-          const url = '/rest/users/logout'
+      async logOut(){
 
-          const userToLogout = {
-            id: this.$store.state.currentUser.id
-          }
+        const url = '/rest/users/logout'
 
-          try{
-            await fetch(url, {
-            method:'PUT',
-            headers: {
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify(userToLogout)
-            })
-          } catch(e){
-            console.log(e)
-          }
-
-          localStorage.removeItem('accessToken')
-          disconnect()
-          this.$router.push('/login')
+        const userToLogout = {
+          id: this.$store.state.currentUser.id,
+          logoff_time: Date.now()
         }
+
+        try{
+          await fetch(url, {
+          method:'PUT',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(userToLogout)
+          })
+        } catch(e){
+          console.log(e)
+        }
+
+        localStorage.removeItem('accessToken')
+        disconnect()
+        this.$router.push('/login')
+      }
     },
 }

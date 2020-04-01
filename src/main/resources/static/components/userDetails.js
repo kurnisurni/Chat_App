@@ -27,6 +27,21 @@ export default {
       close() {
         this.$parent.close()
       },
+      checkUserType(){
+        if(this.friend){
+          this.details = this.friend
+        }
+        else{
+          for(let friend of this.friendList){
+            if(this.user.id === friend.id){
+              this.details = friend
+            }
+          }
+        }
+        if(!this.details){
+          this.details = this.user
+        }   
+       },
       async removeFriend(userId){
         let url = 'rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
         try{
@@ -39,25 +54,25 @@ export default {
       },
       async addFriend(userId){
       
-            let friendToAdd = {
-            user1: this.$store.state.currentUser.id,
-            user2: userId,
-            time: Date.now()
-            }
+        let friendToAdd = {
+        user1: this.$store.state.currentUser.id,
+        user2: userId,
+        time: Date.now()
+        }
 
         let url = 'rest/friend-list'
-                try{
-                  await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(friendToAdd)
-                  })
-                } catch(e){
-                  console.log(e)
-                }
-      }
+        try{
+          await fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(friendToAdd)
+          })
+        } catch(e){
+          console.log(e)
+        }
+  }
      },
      data(){
        return{
@@ -65,19 +80,10 @@ export default {
        }
      },
      created(){
-      if(this.friend){
-        this.details = this.friend
-      }
-      else{
-        for(let friend of this.friendList){
-          if(this.user.id === friend.id){
-            this.details = friend
-          }
-        }
-      }
-      if(!this.details){
-        this.details = this.user
-      }   
+       this.checkUserType()
+     },
+     updated(){
+       this.checkUserType()
      },
     
      computed:{

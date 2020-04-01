@@ -14,6 +14,8 @@ public class UserChannelService {
     private ChannelRepo channelRepo;
     @Autowired
     private UserChannelRepo userChannelRepo;
+    @Autowired
+    SocketService socketService;
 
     public List<Channel> findAllUserChannels(int id){
         return channelRepo.findAllByUserId(id);
@@ -25,5 +27,13 @@ public class UserChannelService {
 
     public List<UserChannel> findAll() {
         return (List<UserChannel>)userChannelRepo.findAll();
+    }
+
+    public void deleteUserChannel(UserChannel userChannel){
+        userChannelRepo.delete(userChannel);
+
+        userChannel.action = "delete-userchannel";
+
+        socketService.sendToAll(userChannel, UserChannel.class);
     }
 }
