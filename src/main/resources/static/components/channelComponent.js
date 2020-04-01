@@ -12,30 +12,34 @@ export default {
   <div class="channelComponent">
     <div class="headerCard">
       <h2 class="channelNameHeader">{{ channel.name }}</h2>
-      <button class="leaveChannelButton" @click="leaveChannel">Leave channel</button>
-      <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Admin view</button>
+      <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.adminid != currentUser.id">Leave channel</button>
+      <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Administration</button>
     </div>
     <div class="adminWindow" v-if="adminWindowOpen && isAdmin()">
       <adminWindow />
     </div>
-    <div class="msgDiv" ref="mesgDiv">
-    <messages />
+    <div class="msgDiv" ref="mesgDiv" v-if="!adminWindowOpen">
+      <messages />
     </div>
-    <div class="msgInputDiv">
-    <messageInput />
+    <div class="msgInputDiv" v-if="!adminWindowOpen">
+      <messageInput />
     </div>
   </div>
   `,
 
   data(){
     return {
-      adminWindowOpen: false
+      adminWindowOpen: false,
+      channelId: ''
     }
   },
 
   computed: {
     channel(){
       return this.$store.state.currentChannel
+    },
+    allChannels(){
+      return this.$store.state.channels
     },
     usersInChannels(){
       return this.$store.state.userChannels
@@ -58,15 +62,13 @@ export default {
   },
   methods: {
     isAdmin(){
-
-      console.log(this.currentUser.id)
-        console.log(this.channel.adminid)
-
-      if (this.currentUser.id === this.channel.adminid){
-        console.log(this.currentUser.id)
-        console.log(this.channel.adminid)
+      if (this.currentUser.id === this.channel.adminid && this.channelId === this.channel.id){
         return true
-      } else return false
+      } else{
+        this.channelId = this.channel.id
+        this.adminWindowOpen = false
+        return false
+      } 
     },
 
     goToAdminWindow(){
@@ -76,22 +78,6 @@ export default {
     },
 
     async leaveChannel(){
-      const userChannelToDelete = {
-        channel_id: this.channel.id,
-        user_id: this.currentUser.id
-      }
-
-      try {
-        await fetch('/rest/userChannels', {
-          method:'DELETE',
-          headers: {
-            'Content-Type':'application/json'
-          },
-          body: JSON.stringify(userChannelToDelete)
-        })
-      } catch (error) {
-        console.log(error);
-      }
 
       const srvMsg = this.currentUser.username + ' just left the channel!'
 
@@ -113,7 +99,27 @@ export default {
         console.log(error)
       }
 
-      this.$store.commit('setCurrentChannel', this.$store.state.channels[0])
+      const userChannelToDelete = {
+        channel_id: this.channel.id,
+        user_id: this.currentUser.id
+      }
+
+      try {
+        await fetch('/rest/userChannels', {
+          method:'DELETE',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(userChannelToDelete)
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
+
+  },
+
+  mounted(){
+    this.channelId = this.channel.id
   }
 }
