@@ -8,6 +8,9 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
+        case 'change-channel-name':
+          store.commit('changeChannelName', data)
+          break
         case 'delete-userchannel':
           store.commit('deleteUserChannel', data)
           break
