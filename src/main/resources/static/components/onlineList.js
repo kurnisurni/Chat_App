@@ -8,7 +8,7 @@ export default {
     userDetails
     },
     template: `
-        <div class="onlineList">
+        <div class="onlineList" v-if="hasJoinedChannels()">
             <h2>Users</h2>
             <h3>Online:</h3>
                 <ul>
@@ -54,6 +54,9 @@ computed: {
     },
     userChannels() {
       return this.$store.state.allUserChannels
+    },
+    myChannels(){
+      return this.$store.state.userChannels
     }
   },
   data(){
@@ -63,6 +66,11 @@ computed: {
     }
   },
   methods: {
+    hasJoinedChannels(){
+      if (this.myChannels.length > 0){
+        return true
+      } else return false
+    },
     checkUserChannel(userId) {
       let isUserInChannel = false
       for (let userChannel of this.userChannels) {
