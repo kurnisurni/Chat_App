@@ -58,6 +58,18 @@ export default{
           let messages = await fetch('/rest/messages')
           messages = await messages.json()
           this.$store.commit('displayMessages', messages)
+
+          let userChannelIds = []
+
+          for (let usrChnl of this.$store.state.userChannels){
+            userChannelIds.push(usrChnl.id)
+          }
+
+          let offlineMessages = this.$store.state.messages.filter(message => message.message_time > this.$store.state.currentUser.logoff_time && userChannelIds.includes(message.channel_id))
+          console.log('Messages sent when you were offline:')
+          console.log(offlineMessages)
+
+          this.$store.commit('loadOfflineMessages', offlineMessages)
           console.log('Messages:')
           console.log(messages)
       },
@@ -117,14 +129,15 @@ export default{
         console.log(allChannels);
         
       }
+
     },
 
      created(){
        /*All methods prints data to console. This is just to see if it works. */
       console.log('created')
         this.loadUsers()
-        this.loadMessages()
         this.loadUserChannels()
+        this.loadMessages()
         this.loadChannels()
         this.loadFriendList()
         this.loadAllUserChannels()
