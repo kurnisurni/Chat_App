@@ -118,17 +118,10 @@ export const store = new Vuex.Store({
           if(u.id === user.id){
             u.picture_url = user.picture_url
             if(u.id === state.currentUser.id){
-              console.log(u);
-              
-              
               state.currentUser = u
-
-              console.log(state.currentUser);
-              
             }
           }
         }
       }
-      
     }
 })

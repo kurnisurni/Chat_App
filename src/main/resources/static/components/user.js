@@ -13,11 +13,6 @@ export default{
         <img :src="user.picture_url" alt="User Image" width="50" height="50">
       </div>
 
-        <form @submit.prevent="updateUser">
-        <input v-model="picture" type="text" placeholder="Add image url here..">
-        <button>update picture</button>
-        </form>
-
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
           <userDetails :loggedInUser="user"/>
@@ -29,7 +24,6 @@ export default{
   return{
     showModal: false,
     loggedInUser: null,
-    picture: ''
     }
   },
   computed: {
@@ -70,11 +64,10 @@ export default{
       this.showModal = false;
     },
 
-    async updateUser(){
-      console.log(this.picture)
+    async updateUser(picture){
       const userToUpdate = {
         id: this.$store.state.currentUser.id,
-        picture_url: this.picture
+        picture_url: picture
       }
         try{
           await fetch('rest/users', {
@@ -84,11 +77,7 @@ export default{
             },
             body: JSON.stringify(userToUpdate)
           })
-          console.log(this.$store.state.currentUser);
-          
-          this.picture = ''
-          
-  
+          picture = ''
     }catch(e){
       console.log(e)
       }

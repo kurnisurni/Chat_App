@@ -18,6 +18,12 @@ export default {
               @click="addFriend(details.id)">Add As a Friend</button>
 
       <button v-if="loggedInUser" @click="logOut">Log Out</button>
+
+      <form v-if="loggedInUser" @submit.prevent="updateUser(picture)">
+        <label for="img-input-field"> Change Profile Picture: </label>
+        <input class="img-input-field" v-model="picture" type="text" placeholder="Add image url here..">
+        <button>Update Picture</button>
+      </form>
     </div>
   `,
   //one user from messages.js, another - from onlineList.js
@@ -78,10 +84,14 @@ export default {
     logOut() {
       this.$parent.logOut()
     },
+    updateUser(){
+      this.$parent.updateUser(this.picture)
+    }
   },
   data(){
     return{
-      details: null
+      details: null,
+      picture: ''
     }
   },
   created(){
