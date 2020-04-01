@@ -8,32 +8,32 @@ export default {
     userDetails
     },
     template: `
-        <div class="onlineList" v-if="hasJoinedChannels()">
-            <h2>Users</h2>
-            <h3>Online:</h3>
-                <ul>
-                    <li v-for="user in online"  
-                    :key="user.id"
-                    v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
-                    @click="goToUserDetails(user)">
-                    <h4>{{ user.username }}</h4>          
-                    </li>
-                </ul>
-                <h3>Offline:</h3>
-                <ul>
-                    <li v-for="user in offline" 
-                    :key="user.id"
-                    v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
-                    @click="goToUserDetails(user)">
-                    <h4>{{ user.username }}</h4>          
-                    </li>
-                </ul>          
-                    <div v-if="showModal" class="modal-route">
-                      <div class="modal-content"> 
-                        <userDetails :user="clickedUser"/>
-                      </div>
-                    </div>
+      <div class="onlineList" v-if="hasJoinedChannels()">
+        <h2>Users</h2>
+        <h3>Online:</h3>
+              
+        <div v-for="user in online"  
+        :key="user.id"
+        v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
+        >
+          <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
         </div>
+              
+        <h3>Offline:</h3>
+        
+        <div v-for="user in offline" 
+        :key="user.id"
+        v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
+        >
+          <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
+        </div>
+              
+        <div v-if="showModal" class="modal-route">
+          <div class="modal-content"> 
+            <userDetails :user="clickedUser"/>
+          </div>
+        </div>
+      </div>
     `,
 
 computed: {

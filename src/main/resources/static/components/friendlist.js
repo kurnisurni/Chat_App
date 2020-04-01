@@ -6,14 +6,11 @@ export default{
   template:`
     <div class="friendList">
       <h3>Friends:</h3>
-        <ul>
-          <li v-for="friend in friendList" 
+          <div v-for="friend in friendList" 
               :key="friend.id"
-              @click="goToFriendDetails(friend)"
               >
-            <h4>User: {{ friend.username }}</h4>          
-          </li>
-        </ul>
+            <h4 class="friend" @click="goToFriendDetails(friend)">{{ friend.username }}</h4>          
+          </div>
         <div v-if="showModal" class="modal-route">
           <div class="modal-content"> 
             <userDetails :friend="activeFriend"/>
