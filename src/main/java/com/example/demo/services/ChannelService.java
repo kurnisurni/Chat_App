@@ -49,5 +49,20 @@ public class ChannelService {
         return channel;
     }
 
+    public Channel changeChannelName(Channel idAndName){
+        Channel channel = null;
+
+        try{
+            channel = channelRepo.save(idAndName);
+
+            channel.action = "change-channel-name";
+
+            socketService.sendToAll(channel, Channel.class);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return channel;
+    }
 
 }

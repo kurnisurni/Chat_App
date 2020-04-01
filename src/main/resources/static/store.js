@@ -161,6 +161,38 @@ export const store = new Vuex.Store({
           }
         }
       }
+    },
+
+    changeChannelName(state, channel){
+      for (let chan of state.channels){
+        if (chan.id === channel.id){
+          console.log('true')
+          chan.name = channel.name
+          console.log(chan)
+          console.log(channel)
+        }
+      }
+
+      for (let chan of state.userChannels){
+        if (chan.id === channel.id){
+          console.log('true')
+          chan.name = channel.name
+          console.log(chan)
+          console.log(channel)
+        }
+      }
+
+      localStorage.setItem('allChannels', JSON.stringify(state.channels))
+      localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
+      localStorage.setItem('currentChannel', JSON.stringify(channel))
+
+      console.log(JSON.parse(localStorage.getItem('allChannels')))
+      console.log(JSON.parse(localStorage.getItem('userChannels')))
+      console.log(JSON.parse(localStorage.getItem('currentChannel')))
+
+      state.currentChannel = channel
+      state.channels = JSON.parse(localStorage.getItem('allChannels'))
+      state.userChannels = JSON.parse(localStorage.getItem('userChannels'))
     }
   }
 })

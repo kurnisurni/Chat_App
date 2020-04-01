@@ -1,18 +1,23 @@
 import messages from './messages.js'
 import messageInput from './messageInput.js'
+import adminWindow from './adminWindow.js'
 
 export default {
   components: {
     messages,
-    messageInput
+    messageInput,
+    adminWindow
   },
   template: `
   <div class="channelComponent">
     <div class="headerCard">
       <h2 class="channelNameHeader">{{ channel.name }}</h2>
       <button class="leaveChannelButton" @click="leaveChannel">Leave channel</button>
+      <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Admin view</button>
     </div>
-    
+    <div class="adminWindow" v-if="adminWindowOpen && isAdmin()">
+      <adminWindow />
+    </div>
     <div class="msgDiv" ref="mesgDiv">
     <messages />
     </div>
@@ -21,6 +26,13 @@ export default {
     </div>
   </div>
   `,
+
+  data(){
+    return {
+      adminWindowOpen: false
+    }
+  },
+
   computed: {
     channel(){
       return this.$store.state.currentChannel
@@ -45,6 +57,24 @@ export default {
     }
   },
   methods: {
+    isAdmin(){
+
+      console.log(this.currentUser.id)
+        console.log(this.channel.adminid)
+
+      if (this.currentUser.id === this.channel.adminid){
+        console.log(this.currentUser.id)
+        console.log(this.channel.adminid)
+        return true
+      } else return false
+    },
+
+    goToAdminWindow(){
+      if (!this.adminWindowOpen){
+        this.adminWindowOpen = true
+      } else this.adminWindowOpen = false
+    },
+
     async leaveChannel(){
       const userChannelToDelete = {
         channel_id: this.channel.id,
