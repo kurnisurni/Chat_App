@@ -64,6 +64,26 @@ export default {
         console.log(e)
       }
 
+      const srvMsg = this.$store.state.currentUser.username + ' changed the channel name to "' + this.newChannelName + '"!'
+
+      const newServerMessage = {
+        message: srvMsg,
+        channel_id: this.currentChannel.id,
+        time: Date.now()
+      }
+
+      try {
+        await fetch('/rest/serverMessages', {
+          method:'POST',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(newServerMessage)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+
     },
     userInChannel(user){
       for (let usCh of this.userChannels){
