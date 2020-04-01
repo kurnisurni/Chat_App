@@ -11,7 +11,7 @@ public class ServerMessage {
     private int id;
     private String message;
     private int channel_id;
-    private String time;
+    private long time;
     private String imageUrl;
 
     @Transient
