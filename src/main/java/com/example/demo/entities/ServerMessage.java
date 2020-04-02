@@ -13,6 +13,7 @@ public class ServerMessage {
     private int channel_id;
     private long time;
 
+
     @Transient
     public String action;
 

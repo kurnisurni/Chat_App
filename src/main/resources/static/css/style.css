@@ -183,11 +183,22 @@ body button {
 	resize: none;
 }
 
-.messageForm button {
+.sendButton {
 	position: absolute;
 	padding: 10px;
+	height: 40px;
 	margin-bottom: 10px;
 	margin-right: 5px;
+	bottom: 0;
+	right: 0;
+}
+
+.shareButton {
+	position: absolute;
+	padding: 10px;
+	height: 40px;
+	margin-bottom: 10px;
+	margin-right: 65px;
 	bottom: 0;
 	right: 0;
 }
