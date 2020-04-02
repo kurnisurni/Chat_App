@@ -13,12 +13,7 @@
 	min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
-  border-style: solid;
-  border-color: rgba(189, 189, 189, 0.699);
-}
-
-.messages::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-  display: none;
+  border: 2px solid rgba(175, 174, 174, 0.192);
 }
 
 .messageDiv {
@@ -35,17 +30,17 @@
 
 .messageParagraph {
   display: flex;
+  color: rgb(226, 226, 226);
   flex-direction: row;
   width: 100%;
   min-width: 0;
-  margin-top: 0;
+  margin-top: 3px;
   margin-left: 2.7em;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   word-break: break-word;
   overflow: hidden;
 }
-
 
 .msgP {
   margin-top: 0;
@@ -60,6 +55,10 @@
   cursor: pointer;
 }
 
+.messageImage {
+  margin-top: 10px;
+}
+
 .userAndPicDiv {
   display: flex;
   flex-direction: row;
@@ -71,13 +70,12 @@
 
 .usrNPic {
   display: flex;
-  margin-bottom: 0.6em;
 }
 
 .msgUser {
-  font-size: 1.1em;
+  font-size: 1.2em;
   margin-bottom: 0;
-  margin-top: 0.8em;
+  margin-top: 0.65em;
   margin-left: 0.5em;
   cursor: pointer;
 }

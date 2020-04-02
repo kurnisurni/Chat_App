@@ -6,6 +6,12 @@
   overflow: hidden;
   padding-bottom: 15px;
   margin-bottom: 15px;
+  width: 70%;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.friendDiv h3 {
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
 }
 
 .friendList {
@@ -20,7 +26,7 @@
 
 .friend {
   cursor: pointer;
-  width: 25%;
+  width: 50%;
   margin-left: 1.5em;
 }
 

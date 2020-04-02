@@ -15,7 +15,7 @@ export default {
     <div class="showIfHasChannels" v-if="hasJoinedChannels()">
       <div class="headerCard">
         <h2 class="channelNameHeader">{{ channel.name }}</h2>
-        <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.adminid != currentUser.id">Leave channel</button>
+        <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.adminid != currentUser.id">Leave</button>
         <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Administration</button>
       </div>
       <div class="adminWindow" v-if="adminWindowOpen && isAdmin() && hasJoinedChannels()">

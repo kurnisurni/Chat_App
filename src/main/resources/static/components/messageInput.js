@@ -8,7 +8,7 @@ export default{
         <textarea type="text" 
         v-model="messageInput" 
         placeholder="Type your message here..." 
-        rows="10" 
+        rows="6" 
         cols="30" 
         @keydown="inputHandler"
         required></textarea>

@@ -9,23 +9,33 @@ export default {
     },
     template: `
       <div class="onlineList" v-if="hasJoinedChannels()">
-        <h2>Users</h2>
-        <h3>Online:</h3>
-              
-        <div v-for="user in online"  
-        :key="user.id"
-        v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
-        >
-          <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
+        <div class="usersHeader">
+          <h2 class="usersh2">Users</h2>
         </div>
-              
-        <h3>Offline:</h3>
+        <div>
+          <h3>Online:</h3>
+        </div>
+        <div class="onlineUsersDiv">
+          <div v-for="user in online"  
+          :key="user.id"
+          v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
+          >
+            <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
+          </div>  
+        </div>
         
-        <div v-for="user in offline" 
-        :key="user.id"
-        v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
-        >
-          <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
+        
+        <div>
+          <h3>Offline:</h3>
+        </div>
+        
+        <div class="offlineUsersDiv">
+          <div v-for="user in offline" 
+          :key="user.id"
+          v-if="user.id !== currentUser.id && checkUserChannel(user.id)"
+          >
+            <h4 class="onlineUserInList" @click="goToUserDetails(user)">{{ user.username }}</h4>          
+          </div>
         </div>
               
         <div v-if="showModal" class="modal-route">
