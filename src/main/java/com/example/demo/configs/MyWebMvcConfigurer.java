@@ -1,5 +1,7 @@
 package com.example.demo.configs;
 
+import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,8 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Configuration
 class MyWebMvcConfigurer implements WebMvcConfigurer {
@@ -21,7 +25,7 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("file:src/main/resources/static/")
                 .setCacheControl(CacheControl.noCache())
-                .resourceChain(true)
+                .resourceChain(false)
                 .addResolver(new PathResourceResolver() {
                     @Override
                     protected Resource getResource(String resourcePath,
@@ -31,14 +35,6 @@ class MyWebMvcConfigurer implements WebMvcConfigurer {
                                 : new ClassPathResource("/static/index.html");
                     }
                 });
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.sqlite.JDBC");
-        dataSourceBuilder.url("jdbc:sqlite:pets-and-owners.db");
-        return dataSourceBuilder.build();
     }
 }
 
