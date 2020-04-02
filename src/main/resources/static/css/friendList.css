@@ -1,0 +1,22 @@
+
+
+/*FRIENDLIST*/
+
+.friendList {
+	background-color: #fff;
+	padding-bottom: 10px;
+}
+
+.friend {
+  cursor: pointer;
+  width: 10%;
+  margin-left: 1.5em;
+}
+
+.friendList h3 {
+	margin: 0;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+/*-------------------------------------------*/

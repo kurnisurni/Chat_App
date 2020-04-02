@@ -27,7 +27,10 @@ public class MessageService {
             dbMessage = messageRepo.save(message);
 
             dbMessage.action = "new-message";
-
+            // Första punkten
+//            if (dbMessage.getImageUrl() != null) {
+//
+//            }
             socketService.sendToAll(dbMessage, Message.class);
         } catch (Exception e) {
             e.printStackTrace();

@@ -4,17 +4,17 @@ export default {
     template: `
     <section>
         <h1 class="registerPage">Welcome!</h1>
-            <h2>Not a member, yet? Please, register to start a conversation!</h2>
 
            <nav>
             <form class="registerForm" @submit.prevent="registerNewMember">
             <h3 class="h3Register">Sign up:</h3>
-            <input v-model="username" type="text" required placeholder="Enter username">
-            <input v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
+            <input class="inputFocus" v-model="username" type="text" required placeholder="Enter username">
+            <input class="inputFocus" v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
             <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
             <button class="registerBtn">Sign up</button>
-            <h4 class="h4Register">Already a member?</h4>
-            <router-link class="signUp" to="/">Login</router-link>
+
+            <p class="signUp">Already a member? <span class="LoginWord" @click="$router.push('/')"><a> Login here </a> </span></p>
+
             </form>
             </nav>
     </section>
@@ -55,6 +55,10 @@ export default {
             } catch(e){
               console.log(e)
             }
+
+        this.$router.push('/login')
+
+          
             
         
         //result = await result.json()
