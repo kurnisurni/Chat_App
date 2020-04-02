@@ -63,6 +63,7 @@ export default{
 
         try {
           
+          if (this.imageFiles != null) {
             let didUpload = await fetch('/api/upload-files', {
               method: 'POST',
               body: this.imageFiles
@@ -70,6 +71,7 @@ export default{
     
             didUpload = await didUpload.text()
             console.log(didUpload);
+          }
 
             // Eventuellt visa en spinner?
 
@@ -91,6 +93,7 @@ export default{
             catch {
                 console.warn('Could not create entity'); 
               }
+            
             
               this.messageInput = ''
       }
