@@ -1,0 +1,27 @@
+
+
+/*FRIENDLIST*/
+
+.friendList {
+  padding-bottom: 10px;
+  height: 34%;
+	overflow: auto;
+}
+
+.friendList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
+
+.friend {
+  cursor: pointer;
+  width: 10%;
+  margin-left: 1.5em;
+}
+
+.friendList h3 {
+	margin: 0;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+/*-------------------------------------------*/
