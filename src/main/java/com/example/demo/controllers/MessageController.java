@@ -24,5 +24,7 @@ public class MessageController {
         return messageService.postMessage(message);
     }
 
+    @DeleteMapping("/messages/{id}/{index}")
+    public void deleteMessage(@PathVariable int id, @PathVariable int index) { messageService.deleteById(id, index);}
 
 }

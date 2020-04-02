@@ -14,7 +14,15 @@ public class UserChannel implements Serializable {
     @Id
     private int user_id;
 
+    @Transient
+    public String action;
+
     public UserChannel() {
+    }
+
+    public UserChannel(int cid, int uid){
+        this.channel_id = cid;
+        this.user_id = uid;
     }
 
     public int getChannel_id() {

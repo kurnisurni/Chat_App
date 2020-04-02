@@ -41,18 +41,25 @@ export default {
             let user = {
                 username: this.username,
                 password: this.password,
+                role: ["admin", "user"]
             }
 
-            let result = await fetch('/rest/users',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        result = await result.json()
+            try{
+              await fetch('/rest/auth/signup',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+              })
+            } catch(e){
+              console.log(e)
+            }
+            
+        
+        //result = await result.json()
 
-        this.$store.commit('appendUser', result)
+        //this.$store.commit('appendUser', result)
 
         this.username = ''
         this.password = ''
