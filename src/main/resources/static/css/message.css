@@ -15,6 +15,10 @@
   word-break: break-word;
 }
 
+.messages::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+  display: none;
+}
+
 .messageDiv {
   display: flex;
   flex-direction: row;

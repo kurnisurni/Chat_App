@@ -3,8 +3,14 @@
 /*ONLINE LIST*/
 
 .onlineList {
-	background-color: aqua;
+    background-color: aqua;
+    height: 100vh;
+    overflow-y: auto;
 }
+
+.onlineList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
 
 .onlineList h3 {
 	margin: 0;
