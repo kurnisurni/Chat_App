@@ -8,6 +8,12 @@ import { store } from './store.js'
       let data = JSON.parse(e.data)
 
       switch(data.action) {
+        case 'delete-channel':
+          store.commit('deleteChannel', data.index)
+          break
+        case 'change-channel-name':
+          store.commit('changeChannelName', data)
+          break
         case 'delete-userchannel':
           store.commit('deleteUserChannel', data)
           break
@@ -79,7 +85,7 @@ import { store } from './store.js'
         case 'update picture':
           for(let user of store.state.users){
             if(user.id === data.id){
-              store.commit('updatePicture', user)
+              store.commit('updatePicture', data)
               break
             }
           }
