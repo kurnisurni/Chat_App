@@ -4,7 +4,12 @@
 
 .friendList {
 	padding-bottom: 10px;
+	overflow: auto;
 }
+
+.friendList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
 
 .friend {
   cursor: pointer;
