@@ -60,40 +60,40 @@ export default{
           message_time: Date.now(),
           imageUrl: this.images[0]
         }
-        // Byt plats på skickade meddelande och skicka bild
-        // Eventuellt visa en spinner?
-          message = await fetch('/rest/messages',{
-            method: 'POST',
-            body: JSON.stringify(messageBody),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          
-          try {
-            message = await message.json()
-            
 
-            // if we created an entity we then
-            // send the image files
+        try {
+          
             let didUpload = await fetch('/api/upload-files', {
               method: 'POST',
               body: this.imageFiles
             });
-            
+    
             didUpload = await didUpload.text()
             console.log(didUpload);
-            
 
+            // Eventuellt visa en spinner?
+
+            // if we created an entity we then
+            // send the image files
+            message = await fetch('/rest/messages',{
+              method: 'POST',
+              body: JSON.stringify(messageBody),
+              headers: {
+                'Content-Type': 'application/json'
+                }
+              })
+
+            message = await message.json()
+            
             this.imageFiles = null
             this.images = []
             } 
             catch {
                 console.warn('Could not create entity'); 
               }
-              
+            
               this.messageInput = ''
-            }
+      }
     },
 
     async filesChange(fileList) {

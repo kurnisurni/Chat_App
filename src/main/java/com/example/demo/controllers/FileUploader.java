@@ -54,7 +54,7 @@ public class FileUploader {
         }
         // punkt 2
         // if sats om man ska trigga omrendering på bild så behöver man skicka
-        // image url i ett socket meddelande 
+        // image url i ett socket meddelande
         return didUpload;
     }
 }

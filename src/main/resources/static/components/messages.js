@@ -23,8 +23,9 @@ export default{
                   </div>
                   <div class="messageParagraph">
                   <p class="msgP">
+                  {{ message.content }}
                   <img v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
-                  {{ message.content }}</p>
+                  </p>
                   </div>
                   
                 </div>
