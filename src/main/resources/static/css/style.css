@@ -14,7 +14,9 @@ html {
 
 body {
 	margin: 0;
-  background-image: linear-gradient(rgb(71, 129, 255), rgba(10, 2, 85, 0.856));
+	background-color: rgba(39, 39, 39, 0.911);
+  /* background-image: linear-gradient(rgb(71, 129, 255), rgba(10, 2, 85, 0.856)); */
+  color: rgba(189, 189, 189, 0.699);
 }
 
 body button {
@@ -84,18 +86,22 @@ body button {
 .frontPage {
 	display: flex;
 	justify-content: center;
+	height: 100vh;
 }
 
 .leftBar {
 	width: 20%;
+	height: 100%;
 }
 
 .rightBar {
 	width: 20%;
+	height: 100%;
 }
 
 .messagesView {
 	width: 60%;
+	height: 100%;
 }
 
 /*-------------------------------------------*/
@@ -139,6 +145,12 @@ body button {
 
 .channel {
 	padding-left: 15px;
+	height: 61%;
+    overflow: auto;
 }
+
+.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
 
 

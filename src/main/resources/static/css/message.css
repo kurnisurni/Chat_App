@@ -14,7 +14,7 @@
   overflow-wrap: break-word;
   word-break: break-word;
   border-style: solid;
-  border-color: rgba(33, 33, 175, 0.808);
+  border-color: rgba(189, 189, 189, 0.699);
 }
 
 .messages::-webkit-scrollbar {    /* Hides the scrollbar in message div*/

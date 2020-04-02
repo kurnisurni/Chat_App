@@ -3,7 +3,6 @@
 /*ONLINE LIST*/
 
 .onlineList {
-    background-color: aqua;
     height: 100vh;
     overflow-y: auto;
 }
@@ -14,7 +13,8 @@
 
 .onlineList h3 {
 	margin: 0;
-	padding-top: 10px;
+  padding-top: 10px;
+  margin-left: 0.6em;
 }
 
 .onlineUserInList {
