@@ -46,10 +46,21 @@
 	width: 15%;
 }
 
-.signUp {
-	padding: 30px;
+.askForRegister{
+	padding: 40px;
 	font-size: 20px;
+	text-align: center;
 	color: #eee;
+}
+
+.registerWord{
+	cursor:pointer;
+	font-style: italic;
+	text-decoration: underline;	
+}
+
+a:hover{
+	color:black;
 }
 
 /*-------------------------------------------*/

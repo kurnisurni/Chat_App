@@ -43,4 +43,14 @@
 	color: #eee;
 }
 
+.LoginWord{
+	cursor:pointer;
+	font-style: italic;
+	text-decoration: underline;	
+}
+
+.inputFocus:focus{
+	background-color:lightgoldenrodyellow;
+}
+
 /*-------------------------------------------*/
