@@ -3,9 +3,14 @@
 /*FRIENDLIST*/
 
 .friendList {
-	background-color: #fff;
-	padding-bottom: 10px;
+  padding-bottom: 10px;
+  height: 34%;
+	overflow: auto;
 }
+
+.friendList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
 
 .friend {
   cursor: pointer;
