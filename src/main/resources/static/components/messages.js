@@ -5,32 +5,40 @@ export default{
   },
     template:`
       <div class="messages" ref="msgs">
-        <div v-for="(message, i) in messages" :key="message.id">
+        <div v-for="(message, i) in messages" :key="message.id">  <!-- Eventuellt en ny dynamsik key så man kan trigga en omrendering -->
           
           <div v-if="message.channel_id === currentChannel.id">
               
-            <div v-for="user in users" :key="user.id" @click="goToUserDetails(user)">
+            <div v-for="user in users" :key="user.id">
               <div class="messageDiv" v-if="message.user_id === user.id">
                 
                 <div class="userAndPicDiv">
-                  
-                  <img class="messagePicture" :src=user.picture_url>
-                  <h4 class="msgUser">{{ user.username }}</h4>
-                  <p class="messageTime">{{ new Date(message.message_time).toLocaleString() }}</p>
-                  <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
-                  <div class="messageParagraph">
-                    <p class="msgP">{{ message.content }}</p>
-                    <div v-if="message.user_id === currentUser.id" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
+                  <div class="usrNPic">
+                    <img class="messagePicture" :src=user.picture_url @click="goToUserDetails(user)">
+                    <p class="msgUser" @click="goToUserDetails(user)">{{ user.username }}</p>
+                    <p class="messageTime">{{ new Date(message.message_time).toLocaleString() }}</p>
+                    <div v-if="message.user_id === currentUser.id || currentUser.id === currentChannel.adminid" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
                     <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
+                    <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
                   </div>
+                  <div class="messageParagraph">
+                  <p class="msgP">
+                  {{ message.content }}
+                  <img v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
+                  </p>
+                  </div>
+                  
                 </div>
+                
+                
                 
               </div>
             </div>
+
           </div>
           <div v-for="serverMessage in serverMessages" :key="serverMessage.id">
-            <div v-if="serverMessage.channel_id === currentChannel.id && correctTime(serverMessage, i)">
-              {{ new Date(serverMessage.time).toLocaleString() }} {{ serverMessage.message }}
+            <div class="serverMessageDiv" v-if="serverMessage.channel_id === currentChannel.id && correctTime(serverMessage, i)">
+              <p class="serverMessage">{{ new Date(serverMessage.time).toLocaleString() }} {{ serverMessage.message }}</p>
             </div>
           </div>
         </div>

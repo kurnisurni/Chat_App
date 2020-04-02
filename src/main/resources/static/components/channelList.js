@@ -5,6 +5,7 @@ export default{
     <div class="channelList" v-for="channel in userChannels" :key="channel.id">
       <h4 class="channelNameInList" @click="goToChannel(channel)">
         {{ channel.name }}
+        <div v-if="checkNewMessages(channel.id) && checkChannels(channel.id)">💬</div>
       </h4>
     </div>
     <div v-if="otherChannels()">
@@ -23,12 +24,40 @@ export default{
     },
     allChannels(){
       return this.$store.state.channels
+    },
+    offlineMessages(){
+      return this.$store.state.offlineMessages
+    }
+  },
+  created(){
+    this.checkNewMessages()
+  },
+  data(){
+    return{
+      newMessages: false,
+      checkedChannels: []
     }
   },
   methods: {
+    checkNewMessages(channelId){
+      for(let msg of this.offlineMessages){
+        if(msg.channel_id === channelId){
+          return this.newMessages = true
+        }
+      }
+      return this.newMessages = false
+    },
     async goToChannel(channel){
       if (!this.userChannels.includes(channel)) this.addChannelToUserChannels(channel)
       this.$store.commit('setCurrentChannel', channel)
+      this.checkedChannels.push(channel.id)
+    },
+    checkChannels(channelId){
+      if(this.checkedChannels.includes(channelId)){
+        return false
+      }else{
+        return true
+      }
     },
     otherChannels(){
       for (let channel of this.allChannels){
