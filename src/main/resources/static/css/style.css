@@ -106,19 +106,6 @@ body button {
 
 /*-------------------------------------------*/
 
-/*CHANNEL LIST COMPONENT*/
-
-.channelList {
-	list-style: none;
-	cursor: pointer;
-}
-
-.channelList:hover {
-	color: #eee;
-}
-
-/*-------------------------------------------*/
-
 /* friendList and userDetail Component */
 .modal {
 	position: absolute;
@@ -145,12 +132,25 @@ body button {
 
 .channel {
 	padding-left: 15px;
-	height: 61%;
+	height: 63%;
     overflow: auto;
 }
 
 .channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
     display: none;
   }
+
+.channelList {
+	list-style: none;
+	cursor: pointer;
+}
+
+.channelList:hover {
+	color: #eee;
+}
+
+.createChannel {
+	padding-left: 10px;
+}
 
 

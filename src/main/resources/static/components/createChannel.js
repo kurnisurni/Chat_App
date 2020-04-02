@@ -1,7 +1,7 @@
 export default{
     template: `
       <div>
-        <form @submit.prevent="createNewChannel">
+        <form class="createChannel" @submit.prevent="createNewChannel">
             <input v-model="name" type="text"
             required
             placeholder = "Enter channel name...">
