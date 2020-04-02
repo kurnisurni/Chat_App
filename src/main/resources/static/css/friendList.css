@@ -2,23 +2,29 @@
 
 /*FRIENDLIST*/
 
-.friendList {
-  padding-bottom: 10px;
-  height: 34%;
-	overflow: auto;
+.friendDiv {
+  overflow: hidden;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
-.friendList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-    display: none;
-  }
+.friendList {
+  height: 100%;
+  overflow: auto;
+}
+
+.friendsInFriendList {
+  height: 100%;
+  
+}
 
 .friend {
   cursor: pointer;
-  width: 10%;
+  width: 25%;
   margin-left: 1.5em;
 }
 
-.friendList h3 {
+.friendDiv h3 {
 	margin: 0;
 	padding-top: 10px;
 	padding-left: 15px;

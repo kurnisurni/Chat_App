@@ -3,27 +3,47 @@
 /*CHANNEL*/
 
 .channel {
-	padding-left: 15px;
-	height: 57%;
-    overflow: auto;
+	overflow: hidden;
+}
+.channel h3 {
+  margin: 0;
+  padding-left: 15px;
 }
 
-.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-    display: none;
-  }
+.yourChannelsDiv {
+  height: 50%;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.allChannelsDiv {
+  height: 50%;
+  overflow: auto;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
 
 .channelList {
-	list-style: none;
-	cursor: pointer;
+  height: 100%;
+  padding-bottom: 15px;
+  margin-left: 1.5em;
+  overflow: auto;
 }
 
 .channelList:hover {
 	color: #eee;
 }
 
+.channelNameInList {
+  cursor: pointer;
+  width: 50%;
+}
+
 .createChannel {
     padding: 15px;
-	padding-left: 10px;
+  padding-left: 10px;
+  position: relative;
 }
 
 /*-------------------------------------------*/
