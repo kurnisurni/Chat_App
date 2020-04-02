@@ -28,10 +28,11 @@ public class FileUploader {
     }
 
     @PostMapping("/api/upload-files")
-    public List<String> handleFileUpload(@RequestParam List<MultipartFile> files) {
+    public String handleFileUpload(@RequestParam List<MultipartFile> files) {
         // Här gör vi så det bara är bilder vi kanske skicka
         final List<String> supportedFileExtensions = List.of(".png,.jpg,.jpeg,.gif,.bmp,.jfif".split(","));
         List<String> resultingFilepaths = new ArrayList<>();
+        String didUpload = "failed";
 
         for (MultipartFile file : files) {
             String fileExt = file.getOriginalFilename().toLowerCase();
@@ -46,11 +47,14 @@ public class FileUploader {
             try {
                 file.transferTo(targetLocation);
                 resultingFilepaths.add(frontendUploadDirectory + filename);
+                didUpload = "success";
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-        return resultingFilepaths;
+        // punkt 2
+        // if sats om man ska trigga omrendering på bild så behöver man skicka
+        // image url i ett socket meddelande 
+        return didUpload;
     }
 }

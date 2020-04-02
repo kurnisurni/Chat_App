@@ -5,7 +5,7 @@ export default{
   },
     template:`
       <div class="messages" ref="msgs">
-        <div v-for="(message, i) in messages" :key="message.id">
+        <div v-for="(message, i) in messages" :key="message.id">  <!-- Eventuellt en ny dynamsik key så man kan trigga en omrendering -->
           
           <div v-if="message.channel_id === currentChannel.id">
               
@@ -22,7 +22,9 @@ export default{
                     <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
                   </div>
                   <div class="messageParagraph">
-                  <p class="msgP">{{ message.content }}</p>
+                  <p class="msgP">
+                  <img v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
+                  {{ message.content }}</p>
                   </div>
                   
                 </div>
