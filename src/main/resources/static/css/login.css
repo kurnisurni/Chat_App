@@ -1,0 +1,66 @@
+
+
+/*LOGIN COMPONENT*/
+
+.LogInPage {
+	padding: 20px;
+	font-weight: 700;
+	text-align: center;
+	font-size: 45px;
+	color: #eee;
+}
+
+.h3LogIn {
+	text-align: center;
+	font-size: 25px;
+	color: #eee;
+}
+
+.loginForm {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.loginForm input {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	align-self: center;
+	width: 40%;
+}
+
+.showPasswordButton {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	align-self: center;
+	width: 15%;
+}
+
+.logInButton {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	align-self: center;
+	width: 15%;
+}
+
+.askForRegister{
+	padding: 40px;
+	font-size: 20px;
+	text-align: center;
+	color: #eee;
+}
+
+.registerWord{
+	cursor:pointer;
+	font-style: italic;
+	text-decoration: underline;	
+}
+
+a:hover{
+	color:black;
+}
+
+/*-------------------------------------------*/

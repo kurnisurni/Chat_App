@@ -1,0 +1,44 @@
+
+
+/*MESSAGE INPUT*/
+
+.messageForm {
+	position: relative;
+}
+
+.messageForm textarea {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	resize: none;
+}
+
+.sendButton {
+	background: none;
+	border: none;
+	position: absolute;
+	padding: 10px;
+	height: 40px;
+	margin-bottom: 30px;
+	margin-right: 5px;
+	bottom: 0;
+	right: 0;
+}
+
+label {
+	position: absolute;
+	cursor:pointer;
+	padding: 10px;
+	height: 40px;
+	margin-bottom: 30px;
+	margin-right: 50px;
+	bottom: 0;
+	right: 0;
+}
+
+#upload {
+    width: 0.1px;
+    height: 0.1px;
+  }
+
+/*-------------------------------------------*/

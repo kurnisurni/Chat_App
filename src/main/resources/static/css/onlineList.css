@@ -1,0 +1,26 @@
+
+
+/*ONLINE LIST*/
+
+.onlineList {
+    background-color: aqua;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.onlineList::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
+
+.onlineList h3 {
+	margin: 0;
+	padding-top: 10px;
+}
+
+.onlineUserInList {
+  width: 10%;
+  cursor:pointer;
+  margin-left: 1.5em;
+}
+
+/*-------------------------------------------*/

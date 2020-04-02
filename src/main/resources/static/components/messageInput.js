@@ -24,7 +24,7 @@ export default{
         @change="filesChange($event.target.files)">
         <label for="upload"> 📁 </label>
 
-        <button class="sendButton">Send</button>
+        <button class="sendButton">💬</button>
         </form>
 
 
