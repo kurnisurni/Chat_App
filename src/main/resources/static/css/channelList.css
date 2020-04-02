@@ -1,0 +1,29 @@
+
+
+/*CHANNEL*/
+
+.channel {
+	padding-left: 15px;
+	height: 57%;
+    overflow: auto;
+}
+
+.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
+    display: none;
+  }
+
+.channelList {
+	list-style: none;
+	cursor: pointer;
+}
+
+.channelList:hover {
+	color: #eee;
+}
+
+.createChannel {
+    padding: 15px;
+	padding-left: 10px;
+}
+
+/*-------------------------------------------*/

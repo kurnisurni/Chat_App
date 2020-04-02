@@ -3,7 +3,8 @@
 /*FRIENDLIST*/
 
 .friendList {
-	padding-bottom: 10px;
+  padding-bottom: 10px;
+  height: 34%;
 	overflow: auto;
 }
 

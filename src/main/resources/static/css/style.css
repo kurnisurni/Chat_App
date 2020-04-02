@@ -126,31 +126,8 @@ body button {
 	cursor: pointer;
 	font-size: 30px;
 }
-/*-------------------------------------------*/
 
-/*CHANNEL*/
 
-.channel {
-	padding-left: 15px;
-	height: 63%;
-    overflow: auto;
-}
 
-.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-    display: none;
-  }
-
-.channelList {
-	list-style: none;
-	cursor: pointer;
-}
-
-.channelList:hover {
-	color: #eee;
-}
-
-.createChannel {
-	padding-left: 10px;
-}
 
 
