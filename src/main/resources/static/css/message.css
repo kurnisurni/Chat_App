@@ -3,7 +3,7 @@
 /*MESSAGES*/
 
 .messages {
-	background-color: rgb(1, 175, 175); /*This one will not be here later. This is just to see what is what*/
+	/*background-color: rgb(1, 175, 175); This one will not be here later. This is just to see what is what*/
   width: 100%;
   height: 100%;
 	display: flex;
@@ -13,6 +13,8 @@
 	min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
+  border-style: solid;
+  border-color: rgba(33, 33, 175, 0.808);
 }
 
 .messages::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
