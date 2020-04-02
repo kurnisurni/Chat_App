@@ -3,7 +3,7 @@ import userDetails from './userDetails.js'
 
 export default{
   components:{
-    userDetails
+    userDetails,
   },
   template: `
     <div>
@@ -12,7 +12,7 @@ export default{
         <!-- Need to move width and height till css later -->
         <img class="userUserPic" :src="user.picture_url" alt="User Image" width="50" height="50" @click="goToUserDetails(user)">
       </div>
-      <button @click="showOfflineMessages">New Messages</button>
+
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
           <userDetails :loggedInUser="user"/>
@@ -21,7 +21,7 @@ export default{
     </div>
   `,
   data(){
-  return{
+    return{
     showModal: false,
     loggedInUser: null,
     }
@@ -35,11 +35,9 @@ export default{
     }  
   },
   methods:{
-    showOfflineMessages(){
-      //öppna en modal med alla offline messages uppdelade efter kanal
-    },
+
     close() {
-      this.showModal = false;
+      this.showModal = false
     },
     goToUserDetails(user){
       this.loggedInUser = user
