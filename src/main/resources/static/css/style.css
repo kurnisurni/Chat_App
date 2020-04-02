@@ -1,10 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import 'lesshat';
 
 * {
 	box-sizing: border-box;
   font-family: 'Lato', sans-serif;
   font-weight: 800;
+}
+
+h4, p, div, button, input {
+  font-size: 14px;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(175, 174, 174, 0.192);
+}
+*::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: rgba(158, 157, 157, 0.411);
+}
+*::-webkit-scrollbar-thumb:hover{
+  background: rgba(168, 167, 167, 0.726);
+}
+*::-webkit-scrollbar-thumb:active{
+  background: rgba(182, 181, 181, 0.9);
 }
 
 body,
@@ -23,6 +48,9 @@ body button {
   cursor: pointer;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
 .hiddenGetUserMethod {
 	height: 0px;
@@ -31,6 +59,19 @@ body button {
 /*-------------------------------------------*/
 
 /*USER*/
+
+.userComp {
+  height: 11.3vh;
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userDiv {
+  height: 100%;
+  padding: 25px;
+  border: 2px solid rgba(175, 174, 174, 0.192);
+}
 
 .userName {
   width: 17%;
@@ -46,6 +87,34 @@ body button {
 /*CHANNEL COMPONENT*/
 
 .channelComponent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.headerCard {
+  width: 100%;
+  height: 16vh;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.channelNameHeader {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.headerCard button {
+  padding: 0;
+  height: 3em;
+  width: 5em;
+  align-self: flex-end;
+}
+
+.showIfHasChannels {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -90,17 +159,20 @@ body button {
 }
 
 .leftBar {
-	width: 20%;
-	height: 100%;
+	width: 20vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .rightBar {
-	width: 20%;
+	width: 20vw;
 	height: 100%;
 }
 
 .messagesView {
-	width: 60%;
+	width: 60vw;
 	height: 100%;
 }
 
@@ -109,13 +181,21 @@ body button {
 /* friendList and userDetail Component */
 .modal {
 	position: absolute;
-	top: 10vh;
-	left: 10vw;
-	height: 80vh;
-	width: 80vw;
+	top: 30vh;
+	left: 40vw;
+	height: 30vh;
+	width: 20vw;
 	border: 2px solid #333;
 	background-color: #ddd;
 	padding: 20px;
+}
+
+.modal p {
+  color: black;
+}
+
+.modal h2 {
+  color: black;
 }
 
 .close-x {

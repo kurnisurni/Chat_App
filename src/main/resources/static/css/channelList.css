@@ -3,27 +3,50 @@
 /*CHANNEL*/
 
 .channel {
-	padding-left: 15px;
-	height: 57%;
-    overflow: auto;
+  overflow: hidden;
+  width: 70%;
+}
+.channel h3 {
+  margin: 0;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
 }
 
-.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-    display: none;
-  }
+.yourChannelsDiv {
+  height: 50%;
+  overflow: auto;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.allChannelsDiv {
+  height: 50%;
+  overflow: auto;
+  margin-bottom: 15px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
 
 .channelList {
-	list-style: none;
-	cursor: pointer;
+  height: 100%;
+  margin-left: 1.5em;
+  overflow: auto;
 }
 
-.channelList:hover {
+.channelNameInList:hover {
 	color: #eee;
 }
 
+.channelNameInList {
+  cursor: pointer;
+  padding-bottom: 2px;
+  width: 80%;
+}
+
 .createChannel {
-    padding: 15px;
-	padding-left: 10px;
+  padding: 15px;
+  padding-left: 10px;
+  position: relative;
 }
 
 /*-------------------------------------------*/

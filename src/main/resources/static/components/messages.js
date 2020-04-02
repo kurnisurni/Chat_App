@@ -22,10 +22,10 @@ export default{
                     <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
                   </div>
                   <div class="messageParagraph">
-                  <p class="msgP">
-                  {{ message.content }}
-                  <img v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
-                  </p>
+                    <p class="msgP">{{ message.content }}<br>
+                      <img class="messageImage" v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
+                    </p>
+                    
                   </div>
                   
                 </div>
