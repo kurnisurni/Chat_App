@@ -7,14 +7,16 @@ export default{
             <nav>
                 <form class="loginForm" @submit.prevent="logIn">
                     <h3 class="h3LogIn">Log In:</h3>
-                    <input v-model="username" type="text" placeholder="Enter username:" required>
+                    <input class="inputFocus" v-model="username" type="text" placeholder="Enter username:" required>
 
-                    <input v-model="password" type="text" :type="passwordType" placeholder="Enter password:" required>
+                    <input class="inputFocus" v-model="password" type="text" :type="passwordType" placeholder="Enter password:" required>
 
                     <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
                     <button class="logInButton">Log In</button>
                 </form>
-                 <router-link class="signUp" to="/register">Sign Up</router-link>
+
+
+            <p class="askForRegister">Not a member, yet? Please, <span class="registerWord" @click="$router.push('/register')"><a> register here </a> </span>to start a conversation!</p>
             </nav>
        </section>
     `,
