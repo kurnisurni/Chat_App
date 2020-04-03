@@ -7,7 +7,7 @@ export default{
   <div class="friendDiv">
     <h3>Friends:</h3>
     <div class="friendList">
-      <div class="friendsInFriendList">
+      
         <div class="friendAndMsgIcon" v-for="friend in friendList" 
           :key="friend.id"
           >
@@ -19,8 +19,7 @@ export default{
             <userDetails :friend="activeFriend"/>
           </div>
         </div>
-      </div>
-          
+      
     </div>
   </div>
     

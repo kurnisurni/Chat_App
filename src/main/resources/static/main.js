@@ -9,3 +9,7 @@ new Vue({
   router,
   render: h => h(app)
 }).$mount('#app')
+
+window.onbeforeunload = () => {
+  localStorage.setItem('closeTime', JSON.stringify(Date.now()))
+}
