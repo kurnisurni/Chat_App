@@ -22,9 +22,9 @@ export default{
         accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
         multiple 
         @change="filesChange($event.target.files)">
-        <label for="upload"> 📁 </label>
+        <label class="choosePicture" for="upload">Choose picture 📁 </label>
 
-        <button class="sendButton">💬</button>
+        <button class="sendButton">Send 💬</button>
         </form>
 
 
