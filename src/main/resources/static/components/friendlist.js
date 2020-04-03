@@ -35,6 +35,7 @@ export default{
     startPrivateConversation(friend){
       
     },
+
     goToFriendDetails(friend){
      this.activeFriend = friend
      console.log('-----Active friend----')

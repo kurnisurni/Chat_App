@@ -88,6 +88,8 @@ body::-webkit-scrollbar {
 }
 
 .userUserPic {
+  height: 5vh;
+  width: 3vh;
   cursor:pointer;
 }
 
