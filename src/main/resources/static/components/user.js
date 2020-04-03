@@ -6,11 +6,12 @@ export default{
     userDetails,
   },
   template: `
-    <div>
+    <div class="userComp">
       <div class="userDiv">
+        <img class="userUserPic" :src="user.picture_url" alt="User Image" width="50" height="50" @click="goToUserDetails(user)">
         <div class="userName" @click="goToUserDetails(user)">{{user.username}}</div>
         <!-- Need to move width and height till css later -->
-        <img class="userUserPic" :src="user.picture_url" alt="User Image" width="50" height="50" @click="goToUserDetails(user)">
+        
       </div>
 
       <div v-if="showModal" class="modal-route">

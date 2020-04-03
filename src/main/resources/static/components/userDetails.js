@@ -1,29 +1,31 @@
 export default {
   template: `
-    <div class="modal"> 
-      <div class="close-x">
-        <button @click="close">Close</button>
-      </div>
-      <h2>{{ details.username }}</h2>
-      <img :src="details.picture_url" 
+    <div class="modal">     
+      <button class="closeModalButton" @click="close">Close</button>
+      
+      <h2 class="modalUsername">{{ details.username }}</h2>
+      <div class="picAddOrRemove">
+        <img :src="details.picture_url" 
             alt="User Image" 
             width="80" 
             height="80">
+        <p v-if="details.friendshipTime">Friend Since: {{ details.friendshipTime }}</p>
+        <button v-if="details.friendshipTime && !loggedInUser" 
+                @click="removeFriend(details.id)">Remove Friend</button>
 
-      <p v-if="details.friendshipTime">Friend Since: {{ details.friendshipTime }}</p>
-      <button v-if="details.friendshipTime && !loggedInUser" 
-              @click="removeFriend(details.id)">Remove Friend</button>
-
-      <button v-if="!details.friendshipTime && !loggedInUser"
-              @click="addFriend(details.id)">Add As a Friend</button>
-
-      <button class="logoutButton" v-if="loggedInUser" @click="logOut">Log Out</button>
-
-      <form v-if="loggedInUser" @submit.prevent="updateUser(picture)">
-        <label for="img-input-field"> Change Profile Picture: </label>
-        <input class="img-input-field" v-model="picture" type="text" placeholder="Add image url here..">
-        <button class="updatePictureButton" >Update Picture</button>
+        <button class="addFriendButton" v-if="!details.friendshipTime && !loggedInUser"
+                @click="addFriend(details.id)">Add Friend</button>
+      </div>
+      
+      <form class="changePictureForm" v-if="loggedInUser" @submit.prevent="updateUser(picture)">
+        <div class="labelAndInput">
+          <label class="imgInputLabel" for="img-input-field"> Change Profile Picture: </label>
+          <input class="img-input-field" v-model="picture" type="text" placeholder="Add image url here..">
+        </div>
+        
+        <button class="updatePictureButton">Submit</button>
       </form>
+      <button class="logoutButton" v-if="loggedInUser" @click="logOut">Log Out</button>
     </div>
   `,
   //one user from messages.js, another - from onlineList.js

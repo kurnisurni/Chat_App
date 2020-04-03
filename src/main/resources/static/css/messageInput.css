@@ -16,16 +16,18 @@
 .sendButton {
 	background: none;
 	border: none;
-	position: absolute;
+  position: absolute;
+  color: black;
 	padding: 10px;
-	height: 40px;
+  height: 40px;
+  margin-left: 15px;
 	margin-bottom: 30px;
 	margin-right: 5px;
 	bottom: 0;
 	right: 0;
 }
 
-label {
+.messageForm label {
 	position: absolute;
 	cursor:pointer;
 	padding: 10px;
@@ -33,7 +35,11 @@ label {
 	margin-bottom: 30px;
 	margin-right: 50px;
 	bottom: 0;
-	right: 0;
+	right: 20px;
+}
+
+.choosePicture {
+  color: black;
 }
 
 #upload {
