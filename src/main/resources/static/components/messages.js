@@ -19,7 +19,8 @@ export default{
                     <p class="messageTime">{{ new Date(message.message_time).toLocaleString() }}</p>
                     <div v-if="message.user_id === currentUser.id || currentUser.id === currentChannel.adminid" class="removeMessage" @click="askIfDelete(message.id)">🗑️</div>
                     <button v-if="removing === message.id" class="deleteMsgButton" @click="deleteMessage(message.id, i)">Delete message</button>
-                    <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p>
+                    
+                    <!-- <p class="newMessageAlert" v-if="newMessage(message)">------ NEW MESSAGE ------</p> -->
                   </div>
                   <div class="messageParagraph">
                     <p class="msgP">{{ message.content }}<br>

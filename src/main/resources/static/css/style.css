@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-@import 'lesshat';
 
 * {
 	box-sizing: border-box;
@@ -10,6 +9,13 @@
 
 h4, p, div, button, input {
   font-size: 14px;
+}
+
+button {
+  background-color: rgba(168, 167, 167, 0.527);
+  color: rgba(226, 226, 226, 0.897);
+  border-radius: 15px;
+  border: none;
 }
 
 *::-webkit-scrollbar {
@@ -69,7 +75,10 @@ body::-webkit-scrollbar {
 
 .userDiv {
   height: 100%;
-  padding: 25px;
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
   border: 2px solid rgba(175, 174, 174, 0.192);
 }
 
@@ -109,9 +118,10 @@ body::-webkit-scrollbar {
 
 .headerCard button {
   padding: 0;
-  height: 3em;
+  height: 2em;
   width: 5em;
   align-self: flex-end;
+  margin-bottom: 0.3em;
 }
 
 .showIfHasChannels {
@@ -182,12 +192,20 @@ body::-webkit-scrollbar {
 .modal {
 	position: absolute;
 	top: 30vh;
-	left: 40vw;
+	left: 45vw;
 	height: 30vh;
-	width: 20vw;
+	width: 15vw;
 	border: 2px solid #333;
-	background-color: #ddd;
+	background-color: rgb(202, 197, 197);
 	padding: 20px;
+}
+
+.modal button {
+  background-color: rgb(70, 69, 69);
+}
+
+.modalUsername {
+  margin-top: 0;
 }
 
 .modal p {
@@ -198,14 +216,51 @@ body::-webkit-scrollbar {
   color: black;
 }
 
-.close-x {
-	text-align: right;
+.picAddOrRemove {
+  display: flex;
+  flex-direction: column;
 }
 
-.close-x span {
-	cursor: pointer;
-	font-size: 30px;
+.picAddOrRemove button {
+  width: 50%;
 }
+
+.addFriendButton {
+  margin-top: 15px;
+}
+
+.closeModalButton {
+  float: right;
+}
+
+.logoutButton {
+  position: absolute;
+  top: 90%;
+  left: 5%;
+}
+
+.labelAndInput {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.imgInputLabel {
+  color: black;
+}
+
+.updatePictureButton {
+  margin-top: 19px;
+  height: 30%;
+  margin-left: 10px;
+}
+
+.changePictureForm {
+  margin-top: 15px;
+  display: flex;
+}
+
+
 
 
 
