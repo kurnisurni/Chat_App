@@ -3,27 +3,58 @@
 /*CHANNEL*/
 
 .channel {
-	padding-left: 15px;
-	height: 57%;
-    overflow: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.channel h3 {
+  margin: 0;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
 }
 
-.channel::-webkit-scrollbar {    /* Hides the scrollbar in message div*/
-    display: none;
-  }
-
-.channelList {
-	list-style: none;
-	cursor: pointer;
+.nameAndNewMessages {
+  display: flex;
 }
 
-.channelList:hover {
+.yourChannelList {  
+  overflow: auto;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+  margin-bottom: 10px;
+}
+
+.allChannelList {
+  overflow: auto;  
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.channelNameInList:hover {
 	color: #eee;
 }
 
+.channelNameInList {
+  margin-left: 1.5em;
+  cursor: pointer;
+  padding-bottom: 2px;
+  margin-bottom: 0;
+}
+
+.missedMessages {
+  background-color: rgba(151, 5, 5, 0.733);
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  margin-left: 10px;
+  
+  margin-bottom: 0;
+  border-radius: 20px;
+}
+
 .createChannel {
-    padding: 15px;
-	padding-left: 10px;
+  padding: 15px;
+  padding-left: 10px;
+  position: relative;
 }
 
 /*-------------------------------------------*/

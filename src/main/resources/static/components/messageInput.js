@@ -8,7 +8,7 @@ export default{
         <textarea type="text" 
         v-model="messageInput" 
         placeholder="Type your message here..." 
-        rows="10" 
+        rows="6" 
         cols="30" 
         @keydown="inputHandler"
         required></textarea>
@@ -22,9 +22,9 @@ export default{
         accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
         multiple 
         @change="filesChange($event.target.files)">
-        <label for="upload"> 📁 </label>
+        <label class="choosePicture" for="upload">Choose picture 📁 </label>
 
-        <button class="sendButton">💬</button>
+        <button class="sendButton">Send 💬</button>
         </form>
 
 
