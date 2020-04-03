@@ -7,6 +7,37 @@
   font-weight: 800;
 }
 
+h4, p, div, button, input {
+  font-size: 14px;
+}
+
+button {
+  background-color: rgba(168, 167, 167, 0.527);
+  color: rgba(226, 226, 226, 0.897);
+  border-radius: 15px;
+  border: none;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(175, 174, 174, 0.192);
+}
+*::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: rgba(158, 157, 157, 0.411);
+}
+*::-webkit-scrollbar-thumb:hover{
+  background: rgba(168, 167, 167, 0.726);
+}
+*::-webkit-scrollbar-thumb:active{
+  background: rgba(182, 181, 181, 0.9);
+}
+
 body,
 html {
   height: 100%;
@@ -23,6 +54,9 @@ body button {
   cursor: pointer;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
 .hiddenGetUserMethod {
 	height: 0px;
@@ -31,6 +65,22 @@ body button {
 /*-------------------------------------------*/
 
 /*USER*/
+
+.userComp {
+  height: 11.3vh;
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userDiv {
+  height: 100%;
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border: 2px solid rgba(175, 174, 174, 0.192);
+}
 
 .userName {
   width: 17%;
@@ -49,7 +99,36 @@ body button {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
+}
+
+.headerCard {
+  width: 100%;
+  height: 16vh;
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.channelNameHeader {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.headerCard button {
+  padding: 0;
+  height: 2em;
+  width: 5em;
+  align-self: flex-end;
+  margin-bottom: 0.3em;
+}
+
+.showIfHasChannels {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .msgDiv {
@@ -86,21 +165,25 @@ body button {
 .frontPage {
 	display: flex;
 	justify-content: center;
-	height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .leftBar {
-	width: 20%;
-	height: 100%;
+	width: 20vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .rightBar {
-	width: 20%;
+	width: 20vw;
 	height: 100%;
 }
 
 .messagesView {
-	width: 60%;
+  overflow: hidden;
+	width: 60vw;
 	height: 100%;
 }
 
@@ -109,23 +192,76 @@ body button {
 /* friendList and userDetail Component */
 .modal {
 	position: absolute;
-	top: 10vh;
-	left: 10vw;
-	height: 80vh;
-	width: 80vw;
+	top: 30vh;
+	left: 45vw;
+	height: 30vh;
+	width: 15vw;
 	border: 2px solid #333;
-	background-color: #ddd;
+	background-color: rgb(202, 197, 197);
 	padding: 20px;
 }
 
-.close-x {
-	text-align: right;
+.modal button {
+  background-color: rgb(70, 69, 69);
 }
 
-.close-x span {
-	cursor: pointer;
-	font-size: 30px;
+.modalUsername {
+  margin-top: 0;
 }
+
+.modal p {
+  color: black;
+}
+
+.modal h2 {
+  color: black;
+}
+
+.picAddOrRemove {
+  display: flex;
+  flex-direction: column;
+}
+
+.picAddOrRemove button {
+  width: 50%;
+}
+
+.addFriendButton {
+  margin-top: 15px;
+}
+
+.closeModalButton {
+  float: right;
+}
+
+.logoutButton {
+  position: absolute;
+  top: 90%;
+  left: 5%;
+}
+
+.labelAndInput {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.imgInputLabel {
+  color: black;
+}
+
+.updatePictureButton {
+  margin-top: 19px;
+  height: 30%;
+  margin-left: 10px;
+}
+
+.changePictureForm {
+  margin-top: 15px;
+  display: flex;
+}
+
+
 
 
 

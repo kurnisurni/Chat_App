@@ -23,18 +23,18 @@ export default{
 
     template:`
     <div class="frontPage">
-        <div class="leftBar">
-          <user />
-          <friendlist />
-          <userChannels />
-          <createChannel />
-        </div>
-        <div class="messagesView">
-          <channelComponent />
-        </div>
-        <div class="rightBar">
-          <onlineList />
-        </div>
+      <div class="leftBar">
+        <user />
+        <friendlist />
+        <userChannels />
+        <createChannel />
+      </div>
+      <div class="messagesView">
+        <channelComponent />
+      </div>
+      <div class="rightBar">
+        <onlineList />
+      </div>
     </div>
     `,
 
