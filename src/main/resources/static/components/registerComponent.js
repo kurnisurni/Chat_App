@@ -9,8 +9,14 @@ export default {
             <form class="registerForm" @submit.prevent="registerNewMember">
             <h3 class="h3Register">Sign up:</h3>
             <input class="inputFocus" v-model="username" type="text" required placeholder="Enter username">
+
             <input class="inputFocus" v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
+            <input class="inputFocus" v-model="rePassword" type="text" :type="passwordType" required placeholder=" re-enter password">
+            <span id="wrongPass"></span><br><br><br><br>
+
             <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
+
+
             <button class="registerBtn">Sign up</button>
 
             <p class="signUp">Already a member? <span class="LoginWord" @click="$router.push('/')"><a> Login here </a> </span></p>
@@ -23,8 +29,10 @@ export default {
         return{
             username: '',
             password: '',
+            rePassword: '',
             passwordType: 'password',
             buttonText: 'Show password',
+
         }
     },
     computed: {
@@ -38,26 +46,33 @@ export default {
             !this.password.trim()){
                 return
             }
-            let user = {
-                username: this.username,
-                password: this.password,
-                role: ["admin", "user"]
+            
+            if(this.password != this.rePassword){
+                document.getElementById("wrongPass").innerHTML="Password doesn't match."
+                return 
+            }else{
+
+
+                let user = {
+                    username: this.username,
+                    password: this.password,
+                    role: ["admin", "user"]
+                }
+
+                try{
+                await fetch('/rest/auth/signup',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                } catch(e){
+                console.log(e)
+                }
+
+            this.$router.push('/login')
             }
-
-            try{
-              await fetch('/rest/auth/signup',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-              })
-            } catch(e){
-              console.log(e)
-            }
-
-        this.$router.push('/login')
-
           
             
         
@@ -67,6 +82,7 @@ export default {
 
         this.username = ''
         this.password = ''
+
     },
 
     showOrHidePassword(){

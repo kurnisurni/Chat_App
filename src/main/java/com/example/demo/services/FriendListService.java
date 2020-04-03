@@ -22,6 +22,7 @@ public class FriendListService {
     FriendshipRepo friendshipRepo;
 
     public List<FriendList> findAllByUser1(int user1id){
+
         return friendListRepo.findAllByUser1(user1id);
     }
 
