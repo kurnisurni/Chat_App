@@ -68,23 +68,6 @@ export default{
       disconnect()
       this.$router.push('/login')
     },
-    async updateUser(picture){
-      const userToUpdate = {
-        id: this.$store.state.currentUser.id,
-        picture_url: picture
-      }
-        try{
-          await fetch('rest/users', {
-            method:'PUT',
-            headers: {
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify(userToUpdate)
-          })
-          picture = ''
-    }catch(e){
-      console.log(e)
-      }
-    },
+    
   }
 }
