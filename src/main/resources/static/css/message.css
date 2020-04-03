@@ -8,12 +8,16 @@
   height: 100%;
 	display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 	min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
   border: 2px solid rgba(175, 174, 174, 0.192);
+}
+
+.messageLoop {
+  overflow: auto;
 }
 
 .messageDiv {
