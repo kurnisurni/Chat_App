@@ -4,6 +4,8 @@
 
 .friendDiv {
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   padding-bottom: 15px;
   margin-bottom: 15px;
   width: 70%;
@@ -15,19 +17,23 @@
 }
 
 .friendList {
-  height: 100%;
   overflow: auto;
-}
-
-.friendsInFriendList {
-  height: 100%;
-  
 }
 
 .friend {
   cursor: pointer;
-  width: 50%;
+  margin-right: 10px;
   margin-left: 1.5em;
+  margin-bottom: 0;
+}
+
+.friendAndMsgIcon {
+  display: flex;
+}
+
+.pmIcon {
+  cursor:pointer;
+  margin-bottom: 0;
 }
 
 .friendDiv h3 {

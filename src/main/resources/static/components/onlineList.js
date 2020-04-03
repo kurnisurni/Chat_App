@@ -13,7 +13,7 @@ export default {
           <h2 class="usersh2">Users</h2>
         </div>
         <div>
-          <h3>Online:</h3>
+          <h3>Online</h3>
         </div>
         <div class="onlineUsersDiv">
           <div v-for="user in online"  
@@ -26,7 +26,7 @@ export default {
         
         
         <div>
-          <h3>Offline:</h3>
+          <h3>Offline</h3>
         </div>
         
         <div class="offlineUsersDiv">

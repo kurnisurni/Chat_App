@@ -81,6 +81,14 @@ export const store = new Vuex.Store({
       localStorage.setItem('offlineMessages', JSON.stringify(messages))
     },
 
+    removeOfflineMessages(state, channelId){
+      let offMsgs = state.offlineMessages.filter(message => message.channel_id != channelId)
+      state.offlineMessages = offMsgs;
+      localStorage.setItem('offlineMessages', JSON.stringify(offMsgs))
+
+      console.log(state.offlineMessages)
+    },
+
     addServerMessage(state, message){
       state.serverMessages.push(message)
       localStorage.setItem('allServerMessages', JSON.stringify(state.serverMessages))
