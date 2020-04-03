@@ -3,6 +3,7 @@
 /*FRIENDLIST*/
 
 .friendDiv {
+  min-height: 15vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
