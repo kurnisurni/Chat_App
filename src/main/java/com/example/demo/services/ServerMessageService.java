@@ -16,6 +16,7 @@ public class ServerMessageService {
     SocketService socketService;
 
     public List<ServerMessage> findAllServerMessages(){
+
         return (List<ServerMessage>)serverMessageRepo.findAll();
     }
 
