@@ -14,7 +14,7 @@ export default {
                 @click="removeFriend(details.id)">Remove Friend</button>
 
         <button class="addFriendButton" v-if="!details.friendshipTime && !loggedInUser"
-                @click="addFriend(details.id)">Add As a Friend</button>
+                @click="addFriend(details.id)">Add Friend</button>
       </div>
       
       <form class="changePictureForm" v-if="loggedInUser" @submit.prevent="updateUser(picture)">
