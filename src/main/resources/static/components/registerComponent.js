@@ -56,9 +56,9 @@ export default {
                     setTimeout(function(){
                         document.getElementById("shortPass").innerHTML='';
                     }, 3000);
-                    return 
-
+                    return
             }
+
             if(this.password != this.rePassword){    
                 document.getElementById("wrongPass").innerHTML="Password doesn't match."
                 setTimeout(function(){
@@ -66,39 +66,36 @@ export default {
                 }, 3000);
                 return 
             }else{
-
-
-             const user = {
-                    username: this.username,
-                    password: this.password,
-                    role: ["admin", "user"]
-                }
-
-                
-                let response= await fetch('/rest/auth/signup',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                });
-
-               try{
-                    response = await response.json()
-                    console.log(response)
-                    if(response.message=="User registered successfully!"){
-                        this.$router.push('/login')}
-                    else{
-                        document.getElementById("existUsername").innerHTML="Error: Username is already taken!." 
-                        setTimeout(function(){
-                            document.getElementById("existUsername").innerHTML='';
-                        }, 3000);
-                        return
+                 const user = {
+                        username: this.username,
+                        password: this.password,
+                        role: ["admin", "user"]
                     }
-                    
-               }catch{
-                   console.log('Error.')
-               }           
+
+                    let response= await fetch('/rest/auth/signup',{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    });
+
+                   try{
+                        response = await response.json()
+                        console.log(response)
+                        if(response.message=="User registered successfully!"){
+                            this.$router.push('/login')}
+                        else{
+                            document.getElementById("existUsername").innerHTML="Error: Username is already taken!."
+                            setTimeout(function(){
+                                document.getElementById("existUsername").innerHTML='';
+                            }, 3000);
+                            return
+                        }
+
+                   }catch{
+                       console.log('Error.')
+                   }
                 
             }
           
