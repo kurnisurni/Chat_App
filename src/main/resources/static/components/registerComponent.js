@@ -6,13 +6,15 @@ export default {
         <h1 class="registerPage">Welcome!</h1>
 
            <nav>
-            <form class="registerForm" @submit.prevent="registerNewMember">
+            <form name="regForm" class="registerForm" @submit.prevent="registerNewMember">
             <h3 class="h3Register">Sign up:</h3>
             <input class="inputFocus" v-model="username" type="text" required placeholder="Enter username">
 
-            <input class="inputFocus" v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
+            <input name="password" class="inputFocus" v-model="password" type="text" :type="passwordType" required placeholder="Enter password">
             <input class="inputFocus" v-model="rePassword" type="text" :type="passwordType" required placeholder=" re-enter password">
-            <span id="wrongPass"></span><br><br><br><br>
+            <span id="shortPass"></span><br>
+            <span id="wrongPass"></span>
+            <span id="existUsername"></span><br><br>
 
             <button type="button" class="showPasswordButton" @click=showOrHidePassword>{{ buttonText }}</button>
 
@@ -41,37 +43,60 @@ export default {
         }
     },
     methods: {
+      
+
         async registerNewMember(){
             if(!this.username.trim() &&
             !this.password.trim()){
                 return
             }
-            
-            if(this.password != this.rePassword){
+
+            if((regForm.password.value).length<3){
+                    document.getElementById("shortPass").innerHTML="Password should be minimum 3 characters."
+                    setTimeout(function(){
+                        document.getElementById("shortPass").innerHTML='';
+                    }, 3000);
+                    return
+            }
+
+            if(this.password != this.rePassword){    
                 document.getElementById("wrongPass").innerHTML="Password doesn't match."
+                setTimeout(function(){
+                    document.getElementById("wrongPass").innerHTML='';
+                }, 3000);
                 return 
             }else{
+                 const user = {
+                        username: this.username,
+                        password: this.password,
+                        role: ["admin", "user"]
+                    }
 
+                    let response= await fetch('/rest/auth/signup',{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    });
 
-                let user = {
-                    username: this.username,
-                    password: this.password,
-                    role: ["admin", "user"]
-                }
+                   try{
+                        response = await response.json()
+                        console.log(response)
+                        if(response.message=="User registered successfully!"){
+                            this.$router.push('/login')}
+                        else{
+                            document.getElementById("existUsername").innerHTML="Error: Username is already taken!."
+                            setTimeout(function(){
+                                document.getElementById("existUsername").innerHTML='';
+                            }, 3000);
+                            return
+                        }
 
-                try{
-                await fetch('/rest/auth/signup',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                } catch(e){
-                console.log(e)
-                }
-
-            this.$router.push('/login')
+                   }catch{
+                       console.log('Error.')
+                   }
+                
             }
           
             
@@ -82,6 +107,7 @@ export default {
 
         this.username = ''
         this.password = ''
+        this.rePassword=''
 
     },
 
