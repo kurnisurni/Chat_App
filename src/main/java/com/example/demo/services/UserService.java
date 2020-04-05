@@ -76,6 +76,7 @@ public class UserService {
 
     }
     public User register(User newUser) {
+
         return userRepo.save(newUser);
     }
 

@@ -8,7 +8,7 @@ export default{
         <textarea type="text" 
         v-model="messageInput" 
         placeholder="Type your message here..." 
-        rows="10" 
+        rows="6" 
         cols="30" 
         @keydown="inputHandler"
         required></textarea>
@@ -22,9 +22,9 @@ export default{
         accept=".png,.jpg,.jpeg,.gif,.bmp,.jfif" 
         multiple 
         @change="filesChange($event.target.files)">
-        <label for="upload"> 📁 </label>
+        <label class="choosePicture" for="upload">Choose picture 📁 </label>
 
-        <button class="sendButton">Send</button>
+        <button class="sendButton">Send 💬</button>
         </form>
 
 
@@ -63,6 +63,7 @@ export default{
 
         try {
           
+          if (this.imageFiles != null) {
             let didUpload = await fetch('/api/upload-files', {
               method: 'POST',
               body: this.imageFiles
@@ -70,6 +71,7 @@ export default{
     
             didUpload = await didUpload.text()
             console.log(didUpload);
+          }
 
             // Eventuellt visa en spinner?
 
@@ -91,6 +93,7 @@ export default{
             catch {
                 console.warn('Could not create entity'); 
               }
+            
             
               this.messageInput = ''
       }

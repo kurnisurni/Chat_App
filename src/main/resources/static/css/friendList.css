@@ -1,0 +1,46 @@
+
+
+/*FRIENDLIST*/
+
+.friendDiv {
+  min-height: 15vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  width: 70%;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.friendDiv h3 {
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.friendList {
+  overflow: auto;
+}
+
+.friend {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 1.5em;
+  margin-bottom: 0;
+}
+
+.friendAndMsgIcon {
+  display: flex;
+}
+
+.pmIcon {
+  cursor:pointer;
+  margin-bottom: 0;
+}
+
+.friendDiv h3 {
+	margin: 0;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+/*-------------------------------------------*/

@@ -1,0 +1,52 @@
+
+
+/*ONLINE LIST*/
+
+.onlineList {
+    height: 100vh;
+    width: 70%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.usersHeader {
+  display: flex;
+  justify-content: center;
+  height: 11.5vh;
+}
+
+.usersh2 {
+  padding-top: 35px;
+}
+
+.onlineUsersDiv {
+  min-height: 15vh;
+  overflow: auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.offlineUsersDiv {
+  overflow: auto;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.onlineList h3 {
+	margin: 0;
+  padding-top: 10px;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+}
+
+.onlineUserInList {
+  width: 50%;
+  cursor:pointer;
+  margin-left: 1.5em;
+}
+
+.onlineUserInList:hover {
+	color: #eee;
+}
+
+/*-------------------------------------------*/

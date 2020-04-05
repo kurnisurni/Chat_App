@@ -1,20 +1,44 @@
 export default{
   template: `
   <div class="channel">
-    <h3>Your Channels:</h3>
-    <div class="channelList" v-for="channel in userChannels" :key="channel.id">
-      <h4 class="channelNameInList" @click="goToChannel(channel)">
-        {{ channel.name }}
-      </h4>
+    
+    <div>
+      <h3>Your Channels:</h3>
     </div>
-    <div v-if="otherChannels()">
+    
+    <div class="yourChannelList">
+      <div class="yourChannels" v-for="channel in userChannels" :key="channel.id">
+        <div class="nameAndNewMessages">
+          <h4 class="channelNameInList" @click="goToChannel(channel)">
+            {{ channel.name }}
+          </h4>
+          <h4 class="missedMessages" 
+          v-if="checkNewMessages(channel.id) && checkChannels(channel.id)">
+          {{ howMany(channel.id) }}
+          </h4>
+        </div>
+        
+      </div>
+    </div> 
+ 
+    
+
+    <div>
       <h3>All Channels:</h3>
-      <div class="channelList" v-for="channel in allChannels" :key="channel.id">
-        <h4 class="channelNameInList" @click="goToChannel(channel)" v-if="isChannelJoined(channel.id)">
+    </div>
+      
+    
+    <div class="allChannelList">
+      <div class="allChan" v-for="channel in allChannels" :key="channel.id" v-if="isChannelJoined(channel.id)">
+        <h4 class="channelNameInList" @click="goToChannel(channel)">
           {{ channel.name }}
         </h4>
       </div> 
     </div>
+
+     
+      
+    
   </div>
   `,
   computed: {
@@ -23,20 +47,62 @@ export default{
     },
     allChannels(){
       return this.$store.state.channels
+    },
+    offlineMessages(){
+      return this.$store.state.offlineMessages
+    }
+  },
+  mounted(){
+    this.checkNewMessages()
+  },
+  updated(){
+    this.checkNewMessages()
+  },
+  data(){
+    return{
+      newMessages: false,
+      checkedChannels: []
     }
   },
   methods: {
+    howMany(channelId){
+
+      let amount = 0;
+      for (let msg of this.offlineMessages){
+        if (msg.channel_id === channelId){
+          amount++
+        }
+      }
+      return amount
+    },
+    checkNewMessages(channelId){
+      for(let msg of this.offlineMessages){
+        if(msg.channel_id === channelId){
+          return this.newMessages = true
+        }
+      }
+      return this.newMessages = false
+    },
     async goToChannel(channel){
       if (!this.userChannels.includes(channel)) this.addChannelToUserChannels(channel)
       this.$store.commit('setCurrentChannel', channel)
+      this.checkedChannels.push(channel.id)
+      this.$store.commit('removeOfflineMessages', channel.id)
     },
-    otherChannels(){
-      for (let channel of this.allChannels){
-        if (!this.userChannels.includes(channel)){
-          return true
+    checkChannels(channelId){
+      if(this.checkedChannels.includes(channelId)){
+        return false
+      }else{
+        return true
+      }
+    },
+    otherChannels(channelId){
+      for (let chan of this.userChannels){
+        if (chan.id === channelId){
+          return false
         }
       }
-      return false
+      return true
     },
     isChannelJoined(channelId){
       let isItJoined = true
