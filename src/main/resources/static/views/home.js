@@ -47,6 +47,8 @@ export default{
         this.$store.commit('displayMessages', JSON.parse(localStorage.getItem('allMessages')))
         this.$store.commit('loadAllServerMessages', JSON.parse(localStorage.getItem('allServerMessages')))
         this.$store.commit('loadOfflineMessages', JSON.parse(localStorage.getItem('offlineMessages')))
+        this.$store.commit('loadPrivateMessages', JSON.parse(localStorage.getItem('privateMessages')))
+        this.$store.commit('loadPrivateChats', JSON.parse(localStorage.getItem('privateChats')))
        
         if (JSON.parse(localStorage.getItem('userChannels')).length > 0){
           this.$store.commit('displayUserChannels', JSON.parse(localStorage.getItem('userChannels')))
@@ -88,6 +90,21 @@ export default{
           this.$store.commit('loadOfflineMessages', offlineMessages)
           console.log('Messages:')
           console.log(messages)
+      },
+
+      async loadPrivateMessages(){
+        let messages = await fetch('/rest/privateMessages')
+        messages = await messages.json()
+        this.$store.commit('loadPrivateMessages', messages)
+        console.log(this.$store.state.privateMessages)
+      },
+
+      async loadPrivateChats(){
+        let chats = await fetch('/rest/privateChat/' + this.$store.state.currentUser.id)
+        chats = await chats.json()
+        this.$store.commit('loadPrivateChats', chats)
+
+        console.log(this.$store.state.privateChats)
       },
 
       async loadUserChannels(){
@@ -155,6 +172,8 @@ export default{
         this.loadUsers()
         this.loadUserChannels()
         this.loadMessages()
+        this.loadPrivateChats()
+        this.loadPrivateMessages()
         this.loadChannels()
         this.loadFriendList()
         this.loadAllUserChannels()

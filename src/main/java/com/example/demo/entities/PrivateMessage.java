@@ -3,22 +3,22 @@ package com.example.demo.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="messages")
-public class Message {
+@Table(name="private_messages")
+public class PrivateMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int user_id;
     private String content;
-    private int channel_id;
+    private int private_chat_id;
     private long message_time;
     private String image_url;
 
     @Transient
     public String action;
 
-    public Message(){}
+    public PrivateMessage(){}
 
     public int getId() {
         return id;
@@ -44,12 +44,12 @@ public class Message {
         this.content = content;
     }
 
-    public int getChannel_id() {
-        return channel_id;
+    public int getPrivate_chat_id() {
+        return private_chat_id;
     }
 
-    public void setChannel_id(int channel_id) {
-        this.channel_id = channel_id;
+    public void setPrivate_chat_id(int private_chat_id) {
+        this.private_chat_id = private_chat_id;
     }
 
     public long getMessage_time() {

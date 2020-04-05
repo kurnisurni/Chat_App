@@ -7,8 +7,10 @@ export const store = new Vuex.Store({
     users: [],
     userChannels: [],
     channels: [],
+    privateChats: [],
     friendShips: [],
     messages: [],
+    privateMessages: [],
     serverMessages: [],
     offlineMessages: [],
     onlineUsers: [],
@@ -45,6 +47,7 @@ export const store = new Vuex.Store({
       }
       state.friendShips = friendShips;        
     },
+
     loginUser(state, user){
       state.currentUser = user
       localStorage.setItem('currentUser', JSON.stringify(user))
@@ -69,6 +72,11 @@ export const store = new Vuex.Store({
     displayMessages(state, messages){
       state.messages = messages
       localStorage.setItem('allMessages', JSON.stringify(messages))
+    },
+
+    loadPrivateMessages(state, messages){
+      state.privateMessages = messages
+      localStorage.setItem('privateMessages', JSON.stringify(messages))
     },
 
     loadAllServerMessages(state, messages){
@@ -97,9 +105,19 @@ export const store = new Vuex.Store({
       localStorage.setItem('userChannels', JSON.stringify(userChannels))
     },
 
+    loadPrivateChats(state, chats){
+      state.privateChats = chats
+      localStorage.setItem('privateChats', JSON.stringify(state.privateChats))
+    },
+
     sendMessage(state, message){
       state.messages.push(message)
       localStorage.setItem('allMessages', JSON.stringify(state.messages))
+    },
+
+    sendPrivateMessage(state, message){
+      state.privateMessages.push(message)
+      localStorage.setItem('privateMessages', JSON.stringify(state.privateMessages))
     },
 
     appendChannel(state, channel){
@@ -136,6 +154,11 @@ export const store = new Vuex.Store({
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
       friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
       state.friendShips.push(friendShip)
+    },
+
+    addPrivateChat(state, chat){
+      state.privateChats.push(chat)
+      localStorage.setItem('privateChats', JSON.stringify(state.privateChats))
     },
 
     setCurrentChannel(state, channel){
@@ -182,12 +205,14 @@ export const store = new Vuex.Store({
       state.allUserChannels.push(userChannel)
       localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
     },
+
     updatePicture(state, user){
       for(let u of state.users){
         if(u.id === user.id){
           u.picture_url = user.picture_url
           if(u.id === state.currentUser.id){
             state.currentUser = u
+            localStorage.setItem('currentUser', JSON.stringify(state.currentUser))
           }
         }
       }
