@@ -12,7 +12,7 @@ export default{
           :key="friend.id"
           >
           <h4 class="friend" @click="goToFriendDetails(friend)">{{ friend.username }}</h4>
-          <h4 class="pmIcon" @click="startPrivateConversation(friend)">💬</h4>
+          <h4 class="pmIcon" @click="goToPrivateConversation(friend.id)">💬</h4>
         </div>
         <div v-if="showModal" class="modal-route">
           <div class="modal-content"> 
@@ -32,8 +32,18 @@ export default{
     }
   },
   methods:{
-    startPrivateConversation(friend){
-      
+    goToPrivateConversation(friendId){
+      let privateChat
+
+      for (let chat of this.privateChats){
+        if (chat.user1 === friendId || chat.user2 === friendId){
+          privateChat = chat
+          break
+        }
+      }
+
+      this.$store.commit('setCurrentChannel', privateChat)
+      console.log(this.$store.state.currentChannel)
     },
 
     goToFriendDetails(friend){
@@ -51,5 +61,11 @@ export default{
     friendList(){
       return this.$store.state.friendShips
     },
+    privateChats(){
+      return this.$store.state.privateChats
+    },
+    currentUser(){
+      return this.$store.state.currentUser
+    }
   }
 }

@@ -12,7 +12,7 @@ public class PrivateChat {
 
     private int user1;
     private int user2;
-    private int createdtime;
+    private long createdtime;
 
     @Transient
     public String action;
@@ -45,11 +45,11 @@ public class PrivateChat {
         this.user2 = user2;
     }
 
-    public int getCreatedtime() {
+    public long getCreatedtime() {
         return createdtime;
     }
 
-    public void setCreatedtime(int createdtime) {
+    public void setCreatedtime(long createdtime) {
         this.createdtime = createdtime;
     }
 }

@@ -2,27 +2,34 @@ import messages from './messages.js'
 import messageInput from './messageInput.js'
 import adminWindow from './adminWindow.js'
 import noChannels from './noChannels.js'
+import privateChat from './privateChat.js'
 
 export default {
   components: {
     messages,
     messageInput,
     adminWindow,
-    noChannels
+    noChannels,
+    privateChat
   },
   template: `
   <div class="channelComponent">
     <div class="showIfHasChannels" v-if="hasJoinedChannels()">
       <div class="headerCard">
-        <h2 class="channelNameHeader">{{ channel.name }}</h2>
-        <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.adminid != currentUser.id">Leave</button>
-        <button class="goToAdminWindow" @click="goToAdminWindow" v-if="isAdmin()">Administration</button>
+        <h2 class="channelNameHeader" v-if="channel.name">{{ channel.name }}</h2>
+        <h2 class="channelNameHeader" v-if="channel.user1">Private conversation between {{ getUsername(channel.user1) }} & {{ getUsername(channel.user2) }}</h2>
+        <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.name && channel.adminid != currentUser.id">Leave</button>
+        <button class="goToAdminWindow" @click="goToAdminWindow" v-if="channel.name && isAdmin()">Administration</button>
       </div>
-      <div class="adminWindow" v-if="adminWindowOpen && isAdmin() && hasJoinedChannels()">
+      <div class="adminWindow" v-if="channel.name && adminWindowOpen && isAdmin() && hasJoinedChannels()">
         <adminWindow />
       </div>
 
-      <div class="msgDiv" ref="mesgDiv" v-if="!adminWindowOpen && hasJoinedChannels()">
+      <div class="msgDiv" v-if="channel.user1">
+        <privateChat />
+      </div>
+
+      <div class="msgDiv" ref="mesgDiv" v-if="channel.name && !adminWindowOpen && hasJoinedChannels()">
         <messages />
       </div>
       <div class="msgInputDiv" v-if="!adminWindowOpen && hasJoinedChannels()">
@@ -71,6 +78,14 @@ export default {
     }
   },
   methods: {
+
+    getUsername(userId){
+      for (let user of this.users){
+        if (user.id === userId){
+          return user.username
+        }
+      }
+    },
 
     hasJoinedChannels(){
       if (this.userChannels.length > 0){

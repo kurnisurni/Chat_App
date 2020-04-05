@@ -61,7 +61,7 @@ export default {
       }   
     },
     async removeFriend(userId){
-      let url = 'rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
+      let url = '/rest/friend-list/' + this.$store.state.currentUser.id + '/' + userId
       try{
         await fetch(url, {
           method: 'DELETE'
@@ -69,6 +69,7 @@ export default {
       } catch(e){
         console.log(e)
       }
+
     },
     async addFriend(userId){
       let friendToAdd = {
@@ -77,7 +78,7 @@ export default {
         time: Date.now()
       }
 
-      let url = 'rest/friend-list'
+      let url = '/rest/friend-list'
       try{
         await fetch(url, {
           method: 'POST',
@@ -89,6 +90,25 @@ export default {
       } catch(e){
         console.log(e)
       }
+
+      const chatToAdd = {
+        user1: this.currentUser.id,
+        user2: userId,
+        createdtime: Date.now()
+      }
+
+      try {
+        await fetch('/rest/privateChat', {
+          method:'POST',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          body: JSON.stringify(chatToAdd)
+        })
+      } catch(e) {
+        console.log(e)
+      }
+
     },
     logOut() {
       this.$parent.logOut()
@@ -111,7 +131,7 @@ export default {
             id: this.$store.state.currentUser.id,
             picture_url: this.images[0]
           }
-          await fetch('rest/users', {
+          await fetch('/rest/users', {
             method:'PUT',
             headers: {
               'Content-Type':'application/json'
