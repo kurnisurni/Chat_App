@@ -1,4 +1,3 @@
-import {disconnect} from '../socket.js'
 import userDetails from './userDetails.js'
 
 export default{
@@ -9,65 +8,35 @@ export default{
     <div class="userComp">
       <div class="userDiv">
         <img class="userUserPic" :src="user.picture_url" alt="User Image" @click="goToUserDetails(user)">
-        <div class="userName" @click="goToUserDetails(user)">{{user.username}}</div>
+        <h3 class="userName" @click="goToUserDetails(user)">{{user.username}}</h3>
         <!-- Need to move width and height till css later -->
         
       </div>
 
       <div v-if="showModal" class="modal-route">
         <div class="modal-content"> 
-          <userDetails :loggedInUser="user"/>
+          <userDetails/>
         </div>
       </div>
     </div>
   `,
-  data(){
-    return{
-    showModal: false,
-    loggedInUser: null,
-    }
-  },
   computed: {
     user(){
       return this.$store.state.currentUser
     },
     offlineMessages(){
       return this.$store.state.offlineMessages
-    }  
+    },
+    showModal(){
+      return this.$store.state.showModal
+    }
   },
   methods:{
-
-    close() {
-      this.showModal = false
-    },
     goToUserDetails(user){
-      this.loggedInUser = user
-      this.showModal = true
+      this.$store.commit('setUserInModal', user)
     },
-    async logOut(){
-      const url = '/rest/users/logout'
-
-      const userToLogout = {
-        id: this.$store.state.currentUser.id,
-        logoff_time: Date.now()
-      }
-
-      try{
-        await fetch(url, {
-        method:'PUT',
-        headers: {
-          'Content-Type':'application/json'
-        },
-        body: JSON.stringify(userToLogout)
-        })
-      } catch(e){
-        console.log(e)
-      }
-
-      localStorage.removeItem('accessToken')
-      disconnect()
-      this.$router.push('/login')
+    close() {
+      this.$store.commit('setUserInModal', {})
     },
-    
   }
 }

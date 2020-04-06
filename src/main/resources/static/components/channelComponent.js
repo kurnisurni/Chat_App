@@ -19,7 +19,7 @@ export default {
         <h2 class="channelNameHeader" v-if="channel.name">{{ channel.name }}</h2>
         <h2 class="channelNameHeader" v-if="channel.user1">Private conversation between {{ getUsername(channel.user1) }} & {{ getUsername(channel.user2) }}</h2>
         <button class="leaveChannelButton" @click="leaveChannel" v-if="channel.name && channel.adminid != currentUser.id">Leave</button>
-        <button class="goToAdminWindow" @click="goToAdminWindow" v-if="channel.name && isAdmin()">Administration</button>
+        <button class="goToAdminWindow" @click="goToAdminWindow" v-if="channel.name && isAdmin()">Admin</button>
       </div>
       <div class="adminWindow" v-if="channel.name && adminWindowOpen && isAdmin() && hasJoinedChannels()">
         <adminWindow />
@@ -46,7 +46,6 @@ export default {
 
   data(){
     return {
-      adminWindowOpen: false,
       channelId: ''
     }
   },
@@ -75,6 +74,9 @@ export default {
     },
     allUserChannels() {
       return this.$store.state.allUserChannels
+    },
+    adminWindowOpen(){
+      return this.$store.state.adminWindowOpen
     }
   },
   methods: {
@@ -98,15 +100,15 @@ export default {
         return true
       } else{
         this.channelId = this.channel.id
-        this.adminWindowOpen = false
+        this.$store.commit('setAdminWindow', false)
         return false
       } 
     },
 
     goToAdminWindow(){
       if (!this.adminWindowOpen){
-        this.adminWindowOpen = true
-      } else this.adminWindowOpen = false
+        this.$store.commit('setAdminWindow', true)
+      } else this.$store.commit('setAdminWindow', false)
     },
 
     async leaveChannel(){
