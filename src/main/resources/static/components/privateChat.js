@@ -1,4 +1,9 @@
+import userDetails from '../components/userDetails.js'
+
 export default {
+  components: {
+    userDetails
+  },
   template: `
       <div class="messages">
         <div class="messageLoop" ref="msgs">
@@ -36,7 +41,7 @@ export default {
         
         <div v-if="showModal" class="modal-route">
           <div class="modal-content"> 
-            <userDetails :user="clickedUser"/>
+            <userDetails />
           </div>
         </div>
       </div>
@@ -85,11 +90,10 @@ export default {
       },
       goToUserDetails(user){
         if(user.id === this.currentUser.id) return
-        this.clickedUser = user
-         this.showModal = true
-       },
+        this.$store.commit('setUserInModal', user)
+      },
       close() {
-         this.showModal = false;
+        this.$store.commit('setUserInModal', {})
        }
     },
     updated(){
