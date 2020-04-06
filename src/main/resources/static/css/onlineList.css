@@ -21,6 +21,7 @@
 }
 
 .onlineUsersDiv {
+  min-height: 15vh;
   overflow: auto;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(175, 174, 174, 0.192);
