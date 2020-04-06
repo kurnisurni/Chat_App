@@ -215,7 +215,7 @@ export default{
 
     let timeOfLastClose = JSON.parse(localStorage.getItem('closeTime'))
 
-    if (timeOfLastClose < (Date.now() - 1000)){
+    //if (timeOfLastClose < (Date.now() - 1000)){
       try{
         this.loadUsers()
         this.loadUserChannels()
@@ -230,7 +230,7 @@ export default{
       } catch (e) {
         console.log(e)
       } 
-    }
+    //}
     this.loadAllFromLocalStorage() 
     
   }

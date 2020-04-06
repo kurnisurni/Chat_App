@@ -14,7 +14,7 @@ export default{
           <h4 class="friend" @click="goToFriendDetails(friend)">{{ friend.username }}</h4>
           <h4 class="pmIcon" @click="goToPrivateConversation(friend.id)">💬</h4>
           <h4 class="missedMessages" 
-          v-if="checkNewMessages(friend.id) && checkChannels(friend.id)">
+          v-if="checkNewMessages(friend.id)">
           {{ howMany(friend.id) }}
           </h4>
         </div>
@@ -63,10 +63,6 @@ export default{
       for (let msg of this.newPrivateMessages){
         if (msg.private_chat_id === privateChat.id){
           amount++
-          for (let seenMsg of this.readPrivateMessages) {
-            if (seenMsg.id === msg.id) amount--
-            break
-          }
         }
       }
       
