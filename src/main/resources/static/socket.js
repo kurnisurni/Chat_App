@@ -76,12 +76,14 @@ ws.onmessage = (e) => {
 
     case 'delete-friend':
       let friendList = store.state.friendShips
+      let userIdForModal
 
       if (store.state.currentUser.id === data.user1id){
         for (let i = 0; i < friendList.length; i++){
           if (friendList[i].id === data.user2id){
             console.log(friendList[i])
             store.commit('deleteFriend', i)
+            userIdForModal = data.user2id
           }
         }
       } else if (store.state.currentUser.id === data.user2id){
@@ -89,9 +91,22 @@ ws.onmessage = (e) => {
           if (friendList[i].id === data.user1id){
             console.log(friendList[i])
             store.commit('deleteFriend', i)
+            userIdForModal = data.user1id
           }
         }
       }
+
+      for (let user of store.state.users){
+        if (user.id === userIdForModal){
+          store.commit('setUserInModal', user)
+        }
+      }
+
+      if (store.state.currentChannel.user1 === userIdForModal ||
+          store.state.currentChannel.user2 === userIdForModal){
+          store.commit('setCurrentChannel', store.state.userChannels[0])
+      }
+
       break
 
     case 'delete-message':

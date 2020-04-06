@@ -67,15 +67,15 @@ body::-webkit-scrollbar {
 /*USER*/
 
 .userComp {
-  height: 11.3vh;
+  max-height: 9vh;
   width: 70%;
-  display: flex;
-  justify-content: flex-start;
 }
 
 .userDiv {
-  height: 100%;
-  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: flex-start;
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -83,13 +83,16 @@ body::-webkit-scrollbar {
 }
 
 .userName {
-  width: 17%;
+  font-size: 1vw;
   cursor:pointer;
 }
 
 .userUserPic {
-  height: 5vh;
-  width: 3vh;
+  margin-left: 1vw;
+  min-height: 3vh;
+  max-height: 5vh;
+  min-width: 3vw;
+  max-width: 5vw;
   cursor:pointer;
 }
 
@@ -137,10 +140,6 @@ body::-webkit-scrollbar {
   
   height: 100%;
   overflow: hidden;
-}
-
-.msgInputDiv {
-
 }
 
 /*-------------------------------------------*/
@@ -193,13 +192,19 @@ body::-webkit-scrollbar {
 
 /* friendList and userDetail Component */
 .modal {
-	position: absolute;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-weight: 1000;
 	top: 30vh;
 	left: 45vw;
 	height: 30vh;
 	width: 15vw;
 	border: 2px solid #333;
-	background-color: rgb(202, 197, 197);
+  background-color: rgb(202, 197, 197);
+  border: 2px solid black;
+  border-radius: 15px;
 	padding: 20px;
 }
 
@@ -208,7 +213,9 @@ body::-webkit-scrollbar {
 }
 
 .modalUsername {
-  margin-top: 0;
+  font-size: 1.5vw;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
 }
 
 .modal p {
@@ -224,43 +231,41 @@ body::-webkit-scrollbar {
   flex-direction: column;
 }
 
-.picAddOrRemove button {
-  width: 50%;
-}
-
-.addFriendButton {
-  margin-top: 15px;
+.userInModalPic {
+  max-height: 7vh;
+  max-width: 4.5vw;
+  margin-bottom: 1vh;
+  margin-top: 0;
 }
 
 .closeModalButton {
-  float: right;
+  align-self: flex-end;
 }
 
 .logoutButton {
-  position: absolute;
-  top: 90%;
-  left: 5%;
+  margin-bottom: 0;
+  align-self: flex-start;
+  margin-top: auto;
 }
 
 .labelAndInput {
   display: flex;
   flex-direction: column;
-  width: 60%;
 }
 
 .imgInputLabel {
   color: black;
+  margin-top: 0.3vh;
 }
 
 .updatePictureButton {
-  margin-top: 19px;
-  height: 30%;
-  margin-left: 10px;
+  margin-top: 0.5vh;
+  align-self: center;
 }
 
 .changePictureForm {
-  margin-top: 15px;
   display: flex;
+  flex-direction: column;
 }
 
 
