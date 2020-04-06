@@ -13,11 +13,17 @@ export const store = new Vuex.Store({
     privateMessages: [],
     serverMessages: [],
     offlineMessages: [],
+    newPrivateMessages: [],
+    readMessages: [],
+    readPrivateMessages: [],
     onlineUsers: [],
     currentUser: {},
     currentChannel: {},
     userAndToken: {},
-    allUserChannels: []
+    allUserChannels: [],
+    userInModal: {},
+    showModal: false,
+    adminWindowOpen: false
   },
   mutations: {
     saveAccessToken(state, userAndToken){
@@ -89,10 +95,39 @@ export const store = new Vuex.Store({
       localStorage.setItem('offlineMessages', JSON.stringify(messages))
     },
 
+    loadNewPrivateMessages(state, messages){
+      state.newPrivateMessages = messages
+      localStorage.setItem('newPrivateMessages', JSON.stringify(state.newPrivateMessages))
+    },
+
+    loadReadMessages(state, messages){
+      state.readMessages = messages
+      localStorage.setItem('readMessages', JSON.stringify(state.readMessages))
+    },
+
+    loadReadPrivateMessages(state, messages){
+      state.readPrivateMessages = messages
+      localStorage.setItem('readPrivateMessages', JSON.stringify(state.readPrivateMessages))
+    },
+
     removeOfflineMessages(state, channelId){
+      let readMessages = state.offlineMessages.filter(message => message.channel_id === channelId)
+      readMessages.forEach(msg => state.readMessages.push(msg))
+      localStorage.setItem('readMessages', JSON.stringify(state.readMessages))
+
       let offMsgs = state.offlineMessages.filter(message => message.channel_id != channelId)
-      state.offlineMessages = offMsgs;
-      localStorage.setItem('offlineMessages', JSON.stringify(offMsgs))
+      state.offlineMessages = offMsgs
+      localStorage.setItem('offlineMessages', JSON.stringify(state.offlineMessages))
+    },
+
+    removeNewPrivateMessages(state, chatId){
+      let newlyReadMessages = state.newPrivateMessages.filter(message => message.private_chat_id === chatId)
+      newlyReadMessages.forEach(msg => state.readPrivateMessages.push(msg))
+      localStorage.setItem('readPrivateMessages', JSON.stringify(state.readPrivateMessages))
+
+      let offMsgs = state.newPrivateMessages.filter(message => message.private_chat_id != chatId)
+      state.newPrivateMessages = offMsgs
+      localStorage.setItem('newPrivateMessages', JSON.stringify(state.newPrivateMessages))
     },
 
     addServerMessage(state, message){
@@ -113,11 +148,26 @@ export const store = new Vuex.Store({
     sendMessage(state, message){
       state.messages.push(message)
       localStorage.setItem('allMessages', JSON.stringify(state.messages))
+      
+      if (message.user_id !== state.currentUser.id){
+        state.offlineMessages.push(message)
+        localStorage.setItem('offlineMessages', JSON.stringify(state.offlineMessages))
+      }
     },
 
     sendPrivateMessage(state, message){
-      state.privateMessages.push(message)
-      localStorage.setItem('privateMessages', JSON.stringify(state.privateMessages))
+
+      for (let chat of state.privateChats){
+        if (chat.id === message.private_chat_id){
+          state.privateMessages.push(message)
+          localStorage.setItem('privateMessages', JSON.stringify(state.privateMessages))
+          if (message.user_id !== state.currentUser.id){
+            state.newPrivateMessages.push(message)
+            localStorage.setItem('newPrivateMessages', JSON.stringify(state.newPrivateMessages))
+          }
+        }
+      }
+      
     },
 
     appendChannel(state, channel){
@@ -145,8 +195,19 @@ export const store = new Vuex.Store({
       state.currentChannel = state.userChannels[0]
     },
 
+    setUserInModal(state, user){
+      state.userInModal = user
+      if (user.username) {
+        state.showModal = true
+      } else state.showModal = false
+
+      localStorage.setItem('userInModal', JSON.stringify(state.userInModal))
+    },
+
     deleteFriend(state, index){
+      console.log(state.friendShips)
       state.friendShips.splice(index, 1)
+      console.log(state.friendShips)
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
     },
 
@@ -154,6 +215,7 @@ export const store = new Vuex.Store({
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
       friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
       state.friendShips.push(friendShip)
+      state.userInModal = friendShip
     },
 
     addPrivateChat(state, chat){
@@ -164,6 +226,11 @@ export const store = new Vuex.Store({
     setCurrentChannel(state, channel){
       state.currentChannel = channel
       localStorage.setItem('currentChannel', JSON.stringify(channel))
+      state.adminWindowOpen = false
+    },
+
+    setAdminWindow(state, isItOpen){
+      state.adminWindowOpen = isItOpen
     },
 
     appendUser(state, user){

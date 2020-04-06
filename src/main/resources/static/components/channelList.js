@@ -3,7 +3,7 @@ export default{
   <div class="channel">
     
     <div>
-      <h3>Your Channels:</h3>
+      <h3>Your Channels</h3>
     </div>
     
     <div class="yourChannelList">
@@ -24,7 +24,7 @@ export default{
     
 
     <div>
-      <h3>All Channels:</h3>
+      <h3>All Channels</h3>
     </div>
       
     
@@ -50,6 +50,9 @@ export default{
     },
     offlineMessages(){
       return this.$store.state.offlineMessages
+    },
+    readMessages(){
+      return this.$store.state.readMessages
     }
   },
   mounted(){
