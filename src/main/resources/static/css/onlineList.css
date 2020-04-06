@@ -13,7 +13,7 @@
 .usersHeader {
   display: flex;
   justify-content: center;
-  height: 11.5vh;
+  min-height: 12vh;
 }
 
 .usersh2 {
@@ -21,6 +21,7 @@
 }
 
 .onlineUsersDiv {
+  min-height: 15vh;
   overflow: auto;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(175, 174, 174, 0.192);
@@ -29,6 +30,7 @@
 .offlineUsersDiv {
   overflow: auto;
   border-bottom: 1px solid rgba(175, 174, 174, 0.192);
+  margin-bottom: 2.6vh;
 }
 
 .onlineList h3 {

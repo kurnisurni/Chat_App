@@ -1,7 +1,6 @@
 export default {
   template: `
   <div>
-    <h3 class="channelNameAdminWindow">{{ currentChannel.name }}</h3>
     <form class="changeChannelName" @submit.prevent="changeChannelName">
       <label for="newName">Change channel name</label>
       <input type="text" v-model="newChannelName" name="newName" placeholder="Enter new channel name..." required>

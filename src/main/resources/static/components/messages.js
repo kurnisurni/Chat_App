@@ -25,7 +25,7 @@ export default{
                     </div>
                     <div class="messageParagraph">
                       <p class="msgP">{{ message.content }}<br>
-                        <img class="messageImage" v-if="message.imageUrl" :src="message.imageUrl" width="100px" height="100px"/>
+                        <img class="messageImage" v-if="message.image_url" :src="message.image_url" width="100px" height="100px"/>
                       </p>
                       
                     </div>
@@ -48,7 +48,7 @@ export default{
         
             <div v-if="showModal" class="modal-route">
               <div class="modal-content"> 
-                <userDetails :user="clickedUser"/>
+                <userDetails />
               </div>
             </div>
       </div>
@@ -58,8 +58,6 @@ export default{
         return {
           removing: '',
           newMessagesBorder: false,
-          clickedUser: null,
-          showModal: false
         }
     },
 
@@ -109,12 +107,11 @@ export default{
       },
       goToUserDetails(user){
         if(user.id === this.currentUser.id) return
-        this.clickedUser = user
-         this.showModal = true
-       },
+        this.$store.commit('setUserInModal', user)
+      },
       close() {
-         this.showModal = false;
-       }
+        this.$store.commit('setUserInModal', {})
+      }
     },
 
     computed: {
@@ -136,6 +133,12 @@ export default{
       currentUser(){
         return this.$store.state.currentUser
       },
+      friendList(){
+      return this.$store.state.friendShips
+      },
+      showModal(){
+        return this.$store.state.showModal
+      }
     },
     updated(){
       let messageContainer = this.$refs.msgs
