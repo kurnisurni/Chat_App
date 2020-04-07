@@ -161,7 +161,7 @@ export const store = new Vuex.Store({
         if (chat.id === message.private_chat_id){
           state.privateMessages.push(message)
           localStorage.setItem('privateMessages', JSON.stringify(state.privateMessages))
-          if (message.user_id !== state.currentUser.id){
+          if (message.user_id !== state.currentUser.id && message.private_chat_id !== state.currentChannel.id){
             state.newPrivateMessages.push(message)
             localStorage.setItem('newPrivateMessages', JSON.stringify(state.newPrivateMessages))
           }
