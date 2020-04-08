@@ -33,10 +33,16 @@ export default{
         <channelComponent />
       </div>
       <div class="rightBar">
-        <onlineList />
+        <onlineList v-if="currentChannel.name"/>
       </div>
     </div>
     `,
+
+    computed: {
+      currentChannel(){
+        return this.$store.state.currentChannel
+      }
+    },
 
     methods:{
       loadAllFromLocalStorage(){
@@ -47,6 +53,9 @@ export default{
         this.$store.commit('displayMessages', JSON.parse(localStorage.getItem('allMessages')))
         this.$store.commit('loadAllServerMessages', JSON.parse(localStorage.getItem('allServerMessages')))
         this.$store.commit('loadOfflineMessages', JSON.parse(localStorage.getItem('offlineMessages')))
+        this.$store.commit('loadPrivateMessages', JSON.parse(localStorage.getItem('privateMessages')))
+        this.$store.commit('loadPrivateChats', JSON.parse(localStorage.getItem('privateChats')))
+        this.$store.commit('setUserInModal', JSON.parse(localStorage.getItem('userInModal')))
        
         if (JSON.parse(localStorage.getItem('userChannels')).length > 0){
           this.$store.commit('displayUserChannels', JSON.parse(localStorage.getItem('userChannels')))
@@ -70,24 +79,80 @@ export default{
       },
 
       async loadMessages(){
+
+        if (!JSON.parse(localStorage.getItem('readMessages'))[0]){
+          localStorage.setItem('readMessages', JSON.stringify([]))
+        }
+
         //Loads all messages before home view is created
-          let messages = await fetch('/rest/messages')
-          messages = await messages.json()
-          this.$store.commit('displayMessages', messages)
+        let messages = await fetch('/rest/messages')
+        messages = await messages.json()
+        this.$store.commit('displayMessages', messages)
 
-          let userChannelIds = []
+        let userChannelIds = []
 
-          for (let usrChnl of this.$store.state.userChannels){
-            userChannelIds.push(usrChnl.id)
-          }
+        for (let usrChnl of this.$store.state.userChannels){
+          userChannelIds.push(usrChnl.id)
+        }
 
-          let offlineMessages = this.$store.state.messages.filter(message => message.message_time > this.$store.state.currentUser.logoff_time && userChannelIds.includes(message.channel_id))
-          console.log('Messages sent when you were offline:')
-          console.log(offlineMessages)
+        let offlineMessages = this.$store.state.messages.filter(
+          message => message.user_id !== this.$store.state.currentUser.id && message.message_time > this.$store.state.currentUser.logoff_time &&
+          userChannelIds.includes(message.channel_id))
+        
+          let newFromStorage = JSON.parse(localStorage.getItem('readMessages'))
 
-          this.$store.commit('loadOfflineMessages', offlineMessages)
-          console.log('Messages:')
-          console.log(messages)
+          this.$store.commit('loadReadMessages', newFromStorage)
+  
+          let idsFromStorage = []
+  
+          newFromStorage.forEach(msg => idsFromStorage.push(msg.id))
+  
+          let newMessages = offlineMessages.filter( msg => !idsFromStorage.includes(msg.id))
+        
+        this.$store.commit('loadOfflineMessages', newMessages)
+          
+      },
+
+      async loadPrivateMessages(){
+
+        if (!JSON.parse(localStorage.getItem('readPrivateMessages'))[0]){
+          localStorage.setItem('readPrivateMessages', JSON.stringify([]))
+        }
+
+        let messages = await fetch('/rest/privateMessages')
+        messages = await messages.json()
+        this.$store.commit('loadPrivateMessages', messages)
+        console.log(this.$store.state.privateMessages)
+
+        let privateChatIds = []
+
+        for (let privateChat of this.$store.state.privateChats){
+          privateChatIds.push(privateChat.id)
+        }
+
+        let offlineMessages = this.$store.state.privateMessages.filter(
+          message => message.user_id !== this.$store.state.currentUser.id && message.message_time > this.$store.state.currentUser.logoff_time &&
+          privateChatIds.includes(message.private_chat_id))
+
+        let newFromStorage = JSON.parse(localStorage.getItem('readPrivateMessages'))
+
+        this.$store.commit('loadReadPrivateMessages', newFromStorage)
+
+        let idsFromStorage = []
+
+        newFromStorage.forEach(msg => idsFromStorage.push(msg.id))
+
+        let newMessages = offlineMessages.filter( msg => !idsFromStorage.includes(msg.id))
+
+        this.$store.commit('loadNewPrivateMessages', newMessages)
+      },
+
+      async loadPrivateChats(){
+        let chats = await fetch('/rest/privateChat/' + this.$store.state.currentUser.id)
+        chats = await chats.json()
+        this.$store.commit('loadPrivateChats', chats)
+
+        console.log(this.$store.state.privateChats)
       },
 
       async loadUserChannels(){
@@ -150,11 +215,13 @@ export default{
 
     let timeOfLastClose = JSON.parse(localStorage.getItem('closeTime'))
 
-    if (timeOfLastClose < (Date.now() - 1000)){
+    //if (timeOfLastClose < (Date.now() - 1000)){
       try{
         this.loadUsers()
         this.loadUserChannels()
         this.loadMessages()
+        this.loadPrivateChats()
+        this.loadPrivateMessages()
         this.loadChannels()
         this.loadFriendList()
         this.loadAllUserChannels()
@@ -163,6 +230,8 @@ export default{
       } catch (e) {
         console.log(e)
       } 
-    } else this.loadAllFromLocalStorage()
+    //}
+    this.loadAllFromLocalStorage() 
+    
   }
 }

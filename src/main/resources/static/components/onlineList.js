@@ -10,7 +10,7 @@ export default {
     template: `
       <div class="onlineList" v-if="hasJoinedChannels()">
         <div class="usersHeader">
-          <h2 class="usersh2">Users</h2>
+          <h2 class="usersh2"></h2>
         </div>
         <div>
           <h3>Online</h3>
@@ -40,7 +40,7 @@ export default {
               
         <div v-if="showModal" class="modal-route">
           <div class="modal-content"> 
-            <userDetails :user="clickedUser"/>
+            <userDetails />
           </div>
         </div>
       </div>
@@ -67,12 +67,12 @@ computed: {
     },
     myChannels(){
       return this.$store.state.userChannels
-    }
-  },
-  data(){
-    return{
-      clickedUser: null,
-      showModal: false
+    },
+    friendList(){
+      return this.$store.state.friendShips
+    },
+    showModal(){
+      return this.$store.state.showModal
     }
   },
   methods: {
@@ -93,11 +93,10 @@ computed: {
     },
     goToUserDetails(user){
       if(user.id === this.currentUser.id) return
-      this.clickedUser = user
-      this.showModal = true
-     },
+      this.$store.commit('setUserInModal', user)
+    },
     close() {
-       this.showModal = false;
-     }
+      this.$store.commit('setUserInModal', {})
+    }
   }
 }
