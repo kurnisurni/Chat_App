@@ -123,6 +123,14 @@ export default {
         user_id: user.id
       }
 
+      const srvMsg = user.username + ' has just been KICKED from the channel!'
+
+      const newServerMessage = {
+        message: srvMsg,
+        channel_id: this.currentChannel.id,
+        time: Date.now()
+      }
+
       try{
         await fetch('/rest/userChannels', {
           method:'DELETE',
@@ -133,14 +141,6 @@ export default {
         })
       } catch (e){
         console.log(e)
-      }
-
-      const srvMsg = user.username + ' has just been KICKED from the channel!'
-
-      const newServerMessage = {
-        message: srvMsg,
-        channel_id: this.currentChannel.id,
-        time: Date.now()
       }
 
       try{

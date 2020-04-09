@@ -78,7 +78,7 @@ export default{
             
             console.log(userAndToken)
             this.$store.commit('saveAccessToken', userAndToken)
-
+            
             localStorage.setItem('readMessages', JSON.stringify([]))
             localStorage.setItem('readPrivateMessages', JSON.stringify([]))
             localStorage.setItem('userInModal', JSON.stringify({}))

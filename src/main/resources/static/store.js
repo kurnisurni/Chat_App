@@ -268,8 +268,10 @@ export const store = new Vuex.Store({
         }
       }
 
-      state.currentChannel = state.userChannels[0]
-      localStorage.setItem('currentChannel', JSON.stringify(state.currentChannel))
+      if (userChannel.user_id === state.currentUser.id){
+        state.currentChannel = state.userChannels[0]
+        localStorage.setItem('currentChannel', JSON.stringify(state.currentChannel))
+      }
 
     },
 
