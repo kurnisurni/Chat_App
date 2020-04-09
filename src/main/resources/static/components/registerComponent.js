@@ -2,7 +2,7 @@ import { router } from "../router.js"
 
 export default {
     template: `
-    <section>
+    <section class="registerSection">
         <h1 class="registerPage">Welcome!</h1>
 
            <nav>
