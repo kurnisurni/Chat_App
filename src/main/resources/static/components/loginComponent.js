@@ -2,7 +2,7 @@ import { router } from "../router.js"
 
 export default{
     template:`
-       <section>
+       <section class="loginSection">
             <h1 class="LogInPage">Welcome!</h1>
             <nav>
                 <form class="loginForm" @submit.prevent="logIn">
