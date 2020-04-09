@@ -188,11 +188,14 @@ export const store = new Vuex.Store({
       state.allUserChannels = allUsCh
 
       localStorage.setItem('allChannels', JSON.stringify(state.channels))
-      localStorage.setItem('currentChannel', JSON.stringify(state.channels[0]))
+      
       localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
       localStorage.setItem('allUserChannels', JSON.stringify(state.allUserChannels))
       
-      state.currentChannel = state.userChannels[0]
+      if (state.currentChannel.id === channelId){
+        localStorage.setItem('currentChannel', JSON.stringify(state.userChannels[0]))
+        state.currentChannel = state.userChannels[0]
+      }
     },
 
     setUserInModal(state, user){
@@ -211,11 +214,13 @@ export const store = new Vuex.Store({
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
     },
 
-    addFriend(state, friendShip){
+    addFriend(state, friendShipAndUser){
       localStorage.setItem('allFriendShips', JSON.stringify(state.friendShips))
-      friendShip.friendshipTime = new Date(friendShip.friendshipTime).toLocaleString()
-      state.friendShips.push(friendShip)
-      state.userInModal = friendShip
+      friendShipAndUser.friendShip.friendshipTime = new Date(friendShipAndUser.friendShip.friendshipTime).toLocaleString()
+      state.friendShips.push(friendShipAndUser.friendShip)
+      if (friendShipAndUser.userWhoAdded === state.currentUser.id){
+        state.userInModal = friendShipAndUser.friendShip
+      }
     },
 
     addPrivateChat(state, chat){
@@ -306,9 +311,11 @@ export const store = new Vuex.Store({
 
       localStorage.setItem('allChannels', JSON.stringify(state.channels))
       localStorage.setItem('userChannels', JSON.stringify(state.userChannels))
-      localStorage.setItem('currentChannel', JSON.stringify(channel))
-
-      state.currentChannel = channel
+      if (state.currentChannel.id === channel.id){
+        localStorage.setItem('currentChannel', JSON.stringify(channel))
+        state.currentChannel = channel
+      }
+      
       state.channels = JSON.parse(localStorage.getItem('allChannels'))
       state.userChannels = JSON.parse(localStorage.getItem('userChannels'))
     }
