@@ -12,7 +12,9 @@ ws.onmessage = (e) => {
       break
 
     case 'new-private-chat':
-      store.commit('addPrivateChat', data)
+      if(data.user1 === store.state.currentUser.id || data.user2 === store.state.currentUser.id){
+        store.commit('addPrivateChat', data)
+      }
       break
 
     case 'delete-channel':
@@ -33,13 +35,22 @@ ws.onmessage = (e) => {
 
     case 'new-friendship':
       console.log(data)
+      let userAndcurrentUser
       if (data.user1 === store.state.currentUser.id){
         getFriend(data.user2, data.time).then( user => {
-          store.commit('addFriend', user)
+          userAndcurrentUser = {
+            friendShip: user,
+            userWhoAdded: data.user1
+          }
+          store.commit('addFriend', userAndcurrentUser)
         })
       } else if (data.user2 === store.state.currentUser.id){
         getFriend(data.user1, data.time).then( user => {
-          store.commit('addFriend', user)
+          userAndcurrentUser = {
+            friendShip: user,
+            userWhoAdded: data.user2
+          }
+          store.commit('addFriend', userAndcurrentUser)
         })
       }
       break
@@ -50,7 +61,7 @@ ws.onmessage = (e) => {
 
     case 'goOnline':
       store.commit('goOnline', data)
-      store.commit('setCurrentChannel', 1)
+      //store.commit('setCurrentChannel', 1)
       break
 
     case 'goOffline':

@@ -81,6 +81,7 @@ export default{
 
             localStorage.setItem('readMessages', JSON.stringify([]))
             localStorage.setItem('readPrivateMessages', JSON.stringify([]))
+            localStorage.setItem('userInModal', JSON.stringify({}))
             
           }
 
