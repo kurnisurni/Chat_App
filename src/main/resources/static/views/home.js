@@ -49,7 +49,7 @@ export default{
         this.$store.commit('displayUsers', JSON.parse(localStorage.getItem('allUsers')))
         this.$store.commit('loadOnlineUsers', JSON.parse(localStorage.getItem('onlineUsers')))
         this.$store.commit('displayChannels', JSON.parse(localStorage.getItem('allChannels')))
-        this.$store.commit('displayFriendship', JSON.parse(localStorage.getItem('allFriendShips')))
+        //this.$store.commit('displayFriendship', JSON.parse(localStorage.getItem('allFriendShips')))
         this.$store.commit('displayMessages', JSON.parse(localStorage.getItem('allMessages')))
         this.$store.commit('loadAllServerMessages', JSON.parse(localStorage.getItem('allServerMessages')))
         this.$store.commit('loadOfflineMessages', JSON.parse(localStorage.getItem('offlineMessages')))
