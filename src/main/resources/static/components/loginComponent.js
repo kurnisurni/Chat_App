@@ -2,7 +2,7 @@ import { router } from "../router.js"
 
 export default{
     template:`
-       <section>
+       <section class="loginSection">
             <h1 class="LogInPage">Welcome!</h1>
             <nav>
                 <form class="loginForm" @submit.prevent="logIn">
@@ -78,6 +78,9 @@ export default{
             
             console.log(userAndToken)
             this.$store.commit('saveAccessToken', userAndToken)
+
+            localStorage.setItem('readMessages', JSON.stringify([]))
+            localStorage.setItem('readPrivateMessages', JSON.stringify([]))
             
           }
 
